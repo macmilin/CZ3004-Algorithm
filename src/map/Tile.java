@@ -24,6 +24,10 @@ public class Tile extends Pane {
         this.setColorByState(state);
     }
 
+    public int getExplored() {
+        return this.explored;
+    }
+
     public void explore() {
         this.explored = 1;  
     }

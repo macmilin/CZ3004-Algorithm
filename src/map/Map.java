@@ -67,6 +67,68 @@ public class Map extends GridPane {
             }
         }
 
+        // Test Map Descriptor Generator
+        System.out.println(generateMapDescriptorPartOne());
+        System.out.println(generateMapDescriptorPartTwo());
+
+    }
+
+    public String binToHex(String bin) {
+        int dec = Integer.parseInt(bin, 2);
+        return Integer.toHexString(dec);
+    }
+
+    public String generateMapDescriptorPartOne() {
+        StringBuilder ans = new StringBuilder();
+        StringBuilder bin = new StringBuilder();
+        
+        bin.append("11");
+        
+        for(int i = mapTile.length-1; i > -1; i--){
+            for(int j = 0; j < mapTile[0].length; j++){
+                if(mapTile[i][j].getExplored() == 1){
+                    bin.append("1");
+                }else{
+                    bin.append("0");
+                }
+
+                if(bin.length() == 4){
+                    ans.append(binToHex(bin.toString()));
+                    bin.setLength(0);
+                }
+            }
+        }
+
+        bin.append("11");
+        ans.append(binToHex(bin.toString()));
+        return ans.toString();
+    }
+
+    public String generateMapDescriptorPartTwo() {
+        StringBuilder ans = new StringBuilder();
+        StringBuilder bin = new StringBuilder();
+        
+        for(int i = mapTile.length-1; i > -1; i--){
+            for(int j = 0; j < mapTile[0].length; j++){
+                if(mapTile[i][j].getExplored() == 1){
+                    if(mapTile[i][j].getState() == 0 || mapTile[i][j].getState() == 2 || mapTile[i][j].getState() == 3) {
+                        bin.append("0");
+                    }else if(mapTile[i][j].getState() == 1 ){
+                        bin.append("1");
+                    }
+                }
+
+                if(bin.length() == 4){
+                    ans.append(binToHex(bin.toString()));
+                    bin.setLength(0);
+                }
+            }
+        }
+
+        if(bin.length() > 0) {
+            ans.append(binToHex(bin.toString()));
+        }
+        return ans.toString();
     }
 
 }
