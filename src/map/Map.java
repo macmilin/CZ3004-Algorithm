@@ -1,12 +1,15 @@
 package map;
 
-import javafx.scene.layout.GridPane;
+import javax.swing.*;
+import java.awt.*;
+import robot.VirtualRobot;
 
-public class Map extends GridPane {
-    private static final int rowSize = 15;
-    private static final int colSize = 20;
-    private static final int HEIGHT = 500;
-    private static final int WIDTH = 375;
+public class Map extends JPanel {
+    private static final int ROW_SIZE = 20;
+    private static final int COL_SIZE = 15;
+    private static final int HEIGHT = 700;
+    private static final int WIDTH = 530;
+
     // Initialize Map
     //1 = wall , 0 = path
     private int[][] map;
@@ -14,9 +17,8 @@ public class Map extends GridPane {
 
 
     public Map() {
-        this.setMinHeight(HEIGHT);
-        this.setMinWidth(WIDTH);
-        mapTile = new Tile[colSize][rowSize];
+        this.setSize(WIDTH, HEIGHT);
+        mapTile = new Tile[ROW_SIZE][COL_SIZE];
 
         // Test Map 
         map = new int[][]  {{0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 3, 3, 3},
@@ -43,17 +45,27 @@ public class Map extends GridPane {
         // Convert Map(int) to Map(Tile)
         for(int i = 0; i < map.length; i++){
             for(int j = 0; j < map[0].length; j++){
-                mapTile[i][j] = new Tile(i, j, map[i][j]);
+                mapTile[i][j] = new Tile(i, j, map[ROW_SIZE-1-i][j]);
+                // Set the virtual walls of the arena
+                if (i == 0 || j == 0 || i == ROW_SIZE - 1 || j ==COL_SIZE - 1) {
+                    mapTile[i][j].setVirtualWall(true);
+                }
             }
         }
 
-        // Render Tiles
+        // Render Robot
+        //virtualRobot.renderRobot();
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
         for(int i = 0; i < mapTile.length; i++){
             for(int j = 0; j < mapTile[0].length; j++){
-                this.add(mapTile[i][j], j, i);
+                mapTile[i][j].renderTile(g);
             }
         }
     }
+
 
     public Tile[][] getMap() {
         return mapTile;
@@ -63,10 +75,15 @@ public class Map extends GridPane {
         this.map = map;
         for(int i = 0; i < map.length; i++){
             for(int j = 0; j < map[0].length; j++){
-                mapTile[i][j].reset(map[i][j]);
+                mapTile[i][j] = new Tile(i, j, map[ROW_SIZE-1-i][j]);
+                // Set the virtual walls of the arena
+                if (i == 0 || j == 0 || i == ROW_SIZE - 1 || j ==COL_SIZE - 1) {
+                    mapTile[i][j].setVirtualWall(true);
+                }
             }
         }
-
+        paintComponent(this.getGraphics());
+    
         // Test Map Descriptor Generator
         System.out.println(generateMapDescriptorPartOne());
         System.out.println(generateMapDescriptorPartTwo());
@@ -84,9 +101,9 @@ public class Map extends GridPane {
         
         bin.append("11");
         
-        for(int i = mapTile.length-1; i > -1; i--){
+        for(int i = 0; i < mapTile.length; i++){
             for(int j = 0; j < mapTile[0].length; j++){
-                if(mapTile[i][j].getExplored() == 1){
+                if(mapTile[i][j].getExplored()){
                     bin.append("1");
                 }else{
                     bin.append("0");
@@ -108,9 +125,9 @@ public class Map extends GridPane {
         StringBuilder ans = new StringBuilder();
         StringBuilder bin = new StringBuilder();
         
-        for(int i = mapTile.length-1; i > -1; i--){
+        for(int i = 0; i < mapTile.length; i++){
             for(int j = 0; j < mapTile[0].length; j++){
-                if(mapTile[i][j].getExplored() == 1){
+                if(mapTile[i][j].getExplored()){
                     if(mapTile[i][j].getState() == 0 || mapTile[i][j].getState() == 2 || mapTile[i][j].getState() == 3) {
                         bin.append("0");
                     }else if(mapTile[i][j].getState() == 1 ){
@@ -129,6 +146,10 @@ public class Map extends GridPane {
             ans.append(binToHex(bin.toString()));
         }
         return ans.toString();
+    }
+
+    public boolean isValid(int row, int col) {
+        return row >= 0 && col >= 0 && row < ROW_SIZE && col < COL_SIZE;
     }
 
 }
