@@ -11,7 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;  
 import map.*;
-import robot.*;
+import robot.Robot;
 
 public class Simulator {
 
@@ -27,7 +27,11 @@ public class Simulator {
     private static JPanel screen;
     private static JPanel controls;
 
+    private static Robot bot;
+
     public static void main(String[] args) {
+        bot = new Robot(1, 1, false);
+
         displaySimulator();
     }
 
@@ -41,7 +45,7 @@ public class Simulator {
 
 
         // Initialize map screen
-        map = new Map();
+        map = new Map(bot);
         screen = new JPanel(new CardLayout());
         content.add(screen, BorderLayout.CENTER);
         screen.add(map, "MAP");
@@ -114,49 +118,6 @@ public class Simulator {
         controls.add(timeLimitedButton);
         controls.add(coverageLimitedButton);
     }
-
-    
-
-    /*
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("MDP Group 21 Simulator");
-        primaryStage.setResizable(false);
-
-        // Window
-        VBox window = new VBox();
-        window.setSpacing(8);
-
-        // Screen
-        screen = new Map();
-        
-
-        // Controls
-        controls = new FlowPane();
-        controls.setVgap(8);
-        controls.setHgap(4);
-        Button exploration = new Button("Exploration");
-        Button shortestPath = new Button("Shortest Path");
-        Button timeLimited = new Button("Time-Limited");
-        Button coverageLimited = new Button("Coverage-Limited");
-
-        Button loadMap = new Button("Load Map");
-        loadMap.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                loadMap();
-            }
-        });
-
-        controls.getChildren().addAll(exploration, shortestPath, timeLimited, coverageLimited, loadMap);
-
-
-        window.getChildren().addAll(screen, controls);
-        Scene scene = new Scene(window, WIN_WIDTH, WIN_HEIGHT);
-
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
-    }*/
 
     public static void loadMap() {
         int[][] map = new int[ROW_SIZE][COL_SIZE];

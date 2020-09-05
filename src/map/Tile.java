@@ -7,7 +7,7 @@ public class Tile {
     private final int row;
     private final int MAX_ROW = 20;
     private final int col;
-    // 1 = wall, 0 = path, 2 = start, 3 = goal
+    // 1 = obstacle, 0 = path, 2 = start, 3 = goal
     private int state;
     private boolean virtual;
     private boolean explored;
@@ -37,8 +37,8 @@ public class Tile {
         return this.explored;
     }
 
-    public void explore() {
-        this.explored = true;  
+    public void setExplored(boolean bool) {
+        this.explored = bool;  
     }
 
     public int getRow() {
@@ -49,7 +49,7 @@ public class Tile {
         return this.col;
     }
 
-    public void changeState(int state) {
+    public void setState(int state) {
         this.state = state;
     }
 
@@ -63,7 +63,7 @@ public class Tile {
         this.explored = true;
     }
 
-    public void setVirtualWall(boolean bool) {
+    public void setVirtual(boolean bool) {
         this.virtual = bool;
     }
 
