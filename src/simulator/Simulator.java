@@ -1,122 +1,179 @@
 package simulator;
 
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.stage.FileChooser;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;  
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileSystemView;
 import java.nio.file.Paths;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;  
-import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 import map.*;
+import robot.Robot;
 
-public class Simulator extends Application {
+public class Simulator {
 
-    private static final int WIN_WIDTH = 375;
-    private static final int WIN_HEIGHT = 574;
-    private static final int rowSize = 15;
-    private static final int colSize = 20;
+    private static final int WIN_WIDTH = 530;
+    private static final int WIN_HEIGHT = 870;
+    private static final int ROW_SIZE = 20;
+    private static final int COL_SIZE = 15;
+    private static Map map;  
+    //private Map screen;
+    //private FlowPane controls;
 
-    private Map screen;
-    private FlowPane controls;
+    private static JFrame win;
+    private static JPanel screen;
+    private static JPanel controls;
+
+    private static Robot bot;
 
     public static void main(String[] args) {
-        launch(args);
+        bot = new Robot(1, 1, false);
+
+        displaySimulator();
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("MDP Group 21 Simulator");
-        primaryStage.setResizable(false);
+    private static void displaySimulator() {
+        // Initialize main window
+        win = new JFrame();
+        win.setTitle("MDP Group 21 Simulator");
+        win.setSize(new Dimension(WIN_WIDTH, WIN_HEIGHT));
+        win.setResizable(false);
+        Container content = win.getContentPane();
 
-        // Window
-        VBox window = new VBox();
-        window.setSpacing(8);
 
-        // Screen
-        screen = new Map();
-        
+        // Initialize map screen
+        map = new Map(bot);
+        screen = new JPanel(new CardLayout());
+        content.add(screen, BorderLayout.CENTER);
+        screen.add(map, "MAP");
 
-        // Controls
-        controls = new FlowPane();
-        controls.setVgap(8);
-        controls.setHgap(4);
-        Button exploration = new Button("Exploration");
-        Button shortestPath = new Button("Shortest Path");
-        Button timeLimited = new Button("Time-Limited");
-        Button coverageLimited = new Button("Coverage-Limited");
+        // Initialize control buttons
+        controls = new JPanel(new GridLayout(5,1));
+        content.add(controls, BorderLayout.PAGE_END);
+        displayControls();
 
-        Button loadMap = new Button("Load Map");
-        loadMap.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
+        // Display the application
+        win.setVisible(true);
+        win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    private static void displayControls() {
+
+        // Load Map Button
+       JButton loadMapButton = new JButton("Load Map");
+       
+        loadMapButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                // Load Map
                 loadMap();
             }
         });
+        
 
-        controls.getChildren().addAll(exploration, shortestPath, timeLimited, coverageLimited, loadMap);
+         // Exploration Button
+       JButton explorationButton = new JButton("Exploration");
+       
+        explorationButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                // Start exploration
+            }
+        });
+
+        // Fastest Path Button
+       JButton fastestPathButton = new JButton("Fastest Path");
+       
+        fastestPathButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                // Start fastest path
+            }
+        });
+
+        // Time-Limited Exploration
+       JButton timeLimitedButton = new JButton("Time Limited Exploration");
+       
+        timeLimitedButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                // Start time limited exploration
+            }
+        });
+
+        // Coverage-Limited Exploration
+       JButton coverageLimitedButton = new JButton("Coverage Limited Exploration");
+       
+        coverageLimitedButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                // Start coverage limited exploration
+            }
+        });
 
 
-        window.getChildren().addAll(screen, controls);
-        Scene scene = new Scene(window, WIN_WIDTH, WIN_HEIGHT);
-        primaryStage.setScene(scene);
-        primaryStage.show();
 
+
+        controls.add(loadMapButton);
+        controls.add(explorationButton);
+        controls.add(fastestPathButton);
+        controls.add(timeLimitedButton);
+        controls.add(coverageLimitedButton);
     }
 
-    public void loadMap() {
-        int[][] map = new int[colSize][rowSize];
+    public static void loadMap() {
+        int[][] map = new int[ROW_SIZE][COL_SIZE];
         int row = 0;
         int col = 0;
-        FileChooser fc = new FileChooser();
+
         String currentPath = Paths.get(".").toAbsolutePath().normalize().toString()+"/templates/";
-        fc.setInitialDirectory(new File(currentPath));
-        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt"));
-        File selectedFile = fc.showOpenDialog(new Stage());
+        JFileChooser jfc = new JFileChooser(currentPath);
+
+        int returnValue = jfc.showOpenDialog(null);
+		// int returnValue = jfc.showSaveDialog(null);
+        File selectedFile = null;
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			selectedFile = jfc.getSelectedFile();
+			System.out.println(selectedFile.getAbsolutePath());
+		}
         
         try {
             Scanner myReader = new Scanner(selectedFile);
-            while (myReader.hasNextLine() && col < colSize) {
+            while (myReader.hasNextLine() && row < ROW_SIZE) {
                 String data = myReader.nextLine();
-                while(row < rowSize){
-                    int item = Character.getNumericValue(data.charAt(row));
-                    map[col][row] = item;
-                    row++;
+                while(col < COL_SIZE){
+                    int item = Character.getNumericValue(data.charAt(col));
+                    map[row][col] = item;
+                    col++;
                 }
-                col++;
-                row = 0;
+                row++;
+                col = 0;
             }
             myReader.close();
         } catch (Exception e) {
             System.out.println("An error occurred.");
         }
         setStartEnd(map);
-        screen.updateMap(map);
+        Simulator.map.updateMap(map);
     }
-
-    public void setStartEnd(int[][] map) {
-        map[0][rowSize-1] = 3;
-        map[0][rowSize-2] = 3;
-        map[0][rowSize-3] = 3;
-        map[1][rowSize-1] = 3;
-        map[1][rowSize-2] = 3;
-        map[1][rowSize-3] = 3;
-        map[2][rowSize-1] = 3;
-        map[2][rowSize-2] = 3;
-        map[2][rowSize-3] = 3;
-        map[colSize-1][0] = 2;
-        map[colSize-2][0] = 2;
-        map[colSize-3][0] = 2;
-        map[colSize-1][1] = 2;
-        map[colSize-2][1] = 2;
-        map[colSize-3][1] = 2;
-        map[colSize-1][2] = 2;
-        map[colSize-2][2] = 2;
-        map[colSize-3][2] = 2;
+    
+    public static void setStartEnd(int[][] map) {
+        map[0][COL_SIZE-1] = 3;
+        map[0][COL_SIZE-2] = 3;
+        map[0][COL_SIZE-3] = 3;
+        map[1][COL_SIZE-1] = 3;
+        map[1][COL_SIZE-2] = 3;
+        map[1][COL_SIZE-3] = 3;
+        map[2][COL_SIZE-1] = 3;
+        map[2][COL_SIZE-2] = 3;
+        map[2][COL_SIZE-3] = 3;
+        map[ROW_SIZE-1][0] = 2;
+        map[ROW_SIZE-2][0] = 2;
+        map[ROW_SIZE-3][0] = 2;
+        map[ROW_SIZE-1][1] = 2;
+        map[ROW_SIZE-2][1] = 2;
+        map[ROW_SIZE-3][1] = 2;
+        map[ROW_SIZE-1][2] = 2;
+        map[ROW_SIZE-2][2] = 2;
+        map[ROW_SIZE-3][2] = 2;
     }
+    
 }
