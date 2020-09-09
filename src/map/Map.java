@@ -56,6 +56,7 @@ public class Map extends JPanel {
                 }
             }
         }
+        setVirtualObstacles();
     }
 
     @Override
@@ -88,13 +89,9 @@ public class Map extends JPanel {
                 }
             }
         }
+        setVirtualObstacles();
         paintComponent(this.getGraphics());
-        
-        testMovement();
-    
-        // Test Map Descriptor Generator
-        System.out.println(generateMapDescriptorPartOne());
-        System.out.println(generateMapDescriptorPartTwo());
+        bot.reset();
 
     }
 
@@ -229,6 +226,24 @@ public class Map extends JPanel {
         paintComponent(this.getGraphics());
         bot.move(MOVEMENT.LEFT, false);
         paintComponent(this.getGraphics());
+    }
+
+    public int getRowSize() {
+        return ROW_SIZE;
+    }
+
+    public int getColSize() {
+        return COL_SIZE;
+    }
+
+    public void setVirtualObstacles() {
+        for(int i = 0; i < mapTile.length; i++){
+            for(int j = 0; j < mapTile[0].length; j++){
+                if (mapTile[i][j].getState() == 1) {
+                    setObstacle(i, j, true);
+                }
+            }
+        }
     }
 
 }

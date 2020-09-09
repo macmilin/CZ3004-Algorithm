@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;  
 import map.*;
 import robot.Robot;
+import algorithms.Exploration;
 
 public class Simulator {
 
@@ -20,6 +21,7 @@ public class Simulator {
     private static final int ROW_SIZE = 20;
     private static final int COL_SIZE = 15;
     private static Map map;  
+    private static int coverageLimit;
     //private Map screen;
     //private FlowPane controls;
 
@@ -62,6 +64,60 @@ public class Simulator {
 
     private static void displayControls() {
 
+        // Multi-Threading
+        class MTExploration extends SwingWorker<Integer, String> {
+            protected Integer doInBackground() throws Exception {
+                int row, col;
+
+                row = 1;
+                col = 1;
+
+                bot.setPos(row, col);
+                map.paintComponent(map.getGraphics());
+
+                Exploration exploration;
+                exploration = new Exploration(30, 300, bot, map);
+
+                /*
+                if (realRun) {
+                    CommMgr.getCommMgr().sendMsg(null, CommMgr.BOT_START);
+                }*/
+                exploration.run();
+                    
+                // Test Map Descriptor Generator
+                System.out.println(map.generateMapDescriptorPartOne());
+                System.out.println(map.generateMapDescriptorPartTwo());
+
+                /*
+                if (realRun) {
+                    new FastestPath().execute();
+                }*/
+
+                return 111;
+            }
+        }
+
+        class MTCoverageExploration extends SwingWorker<Integer, String> {
+            protected Integer doInBackground() throws Exception {
+                int row, col;
+
+                row = 1;
+                col = 1;
+
+                bot.setPos(row, col);
+                map.paintComponent(map.getGraphics());
+
+                Exploration exploration;
+                exploration = new Exploration(360, coverageLimit, bot, map);
+                exploration.run();
+                System.out.println(map.generateMapDescriptorPartOne());
+                System.out.println(map.generateMapDescriptorPartTwo());
+
+                return 444;
+            }
+        }
+
+
         // Load Map Button
        JButton loadMapButton = new JButton("Load Map");
        
@@ -79,6 +135,7 @@ public class Simulator {
         explorationButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 // Start exploration
+                new MTExploration().execute();
             }
         });
 
@@ -106,7 +163,26 @@ public class Simulator {
         coverageLimitedButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 // Start coverage limited exploration
+                JDialog inputDialog = new JDialog(win, "Coverage-Limited Exploration", true);
+                inputDialog.setSize(400, 100);
+                inputDialog.setLayout(new FlowLayout());
+                final JTextField inputField = new JTextField(5);
+                JButton coverageButton = new JButton("Run");
+
+                coverageButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        inputDialog.setVisible(false);
+                        coverageLimit = (int) ((Integer.parseInt(inputField.getText())) * 300 / 100.0);
+                        new MTCoverageExploration().execute();
+                    }
+                });
+                
+                inputDialog.add(new JLabel("Coverage Limit (%): "));
+                inputDialog.add(inputField);
+                inputDialog.add(coverageButton);
+                inputDialog.setVisible(true);
             }
+
         });
 
 
@@ -175,5 +251,7 @@ public class Simulator {
         map[ROW_SIZE-2][2] = 2;
         map[ROW_SIZE-3][2] = 2;
     }
+
+    
     
 }

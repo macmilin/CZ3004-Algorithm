@@ -78,6 +78,7 @@ public class Sensor {
             if (!map.isValid(row, col)) return i;
 
             map.getTile(row, col).setExplored(true);
+            //System.out.println("Set explored " + row + " " + col);
 
             if (map.getTile(row, col).getState() == 1) {
                 return i;

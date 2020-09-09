@@ -71,6 +71,15 @@ public class Robot {
         
     }
 
+    public void reset() {
+        this.row = 1;
+        this.col = 1;
+
+        robotDir = RobotConstants.START_DIR;
+        speed = RobotConstants.SPEED;
+        setSensors();
+    }
+
     public void setPos(int row, int col) {
         this.row = row;
         this.col = col;
@@ -118,7 +127,7 @@ public class Robot {
     public void move(MOVEMENT m, boolean sendMoveToAndroid) {
         if (!realBot) {
             // Emulate real movement by pausing execution.
-            System.out.print("MOVE");
+            //System.out.println("MOVE");
             try {
                 TimeUnit.MILLISECONDS.sleep(speed);
             } catch (InterruptedException e) {

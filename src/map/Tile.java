@@ -23,8 +23,12 @@ public class Tile {
         this.col = col;
         this.state = state;
 
-        // Default explored = 0
-        this.explored = true;
+        // Default explored = false
+        this.explored = false;
+        if (state == 2 || state == 3){
+            this.explored = true;
+        }
+
         this.virtual = false;
 
         // Set X,Y location of on screen
@@ -59,12 +63,20 @@ public class Tile {
 
     public void reset(int state) {
         this.state = state;
-        // Default explored = 0
-        this.explored = true;
+        // Default explored = false
+        this.explored = false;
+        if (state == 2 || state == 3){
+            this.explored = true;
+        }
+        this.virtual = false;
     }
 
     public void setVirtual(boolean bool) {
         this.virtual = bool;
+    }
+
+    public boolean getVirtual() {
+        return this.virtual;
     }
 
     public void renderTile(Graphics g) {
@@ -74,6 +86,9 @@ public class Tile {
             switch(state){
                 case 0:
                     color = Color.WHITE;
+                    if (virtual) {
+                        color = Color.CYAN;
+                    }
                     break;
                 case 1:
                     color = Color.BLACK;
