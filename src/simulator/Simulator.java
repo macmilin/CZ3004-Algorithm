@@ -22,6 +22,7 @@ public class Simulator {
     private static final int COL_SIZE = 15;
     private static Map map;  
     private static int coverageLimit;
+    private static int timeLimit;
     //private Map screen;
     //private FlowPane controls;
 
@@ -108,7 +109,27 @@ public class Simulator {
                 map.paintComponent(map.getGraphics());
 
                 Exploration exploration;
-                exploration = new Exploration(360, coverageLimit, bot, map);
+                exploration = new Exploration(1800, coverageLimit, bot, map);
+                exploration.run();
+                System.out.println(map.generateMapDescriptorPartOne());
+                System.out.println(map.generateMapDescriptorPartTwo());
+
+                return 444;
+            }
+        }
+
+        class MTTimeExploration extends SwingWorker<Integer, String> {
+            protected Integer doInBackground() throws Exception {
+                int row, col;
+
+                row = 1;
+                col = 1;
+
+                bot.setPos(row, col);
+                map.paintComponent(map.getGraphics());
+
+                Exploration exploration;
+                exploration = new Exploration(timeLimit, 300, bot, map);
                 exploration.run();
                 System.out.println(map.generateMapDescriptorPartOne());
                 System.out.println(map.generateMapDescriptorPartTwo());
@@ -154,6 +175,26 @@ public class Simulator {
         timeLimitedButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 // Start time limited exploration
+                JDialog inputDialog = new JDialog(win, "Time-Limited Exploration", true);
+                inputDialog.setSize(400, 100);
+                inputDialog.setLayout(new FlowLayout());
+                final JTextField inputField = new JTextField(5);
+                JButton timeButton = new JButton("Run");
+
+                timeButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        inputDialog.setVisible(false);
+                        String time = inputField.getText();
+                        String[] time2 = time.split(":");
+                        timeLimit = (Integer.parseInt(time2[0]) * 60) + Integer.parseInt(time2[1]);
+                        new MTTimeExploration().execute();
+                    }
+                });
+                
+                inputDialog.add(new JLabel("Time Limit (minutes:seconds): "));
+                inputDialog.add(inputField);
+                inputDialog.add(timeButton);
+                inputDialog.setVisible(true);
             }
         });
 
