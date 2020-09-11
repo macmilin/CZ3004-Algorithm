@@ -2,9 +2,9 @@ package algorithms;
 
 import map.*;
 import robot.Robot;
-import robot.RobotConstants;
-import robot.RobotConstants.DIRECTION;
-import robot.RobotConstants.MOVEMENT;
+import robot.Constant;
+import robot.Constant.DIRECTION;
+import robot.Constant.MOVEMENT;
 import utils.*;
 
 public class Exploration {
@@ -24,8 +24,7 @@ public class Exploration {
     }
 
     public void run() {
-        // Calibrate Robot During the Real Exploration
-        if (robot.getRealBot()) {
+        if (robot.getRealRun()) {
             System.out.println("Calibrating...");
 
             CommMgr.getCommMgr().recvMsg();
@@ -59,8 +58,8 @@ public class Exploration {
         startTime = System.currentTimeMillis();
         endTime = startTime + (timeLimit * 1000);
 
-        // During real run, send comms indicating start
-        if (robot.getRealBot()) {
+
+        if (robot.getRealRun()) {
             CommMgr.getCommMgr().sendMsg(null, CommMgr.BOT_START);
         }
 
@@ -78,31 +77,9 @@ public class Exploration {
         map.paintComponent(map.getGraphics());
     }
 
-    /**
-     * Continuously explore the map using the right wall following algorithm until
-     * 1. Robot is back at start zone with everything explored.
-     * 2. Area Explored is greater than the coverage limit.
-     * 3. Time taken is greater than time limit.
-     */
-    public void explore(int startR, int startC) {
-        do {
-            nextStep();
-            areaExplored = getAreaExplored();
-            System.out.println("Area explored: " + areaExplored);
 
-            if (robot.getRow() == startR && robot.getCol() == startC){
-                break;
-            }
-        } while (areaExplored <= coverageLimit && System.currentTimeMillis() <= endTime);
-
-        returnHome();
-    }
-
-    /** 
-     * Right Wall Following Algorithm
-     */
-
-     public void nextStep() {
+    //Right Wall Following Algorithm
+    public void nextStep() {
         if (checkRight()) {
             move(MOVEMENT.RIGHT);
             System.out.println("Right empty. Rotate right");
@@ -125,76 +102,21 @@ public class Exploration {
             move(MOVEMENT.RIGHT);
             System.out.println("Deadend. U-turn");
         }
-     }
+    }
 
-    
-    private boolean checkRight() {
-        switch (robot.getDir()) {
-            case NORTH:
-                return eastFree();
-            case EAST:
-                return southFree();
-            case SOUTH:
-                return westFree();
-            case WEST:
-                return northFree();
+    public void explore(int startR, int startC) {
+        while (System.currentTimeMillis() <= endTime && areaExplored <= coverageLimit) {
+            nextStep();
+            areaExplored = getAreaExplored();
+            System.out.println("Area explored: " + areaExplored);
+
+            if (robot.getRow() == startR && robot.getCol() == startC){
+                break;
+            }
+
         }
-        return false;
-    }
-
-    private boolean checkFront() {
-        switch (robot.getDir()) {
-            case NORTH:
-                return northFree();
-            case EAST:
-                return eastFree();
-            case SOUTH:
-                return southFree();
-            case WEST:
-                return westFree();
-        }
-        return false;
-    }
-
-    private boolean checkLeft() {
-        switch (robot.getDir()) {
-            case NORTH:
-                return westFree();
-            case EAST:
-                return northFree();
-            case SOUTH:
-                return eastFree();
-            case WEST:
-                return southFree();
-        }
-        return false;
-    }
-
-    private boolean northFree() {
-        int row = robot.getRow();
-        int col = robot.getCol();
-        return (isExploredAndNotObstacle(row + 1, col - 1) && isExploredAndFree(row + 1, col) && isExploredAndNotObstacle(row + 1, col + 1));
-    }
-
-    private boolean eastFree() {
-        int row = robot.getRow();
-        int col = robot.getCol();
-        return (isExploredAndNotObstacle(row - 1, col + 1) && isExploredAndFree(row, col + 1) && isExploredAndNotObstacle(row + 1, col + 1));
-    }
-
-    private boolean southFree() {
-        int row = robot.getRow();
-        int col = robot.getCol();
-        return (isExploredAndNotObstacle(row - 1, col - 1) && isExploredAndFree(row - 1, col) && isExploredAndNotObstacle(row - 1, col + 1));
-    }
-
-    private boolean westFree() {
-        int row = robot.getRow();
-        int col = robot.getCol();
-        return (isExploredAndNotObstacle(row - 1, col - 1) && isExploredAndFree(row, col - 1) && isExploredAndNotObstacle(row + 1, col - 1));
-    }
-
-    
+        returnHome();
+    }    
 
     private boolean isExploredAndNotObstacle(int r, int c) {
         if (map.isValid(r, c)) {
@@ -213,7 +135,7 @@ public class Exploration {
     }
 
     private void move(MOVEMENT m) {
-        robot.move(m);
+        robot.move(m, false);
         map.paintComponent(map.getGraphics());
         if (m != MOVEMENT.CALIBRATE) {
             sense();
@@ -223,7 +145,7 @@ public class Exploration {
         }
 
         /*
-        if (robot.getRealBot() && !calibrationMode) {
+        if (robot.getRealRun() && !calibrationMode) {
             calibrationMode = true;
 
             if (canCalibrateOnTheSpot(bot.getRobotCurDir())) {
@@ -260,11 +182,11 @@ public class Exploration {
         /*
         if (!robot.getReachedGoal() && coverageLimit == 300 && timeLimit == 3600) {
             FastestPathAlgo goToGoal = new FastestPathAlgo(exploredMap, bot, realMap);
-            goToGoal.runFastestPath(RobotConstants.GOAL_ROW, RobotConstants.GOAL_COL);
+            goToGoal.runFastestPath(Constant.GOAL_ROW, Constant.GOAL_COL);
         }
 
         FastestPathAlgo returnToStart = new FastestPathAlgo(exploredMap, bot, realMap);
-        returnToStart.runFastestPath(RobotConstants.START_ROW, RobotConstants.START_COL);
+        returnToStart.runFastestPath(Constant.START_ROW, Constant.START_COL);
 
         System.out.println("Exploration complete!");
         areaExplored = calculateAreaExplored();
@@ -272,7 +194,7 @@ public class Exploration {
         System.out.println(", " + areaExplored + " Cells");
         System.out.println((System.currentTimeMillis() - startTime) / 1000 + " Seconds");
 
-        if (bot.getRealBot()) {
+        if (bot.getRealRun()) {
             turnBotDirection(DIRECTION.WEST);
             moveBot(MOVEMENT.CALIBRATE);
             turnBotDirection(DIRECTION.SOUTH);
@@ -282,6 +204,72 @@ public class Exploration {
         }
         turnBotDirection(DIRECTION.NORTH);
         */
+    }
+
+    private boolean checkRight() {
+        switch (robot.getDir()) {
+            case NORTH:
+                return clearEast();
+            case EAST:
+                return clearSouth();
+            case SOUTH:
+                return clearWest();
+            case WEST:
+                return clearNorth();
+        }
+        return false;
+    }
+
+    private boolean checkFront() {
+        switch (robot.getDir()) {
+            case NORTH:
+                return clearNorth();
+            case EAST:
+                return clearEast();
+            case SOUTH:
+                return clearSouth();
+            case WEST:
+                return clearWest();
+        }
+        return false;
+    }
+
+    private boolean checkLeft() {
+        switch (robot.getDir()) {
+            case NORTH:
+                return clearWest();
+            case EAST:
+                return clearNorth();
+            case SOUTH:
+                return clearEast();
+            case WEST:
+                return clearSouth();
+        }
+        return false;
+    }
+
+    private boolean clearNorth() {
+        int row = robot.getRow();
+        int col = robot.getCol();
+        return (isExploredAndNotObstacle(row + 1, col - 1) && isExploredAndFree(row + 1, col) && isExploredAndNotObstacle(row + 1, col + 1));
+    }
+
+    private boolean clearEast() {
+        int row = robot.getRow();
+        int col = robot.getCol();
+        return (isExploredAndNotObstacle(row - 1, col + 1) && isExploredAndFree(row, col + 1) && isExploredAndNotObstacle(row + 1, col + 1));
+    }
+
+    private boolean clearSouth() {
+        int row = robot.getRow();
+        int col = robot.getCol();
+        return (isExploredAndNotObstacle(row - 1, col - 1) && isExploredAndFree(row - 1, col) && isExploredAndNotObstacle(row - 1, col + 1));
+    }
+
+    private boolean clearWest() {
+        int row = robot.getRow();
+        int col = robot.getCol();
+        return (isExploredAndNotObstacle(row - 1, col - 1) && isExploredAndFree(row, col - 1) && isExploredAndNotObstacle(row + 1, col - 1));
     }
 
 }

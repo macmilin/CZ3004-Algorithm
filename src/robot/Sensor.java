@@ -1,157 +1,135 @@
 package robot;
 
 import map.Map;
-import robot.RobotConstants.DIRECTION;
-
-/**
- * A sensor mounted on the robot.
- *
- */
-
+import robot.Constant.DIRECTION;
 
 public class Sensor {
-    private final int minRange;
-    private final int maxRange;
-    private int sensorRow;
-    private int sensorCol;
-    private DIRECTION sensorDir;
-    private final String id;
+    private DIRECTION dir;
+    private String id;
+    private int row;
+    private int col;
+    private int min;
+    private int max;
 
-    public Sensor(int minRange, int maxRange, int row, int col, DIRECTION dir, String id) {
-        this.minRange = minRange;
-        this.maxRange = maxRange;
-        this.sensorRow = row;
-        this.sensorCol = col;
-        this.sensorDir = dir;
+    public Sensor(int min, int max, int row, int col, DIRECTION dir, String id) {
+        this.row = row;
+        this.col = col;
+        this.min = min;
+        this.max = max;
+        this.dir = dir;
         this.id = id;
     }
 
+    public int getSensorValueSimulator(int rowChange, int colChange, Map map) {
+        if (min > 1) {
+            for (int i = 1; i < this.min; i++) {
+                int row = this.row + (rowChange * i);
+                int col = this.col + (colChange * i);
+
+                if (map.isValid(row, col)) {
+                    if (map.getTile(row, col).getState() == 1) {
+                        return i;
+                    }
+                }else {
+                    return i;
+                }
+            }
+        }
+
+        for (int i = this.min; i <= this.max; i++) {
+            int row = this.row + (rowChange * i);
+            int col = this.col + (colChange * i);
+
+            if (map.isValid(row, col)) {
+                map.getTile(row, col).setExplored(true);
+                if (map.getTile(row, col).getState() == 1) {
+                    map.setObstacle(row, col, true);
+                    return i;
+                }
+            }else{
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    public int senseSimulator(Map map) {
+        switch (dir) {
+            case NORTH:
+                return getSensorValueSimulator(1, 0, map);
+            case EAST:
+                return getSensorValueSimulator(0, 1, map);
+            case SOUTH:
+                return getSensorValueSimulator(-1, 0, map);
+            case WEST:
+                return getSensorValueSimulator(0, -1, map);
+        }
+        return -1;
+    }
+
     public void setSensor(int row, int col, DIRECTION dir) {
-        this.sensorRow = row;
-        this.sensorCol = col;
-        this.sensorDir = dir;
+        this.row = row;
+        this.col = col;
+        this.dir = dir;
     }
 
-    /**
-     * If no obstacle is detected, return -1
-     * Else, return the number of tiles to the nearest detected osbtacle
-     * Use during the simulation
-     */
-
-    public int senseVirtual(Map map) {
-        switch (sensorDir) {
+    public void senseReal(Map map, int sensorValue) {
+        switch (dir) {
             case NORTH:
-                return getSensorVal(map, 1, 0);
-            case EAST:
-                return getSensorVal(map, 0, 1);
-            case SOUTH:
-                return getSensorVal(map, -1, 0);
-            case WEST:
-                return getSensorVal(map, 0, -1);
-        }
-        return -1;
-    }
-
-    /**
-     * Sets the appropriate obstacle tile in the map, returns the row or column value of the obstacle tile. 
-     * Returns -1 if no obstacle is detected.
-     * Use during the simulation.
-     */
-
-    private int getSensorVal(Map map, int rowInc, int colInc) {
-        // Check if starting point is valid for sensors with minRange > 1.
-        if (minRange > 1) {
-            for (int i = 1; i < this.minRange; i++) {
-                int row = this.sensorRow + (rowInc * i);
-                int col = this.sensorCol + (colInc * i);
-
-                if (!map.isValid(row, col)) return i;
-                if (map.getTile(row, col).getState() == 1) return i;
-            }
-        }
-
-        // Check if anything is detected by the sensor and return that value.
-        for (int i = this.minRange; i <= this.maxRange; i++) {
-            int row = this.sensorRow + (rowInc * i);
-            int col = this.sensorCol + (colInc * i);
-
-            if (!map.isValid(row, col)) return i;
-
-            map.getTile(row, col).setExplored(true);
-            //System.out.println("Set explored " + row + " " + col);
-
-            if (map.getTile(row, col).getState() == 1) {
-                return i;
-            }
-            /*
-            if (realMap.getCell(row, col).getIsObstacle()) {
-                exploredMap.setObstacleCell(row, col, true);
-                return i;
-            }*/
-        }
-
-        return -1;
-    }
-
-    /**
-     * Uses the sensor direction and sensor value from RPI.
-     * Use during real run.
-     */
-
-    public void senseReal(Map map, int sensorVal) {
-        switch (sensorDir) {
-            case NORTH:
-                processSensorVal(map, sensorVal, 1, 0);
+                useSenseValueReal(1, 0, map, sensorValue);
                 break;
             case EAST:
-                processSensorVal(map, sensorVal, 0, 1);
+                useSenseValueReal(0, 1, map, sensorValue);
                 break;
             case SOUTH:
-                processSensorVal(map, sensorVal, -1, 0);
+                useSenseValueReal(-1, 0, map, sensorValue);
                 break;
             case WEST:
-                processSensorVal(map, sensorVal, 0, -1);
+                useSenseValueReal(0, -1, map, sensorValue);
                 break;
         }
     }
 
-    /**
-     * Sets the correct tile to explored and/or obstacle according to the actual sensor value.
-     */
 
-    private void processSensorVal(Map map, int sensorVal, int rowInc, int colInc) {
-        if (sensorVal == 0) return;  // return value for LR sensor if obstacle before minRange
-
-        // If above fails, check if starting point is valid for sensors with minRange > 1.
-        for (int i = 1; i < this.minRange; i++) {
-            int row = this.sensorRow + (rowInc * i);
-            int col = this.sensorCol + (colInc * i);
-
-            if (!map.isValid(row, col)) return;
-            if (map.getTile(row, col).getState() == 1) return;
+    private void useSenseValueReal(int rowChange, int colChange, Map map, int sensorValue) {
+        if (sensorValue == 0) {
+            return;
         }
 
-        // Update map according to sensor's value.
-        for (int i = this.minRange; i <= this.maxRange; i++) {
-            int row = this.sensorRow + (rowInc * i);
-            int col = this.sensorCol + (colInc * i);
+        for (int i = 1; i < this.min; i++) {
+            int row = this.row + (rowChange * i);
+            int col = this.col + (colChange * i);
 
-            if (!map.isValid(row, col)) continue;
-
-            map.getTile(row, col).setExplored(true);
-
-            if (sensorVal == i) {
-                map.setObstacle(row, col, true);
-                break;
+            if (map.isValid(row, col)) {
+                if (map.getTile(row, col).getState() == 1) {
+                    return;
+                }
+            }else{
+                return;
             }
+        }
 
-            // Override previous obstacle value if front sensors detect no obstacle.
-            if (map.getTile(row, col).getState() == 1) {
-                if (id.equals("SRFL") || id.equals("SRFC") || id.equals("SRFR")) {
-                    map.setObstacle(row, col, false);
-                } else {
+        for (int i = this.min; i <= this.max; i++) {
+            int row = this.row + (rowChange * i);
+            int col = this.col + (colChange * i);
+
+            if (map.isValid(row, col)) {
+                map.getTile(row, col).setExplored(true);
+
+                if (sensorValue == i) {
+                    map.setObstacle(row, col, true);
                     break;
                 }
+
+                if (map.getTile(row, col).getState() == 1) {
+                    if (id.equals("SHORT_RANGE_FRONT_LEFT") || id.equals("SHORT_RANGE_FRONT_CENTER") || id.equals("SHORT_RANGE_FRONT_RIGHT")) {
+                        map.setObstacle(row, col, false);
+                    } else {
+                        break;
+                    }
+                }
+
             }
         }
     }

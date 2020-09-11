@@ -3,7 +3,7 @@ package map;
 import javax.swing.*;
 import java.awt.*;
 import robot.Robot;
-import robot.RobotConstants.MOVEMENT;
+import robot.Constant.MOVEMENT;
 
 public class Map extends JPanel {
     private static final int ROW_SIZE = 20;
@@ -56,7 +56,7 @@ public class Map extends JPanel {
                 }
             }
         }
-        setVirtualObstacles();
+        //setVirtualObstacles();
     }
 
     @Override
@@ -89,7 +89,7 @@ public class Map extends JPanel {
                 }
             }
         }
-        setVirtualObstacles();
+        //setVirtualObstacles();
         paintComponent(this.getGraphics());
         bot.reset();
 
