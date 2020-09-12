@@ -10,6 +10,8 @@ public class Constant {
     // range of long range sensor (tiles)
     public static final int SENSOR_LONG_RANGE_MAX = 4;
 
+    public static final int SPEED = 50;
+    public static final DIRECTION START_DIR = DIRECTION.NORTH;
 
     public static final int GOAL_ROW = 18;
     public static final int GOAL_COL = 13;
@@ -17,12 +19,9 @@ public class Constant {
     public static final int START_COL = 1;
 
 
-    public static final int MOVE_COST = 10;
-    public static final int TURN_COST = 20;
-    public static final int INFINITE_COST = 9999;
-
-    public static final int SPEED = 100;
-    public static final DIRECTION START_DIR = DIRECTION.NORTH;
+    public static final int MOVE_COST = 50;
+    public static final int TURN_COST = 100;
+    public static final int INFINITE_COST = 99999;
     
 
     public enum MOVEMENT {

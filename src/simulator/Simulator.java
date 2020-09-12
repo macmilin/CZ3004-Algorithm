@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;  
 import map.*;
 import robot.Robot;
-import algorithms.Exploration;
+import algorithms.*;
 
 public class Simulator {
 
@@ -138,6 +138,27 @@ public class Simulator {
             }
         }
 
+        class MTFastestPath extends SwingWorker<Integer, String> {
+            protected Integer doInBackground() throws Exception {
+                bot.reset();
+                map.paintComponent(map.getGraphics());
+
+                /*
+                if (realRun) {
+                    while (true) {
+                        System.out.println("Waiting for FP_START...");
+                        String msg = comm.recvMsg();
+                        if (msg.equals(CommMgr.FP_START)) break;
+                    }
+                }*/
+
+                FastestPath fastestPath = new FastestPath(bot, map);
+                fastestPath.run(18, 13);
+
+                return 222;
+            }
+        }
+
 
         // Load Map Button
        JButton loadMapButton = new JButton("Load Map");
@@ -166,6 +187,7 @@ public class Simulator {
         fastestPathButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 // Start fastest path
+                new MTFastestPath().execute();
             }
         });
 
