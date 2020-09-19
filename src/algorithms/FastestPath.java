@@ -235,7 +235,7 @@ public class FastestPath {
                     case NORTH:
                         return MOVEMENT.FORWARD;
                     case SOUTH:
-                        return MOVEMENT.LEFT;
+                        return MOVEMENT.BACKWARD;
                     case WEST:
                         return MOVEMENT.LEFT;
                     case EAST:
@@ -246,7 +246,7 @@ public class FastestPath {
             case SOUTH:
                 switch (nextDir) {
                     case NORTH:
-                        return MOVEMENT.LEFT;
+                        return MOVEMENT.BACKWARD;
                     case SOUTH:
                         return MOVEMENT.FORWARD;
                     case WEST:
@@ -265,7 +265,7 @@ public class FastestPath {
                     case WEST:
                         return MOVEMENT.FORWARD;
                     case EAST:
-                        return MOVEMENT.LEFT;
+                        return MOVEMENT.BACKWARD;
                 }
                 break;
 
@@ -276,7 +276,7 @@ public class FastestPath {
                     case SOUTH:
                         return MOVEMENT.RIGHT;
                     case WEST:
-                        return MOVEMENT.LEFT;
+                        return MOVEMENT.BACKWARD;
                     case EAST:
                         return MOVEMENT.FORWARD;
                 }

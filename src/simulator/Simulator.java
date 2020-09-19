@@ -13,6 +13,7 @@ import java.util.Scanner;
 import map.*;
 import robot.Robot;
 import algorithms.*;
+import communication.*;
 
 public class Simulator {
 
@@ -36,6 +37,7 @@ public class Simulator {
         bot = new Robot(1, 1, false);
 
         displaySimulator();
+        //testComms();
     }
 
     private static void displaySimulator() {
@@ -313,6 +315,19 @@ public class Simulator {
         map[ROW_SIZE-1][2] = 2;
         map[ROW_SIZE-2][2] = 2;
         map[ROW_SIZE-3][2] = 2;
+    }
+
+    public static void testComms() {
+        Communication comms = new Communication();
+        comms = comms.getComms();
+        comms.openSocket();
+        System.out.println("After socket");
+        while(!comms.isConnected()){
+            System.out.println("Connected");
+            comms.testSendMessage("HI");
+            comms.testReceiveMessage();
+            comms.closeSocket();
+        }
     }
 
     

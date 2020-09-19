@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 import map.Map;
 import robot.Constant.DIRECTION;
 import robot.Constant.MOVEMENT;
-import utils.CommMgr;
+import communication.Communication;
 import java.awt.*;
 
 public class Robot {
@@ -136,7 +136,7 @@ public class Robot {
                 System.out.println("Something went wrong in Robot.move()!");
             }
         }
-
+        
         switch (m) {
             case FORWARD:
                 switch (dir) {
@@ -155,6 +155,11 @@ public class Robot {
                 }
                 break;
             case BACKWARD:
+                // U-turn
+                dir = newDir(MOVEMENT.RIGHT);
+                dir = newDir(MOVEMENT.RIGHT);
+                break;
+                /*
                 switch (dir) {
                     case NORTH:
                         row--;
@@ -169,7 +174,7 @@ public class Robot {
                         col++;
                         break;
                 }
-                break;
+                break;*/
             case RIGHT:
             case LEFT:
                 dir = newDir(m);
@@ -181,12 +186,38 @@ public class Robot {
                 break;
         }
 
-        /*
-        if (realRun) sendMovement(m, sendMoveToAndroid);
-        else System.out.println("Move: " + MOVEMENT.print(m));*/
+        if (realRun) {
+            sendMovement(m, false);
+        }
 
         updateReachedGoal();
     }
+
+    public void sendMovement(MOVEMENT m, boolean sendMoveToAndroid) {
+        Communication comms = Communication.getComms();
+        switch(m){
+            case FORWARD:
+                comms.sendMessage(Constant.MOVE_FORWARD);
+                break;
+            case BACKWARD:
+                //comms.sendMessage(Constant.MOVE_BACK);
+                comms.sendMessage(Constant.TURN_RIGHT);
+                comms.sendMessage(Constant.TURN_RIGHT);
+                break;
+            case RIGHT:
+                comms.sendMessage(Constant.TURN_RIGHT);
+                break;
+            case LEFT:
+                comms.sendMessage(Constant.TURN_LEFT);
+                break;
+            case CALIBRATE:
+                comms.sendMessage(Constant.CALIBRATE_SENSOR);
+                break;
+            default:
+                System.out.println("Error in sending movement");
+        }
+    }
+
 
     /**
      * Sends a number instead of 'F' for multiple continuous forward movements.
@@ -253,18 +284,18 @@ public class Robot {
             result[3] = srLeftT.senseSimulator(map);
             result[4] = srRightC.senseSimulator(map);
             result[5] = lrLeftC.senseSimulator(map);
-        } /*else {
-            CommMgr comm = CommMgr.getCommMgr();
-            String msg = comm.recvMsg();
-            String[] msgArr = msg.split(";");
+        } else {
+            Communication comms = Communication.getComms();
+            String message = comms.receiveMessage();
+            String[] messageArr = message.split("|");
 
-            if (msgArr[0].equals(CommMgr.SENSOR_DATA)) {
-                result[0] = Integer.parseInt(msgArr[1].split("_")[1]);
-                result[1] = Integer.parseInt(msgArr[2].split("_")[1]);
-                result[2] = Integer.parseInt(msgArr[3].split("_")[1]);
-                result[3] = Integer.parseInt(msgArr[4].split("_")[1]);
-                result[4] = Integer.parseInt(msgArr[5].split("_")[1]);
-                result[5] = Integer.parseInt(msgArr[6].split("_")[1]);
+            if (messageArr[0].equals(Constant.SENSE_DATA)) {
+                result[0] = Integer.parseInt(messageArr[1]);
+                result[1] = Integer.parseInt(messageArr[2]);
+                result[2] = Integer.parseInt(messageArr[3]);
+                result[3] = Integer.parseInt(messageArr[4]);
+                result[4] = Integer.parseInt(messageArr[5]);
+                result[5] = Integer.parseInt(messageArr[6]);
             }
 
             srFrontL.senseReal(map, result[0]);
@@ -273,11 +304,7 @@ public class Robot {
             srLeftT.senseReal(map, result[3]);
             srRightC.senseReal(map, result[4]);
             srLeftT.senseReal(map, result[5]);
-
-            
-            String[] mapStrings = MapDescriptor.generateMapDescriptor(map);
-            comm.sendMsg(mapStrings[0] + " " + mapStrings[1], CommMgr.MAP_STRINGS);
-        }*/
+        }
 
         return result;
     }
