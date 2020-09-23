@@ -12,7 +12,8 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;  
 import map.*;
 import robot.Robot;
-import algorithms.Exploration;
+import algorithms.*;
+import communication.*;
 
 public class Simulator {
 
@@ -20,7 +21,8 @@ public class Simulator {
     private static final int WIN_HEIGHT = 870;
     private static final int ROW_SIZE = 20;
     private static final int COL_SIZE = 15;
-    private static Map map;  
+    private static Map map;
+    private static Map realRunMap;
     private static int coverageLimit;
     private static int timeLimit;
     //private Map screen;
@@ -31,11 +33,15 @@ public class Simulator {
     private static JPanel controls;
 
     private static Robot bot;
+    private static Robot realRunRobot;
+
+    private static Communication comms = Communication.getComms();
 
     public static void main(String[] args) {
         bot = new Robot(1, 1, false);
 
         displaySimulator();
+        //testComms();
     }
 
     private static void displaySimulator() {
@@ -138,6 +144,27 @@ public class Simulator {
             }
         }
 
+        class MTFastestPath extends SwingWorker<Integer, String> {
+            protected Integer doInBackground() throws Exception {
+                bot.reset();
+                map.paintComponent(map.getGraphics());
+
+                /*
+                if (realRun) {
+                    while (true) {
+                        System.out.println("Waiting for FP_START...");
+                        String msg = comm.recvMsg();
+                        if (msg.equals(CommMgr.FP_START)) break;
+                    }
+                }*/
+
+                FastestPath fastestPath = new FastestPath(bot, map);
+                fastestPath.run(18, 13);
+
+                return 222;
+            }
+        }
+
 
         // Load Map Button
        JButton loadMapButton = new JButton("Load Map");
@@ -166,6 +193,7 @@ public class Simulator {
         fastestPathButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 // Start fastest path
+                new MTFastestPath().execute();
             }
         });
 
@@ -225,15 +253,24 @@ public class Simulator {
             }
 
         });
-
-
-
+        
+        // Real Run
+        JButton realRunButton = new JButton("Real Run");
+        realRunButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                comms.openSocket();
+                realRunRobot = new Robot(1, 1, true);
+                realRunMap = new Map(realRunRobot);
+                Exploration exploration = new Exploration(3600, 300, realRunRobot, realRunMap);
+            }
+        });
 
         controls.add(loadMapButton);
         controls.add(explorationButton);
         controls.add(fastestPathButton);
         controls.add(timeLimitedButton);
         controls.add(coverageLimitedButton);
+        controls.add(realRunButton);
     }
 
     public static void loadMap() {
@@ -291,6 +328,19 @@ public class Simulator {
         map[ROW_SIZE-1][2] = 2;
         map[ROW_SIZE-2][2] = 2;
         map[ROW_SIZE-3][2] = 2;
+    }
+
+    public static void testComms() {
+        Communication comms = new Communication();
+        comms = comms.getComms();
+        comms.openSocket();
+        System.out.println("After socket");
+        while(!comms.isConnected()){
+            System.out.println("Connected");
+            comms.testSendMessage("HI");
+            comms.testReceiveMessage();
+            comms.closeSocket();
+        }
     }
 
     

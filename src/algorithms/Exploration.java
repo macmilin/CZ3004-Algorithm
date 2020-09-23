@@ -5,7 +5,7 @@ import robot.Robot;
 import robot.Constant;
 import robot.Constant.DIRECTION;
 import robot.Constant.MOVEMENT;
-import utils.*;
+import communication.*;
 
 public class Exploration {
     private int timeLimit;
@@ -27,28 +27,10 @@ public class Exploration {
         if (robot.getRealRun()) {
             System.out.println("Calibrating...");
 
-            CommMgr.getCommMgr().recvMsg();
-            
-            robot.move(MOVEMENT.LEFT, false);
-            CommMgr.getCommMgr().recvMsg();
-            robot.move(MOVEMENT.CALIBRATE, false);
-            CommMgr.getCommMgr().recvMsg();
-            robot.move(MOVEMENT.LEFT, false);
-            CommMgr.getCommMgr().recvMsg();
-            robot.move(MOVEMENT.CALIBRATE, false);
-            CommMgr.getCommMgr().recvMsg();
-            robot.move(MOVEMENT.RIGHT, false);
-            CommMgr.getCommMgr().recvMsg();
-            robot.move(MOVEMENT.CALIBRATE, false);
-            CommMgr.getCommMgr().recvMsg();
-            robot.move(MOVEMENT.RIGHT, false);
-            
-
             while (true) {
                 System.out.println("Waiting for Start Command");
-                String msg = CommMgr.getCommMgr().recvMsg();
-                String[] msgArr = msg.split(";");
-                if (msgArr[0].equals(CommMgr.EX_START)){
+                String msg = Communication.getComms().receiveMessage();
+                if (msg.equals(Constant.START_EXPLORATION)){
                     break;
                 }
             }
@@ -60,7 +42,7 @@ public class Exploration {
 
 
         if (robot.getRealRun()) {
-            CommMgr.getCommMgr().sendMsg(null, CommMgr.BOT_START);
+            Communication.getComms().sendMessage(Constant.START_EXPLORATION);
         }
 
         sense();
@@ -69,6 +51,14 @@ public class Exploration {
         System.out.println("Explored Area: " + areaExplored);
 
         explore(robot.getRow(), robot.getCol());
+
+        System.out.println("Exploration complete!");
+
+        if (robot.getRealRun()) {
+            Communication.getComms().sendMessage(Constant.START_FASTEST_PATH);
+            FastestPath fastestPath = new FastestPath(robot, map);
+            fastestPath.run(Constant.GOAL_ROW, Constant.GOAL_COL);
+        }
     }
 
     public void sense() {
@@ -140,8 +130,8 @@ public class Exploration {
         if (m != MOVEMENT.CALIBRATE) {
             sense();
         } else {
-            CommMgr commMgr = CommMgr.getCommMgr();
-            commMgr.recvMsg();
+            //CommMgr commMgr = CommMgr.getCommMgr();
+            //commMgr.recvMsg();
         }
 
         /*
@@ -183,11 +173,12 @@ public class Exploration {
         if (!robot.getReachedGoal() && coverageLimit == 300 && timeLimit == 3600) {
             FastestPathAlgo goToGoal = new FastestPathAlgo(exploredMap, bot, realMap);
             goToGoal.runFastestPath(Constant.GOAL_ROW, Constant.GOAL_COL);
-        }
+        }*/
 
-        FastestPathAlgo returnToStart = new FastestPathAlgo(exploredMap, bot, realMap);
-        returnToStart.runFastestPath(Constant.START_ROW, Constant.START_COL);
+        FastestPath fastestPath = new FastestPath(robot, map);
+        fastestPath.run(Constant.START_ROW, Constant.START_COL);
 
+        /*
         System.out.println("Exploration complete!");
         areaExplored = calculateAreaExplored();
         System.out.printf("%.2f%% Coverage", (areaExplored / 300.0) * 100.0);
@@ -204,6 +195,7 @@ public class Exploration {
         }
         turnBotDirection(DIRECTION.NORTH);
         */
+        
     }
 
     private boolean checkRight() {
