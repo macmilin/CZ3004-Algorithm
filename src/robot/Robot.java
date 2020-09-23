@@ -11,7 +11,7 @@ import java.awt.*;
 public class Robot {
     
     private boolean reachedGoal;
-    private final boolean realRun;
+    private boolean realRun;
 
     private int row; 
     private int col; 
@@ -345,5 +345,9 @@ public class Robot {
                 break;
         }
 
+    }
+
+    public void setRealRun(boolean realRun) {
+        this.realRun = realRun;
     }
 }

@@ -21,7 +21,8 @@ public class Simulator {
     private static final int WIN_HEIGHT = 870;
     private static final int ROW_SIZE = 20;
     private static final int COL_SIZE = 15;
-    private static Map map;  
+    private static Map map;
+    private static Map realRunMap;
     private static int coverageLimit;
     private static int timeLimit;
     //private Map screen;
@@ -32,6 +33,9 @@ public class Simulator {
     private static JPanel controls;
 
     private static Robot bot;
+    private static Robot realRunRobot;
+
+    private static Communication comms = Communication.getComms();
 
     public static void main(String[] args) {
         bot = new Robot(1, 1, false);
@@ -249,15 +253,24 @@ public class Simulator {
             }
 
         });
-
-
-
+        
+        // Real Run
+        JButton realRunButton = new JButton("Real Run");
+        realRunButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                comms.openSocket();
+                realRunRobot = new Robot(1, 1, true);
+                realRunMap = new Map(realRunRobot);
+                Exploration exploration = new Exploration(3600, 300, realRunRobot, realRunMap);
+            }
+        });
 
         controls.add(loadMapButton);
         controls.add(explorationButton);
         controls.add(fastestPathButton);
         controls.add(timeLimitedButton);
         controls.add(coverageLimitedButton);
+        controls.add(realRunButton);
     }
 
     public static void loadMap() {
