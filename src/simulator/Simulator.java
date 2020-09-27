@@ -83,7 +83,7 @@ public class Simulator {
                 map.paintComponent(map.getGraphics());
 
                 Exploration exploration;
-                exploration = new Exploration(30, 300, bot, map);
+                exploration = new Exploration(30, 300, bot, map, false);
 
                 /*
                 if (realRun) {
@@ -115,7 +115,7 @@ public class Simulator {
                 map.paintComponent(map.getGraphics());
 
                 Exploration exploration;
-                exploration = new Exploration(1800, coverageLimit, bot, map);
+                exploration = new Exploration(1800, coverageLimit, bot, map, true);
                 exploration.run();
                 System.out.println(map.generateMapDescriptorPartOne());
                 System.out.println(map.generateMapDescriptorPartTwo());
@@ -135,7 +135,7 @@ public class Simulator {
                 map.paintComponent(map.getGraphics());
 
                 Exploration exploration;
-                exploration = new Exploration(timeLimit, 300, bot, map);
+                exploration = new Exploration(timeLimit, 300, bot, map, true);
                 exploration.run();
                 System.out.println(map.generateMapDescriptorPartOne());
                 System.out.println(map.generateMapDescriptorPartTwo());
@@ -160,6 +160,18 @@ public class Simulator {
 
                 FastestPath fastestPath = new FastestPath(bot, map);
                 fastestPath.run(18, 13);
+
+                return 222;
+            }
+        }
+
+        class MTRealRun extends SwingWorker<Integer, String> {
+            protected Integer doInBackground() throws Exception {
+                comms.openSocket();
+                realRunRobot = new Robot(1, 1, true);
+                realRunMap = new Map(realRunRobot);
+                Exploration exploration = new Exploration(3600, 300, realRunRobot, realRunMap, false);
+                exploration.run();
 
                 return 222;
             }
@@ -258,10 +270,7 @@ public class Simulator {
         JButton realRunButton = new JButton("Real Run");
         realRunButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                comms.openSocket();
-                realRunRobot = new Robot(1, 1, true);
-                realRunMap = new Map(realRunRobot);
-                Exploration exploration = new Exploration(3600, 300, realRunRobot, realRunMap);
+                new MTRealRun().execute();
             }
         });
 
@@ -335,9 +344,9 @@ public class Simulator {
         comms = comms.getComms();
         comms.openSocket();
         System.out.println("After socket");
-        while(!comms.isConnected()){
+        while(comms.isConnected()){
             System.out.println("Connected");
-            comms.testSendMessage("HI");
+            //comms.testSendMessage("HI");
             comms.testReceiveMessage();
             comms.closeSocket();
         }

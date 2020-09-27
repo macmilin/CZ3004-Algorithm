@@ -23,24 +23,24 @@ public class Constant {
     public static final int TURN_COST = 100;
     public static final int INFINITE_COST = 99999;
 
-    public static final String MOVE_FORWARD = "W|";
-    public static final String MOVE_BACK = "S|";
-    public static final String TURN_LEFT = "A|";
-    public static final String TURN_RIGHT = "D|";
-    public static final String CALIBRATE_SENSOR = "C|";
-    public static final String SENSE_DATA = "R";
+    public static final String MOVE_FORWARD = "W|\n";
+    public static final String MOVE_BACK = "S|\n";
+    public static final String TURN_LEFT = "A|\n";
+    public static final String TURN_RIGHT = "D|\n";
+    public static final String CALIBRATE_SENSOR = "C|\n";
+    public static final String SENSE_DATA = "R|\n";
     /*
     public static final String SHORT_CUT_1 = "F1|";
     public static final String SHORT_CUT_2 = "F2|";
     */
 
-    public static final String START_EXPLORATION = "E|";
-    public static final String START_FASTEST_PATH = "F|";
-    public static final String SEND_ARENA = "SendArena";
-    public static final String MDF_STRING = "M";
+    public static final String START_EXPLORATION = "E|\n";
+    public static final String START_FASTEST_PATH = "F|\n";
+    public static final String SEND_ARENA = "SendArena\n";
+    public static final String MDF_STRING = "M\n";
 
-    public static final String TAKE_PICTURE = "TP";
-    public static final String EXPLORATION_DONE = "ED";
+    public static final String TAKE_PICTURE = "TP\n";
+    public static final String EXPLORATION_DONE = "ED\n";
 
 
     

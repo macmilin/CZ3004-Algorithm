@@ -48,7 +48,7 @@ public class Robot {
         srFrontR = new Sensor(Constant.SENSOR_SHORT_RANGE_MIN, Constant.SENSOR_SHORT_RANGE_MAX, row + 1, col + 1, dir, "SHORT_RANGE_FRONT_RIGHT");
         srLeftT = new Sensor(Constant.SENSOR_SHORT_RANGE_MIN, Constant.SENSOR_SHORT_RANGE_MAX, row + 1, col - 1, newDir(MOVEMENT.LEFT), "SHORT_RANGE_LEFT_TOP");
         srRightC = new Sensor(Constant.SENSOR_SHORT_RANGE_MIN, Constant.SENSOR_SHORT_RANGE_MAX, row + 1, col + 1, newDir(MOVEMENT.RIGHT), "SHORT_RANGE_RIGHT_CENTER");
-        lrLeftC = new Sensor(Constant.SENSOR_LONG_RANGE_MIN, Constant.SENSOR_LONG_RANGE_MAX, row, col - 1, newDir(MOVEMENT.LEFT), "LONG_RANGE_LEFT_CENTER" );
+        lrLeftC = new Sensor(Constant.SENSOR_LONG_RANGE_MIN, Constant.SENSOR_LONG_RANGE_MAX, row + 1, col - 1, newDir(MOVEMENT.LEFT), "LONG_RANGE_LEFT_CENTER" );
         
     }
 
@@ -123,6 +123,26 @@ public class Robot {
 
     public boolean getReachedGoal() {
         return this.reachedGoal;
+    }
+
+    public void faceNorth(){
+        switch (dir) {
+            case NORTH:
+                break;
+            case EAST:
+                dir = newDir(MOVEMENT.LEFT);
+                break;
+            case SOUTH:
+                dir = newDir(MOVEMENT.RIGHT);
+                dir = newDir(MOVEMENT.RIGHT);
+                break;
+            case WEST:
+                dir = newDir(MOVEMENT.RIGHT);
+                break;
+            default:
+                System.out.println("Error in Robot.face()!");
+                break;
+            }
     }
 
     
@@ -286,6 +306,10 @@ public class Robot {
             result[5] = lrLeftC.senseSimulator(map);
         } else {
             Communication comms = Communication.getComms();
+            comms.sendMessage(Constant.MOVE_FORWARD);
+            comms.sendMessage(Constant.MOVE_BACK);
+            comms.sendMessage(Constant.SENSE_DATA);
+            comms.sendMessage(Constant.TURN_RIGHT);
             String message = comms.receiveMessage();
             String[] messageArr = message.split("|");
 

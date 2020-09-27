@@ -246,4 +246,41 @@ public class Map extends JPanel {
         }
     }
 
+    public int[] getNextNearestUnexplored() {
+        int[] ans;
+
+        for(int i = 0; i < mapTile.length; i++){
+            for(int j = 0; j < mapTile[0].length; j++){
+                if (!mapTile[i][j].getExplored()) {
+                    if (isValid(i-2, j) && mapTile[i-2][j].getExplored() 
+                    && mapTile[i-2][j].getState() == 0 && !mapTile[i-2][j].getVirtual()){
+                        ans = new int[]{i-2, j};
+                        return ans;
+                    }
+                    
+                    else if (isValid(i, j-2) && mapTile[i][j-2].getExplored() 
+                    && mapTile[i][j-2].getState() == 0 && !mapTile[i][j-2].getVirtual()){
+                        ans = new int[]{i, j-2};
+                        return ans;
+                    }
+
+                    else if (isValid(i, j+2) && mapTile[i][j+2].getExplored() 
+                    && mapTile[i][j+2].getState() == 0 && !mapTile[i][j+2].getVirtual()){
+                        ans = new int[]{i, j+2};
+                        return ans;
+                    }
+                    
+                    else if (isValid(i+2, j) && mapTile[i+2][j].getExplored() 
+                    && mapTile[i+2][j].getState() == 0 && !mapTile[i+2][j].getVirtual()){
+                        ans = new int[]{i+2, j};
+                        return ans;
+                    }
+                }
+            }
+        }
+
+        ans = new int[]{-1, -1};
+        return ans;
+    }
+
 }
