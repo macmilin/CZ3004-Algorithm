@@ -92,23 +92,30 @@ public class Sensor {
     }
 
 
-    private void useSenseValueReal(int rowChange, int colChange, Map map, int sensorValue) {
-        if (sensorValue == 0) {
+    private void useSenseValueReal(int rowChange, int colChange, Map map, int sensorVal) {
+        /*
+        if (sensorVal == 0) {
             return;
-        }
+        }*/
 
+        System.out.println("Sensor ID: " + id + " Value: " + sensorVal + " Pos: " + row + ", " + col);
+
+        int sensorValue = sensorVal + 1;
+
+        // Check if anything before the min range of the sensor is valid if min range is greater than 1
         for (int i = 1; i < this.min; i++) {
             int row = this.row + (rowChange * i);
             int col = this.col + (colChange * i);
 
-            if (map.isValid(row, col)) {
+            if (!map.isValid(row, col)) {
+                return;
+            }else {
                 if (map.getTile(row, col).getState() == 1) {
                     return;
                 }
-            }else{
-                return;
             }
         }
+
 
         for (int i = this.min; i <= this.max; i++) {
             int row = this.row + (rowChange * i);
@@ -119,16 +126,18 @@ public class Sensor {
 
                 if (sensorValue == i) {
                     map.setObstacle(row, col, true);
+                    System.out.println("Sensor ID: " + id + " Obstacle at " + row + " " + col);
                     break;
                 }
 
+                /*
                 if (map.getTile(row, col).getState() == 1) {
                     if (id.equals("SHORT_RANGE_FRONT_LEFT") || id.equals("SHORT_RANGE_FRONT_CENTER") || id.equals("SHORT_RANGE_FRONT_RIGHT")) {
                         map.setObstacle(row, col, false);
                     } else {
                         break;
                     }
-                }
+                }*/
 
             }
         }

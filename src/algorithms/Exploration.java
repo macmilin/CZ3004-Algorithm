@@ -6,6 +6,7 @@ import robot.Constant;
 import robot.Constant.DIRECTION;
 import robot.Constant.MOVEMENT;
 import communication.*;
+import java.util.Arrays;
 
 public class Exploration {
     private int timeLimit;
@@ -15,42 +16,51 @@ public class Exploration {
     private long endTime;
     private Map map;
     private int areaExplored;
+    private boolean limited;
 
-    public Exploration(int timeLimit, int coverageLimit, Robot robot, Map map) {
+    public Exploration(int timeLimit, int coverageLimit, Robot robot, Map map, boolean limited) {
         this.timeLimit = timeLimit;
         this.coverageLimit = coverageLimit;
         this.robot = robot;
         this.map = map;
+        this.limited = limited;
     }
 
     public void run() {
         if (robot.getRealRun()) {
             System.out.println("Calibrating...");
-
+            //Communication.getComms().sendMessage("Hello from ALgo");
+            
+            /*
             while (true) {
                 System.out.println("Waiting for Start Command");
                 String msg = Communication.getComms().receiveMessage();
                 if (msg.equals(Constant.START_EXPLORATION)){
                     break;
                 }
-            }
+            }*/
         }
 
         System.out.println("Starting exploration...");
         startTime = System.currentTimeMillis();
         endTime = startTime + (timeLimit * 1000);
 
-
+        /*
         if (robot.getRealRun()) {
             Communication.getComms().sendMessage(Constant.START_EXPLORATION);
-        }
+        }*/
 
         sense();
+        System.out.println("After first sense");
+
 
         areaExplored = getAreaExplored();
         System.out.println("Explored Area: " + areaExplored);
 
-        explore(robot.getRow(), robot.getCol());
+        explore(robot.getRow(), robot.getCol(), limited);
+
+        robot.faceNorth();
+        map.paintComponent(map.getGraphics());
 
         System.out.println("Exploration complete!");
 
@@ -94,7 +104,7 @@ public class Exploration {
         }
     }
 
-    public void explore(int startR, int startC) {
+    public void explore(int startR, int startC, boolean limited) {
         while (System.currentTimeMillis() <= endTime && areaExplored <= coverageLimit) {
             nextStep();
             areaExplored = getAreaExplored();
@@ -104,6 +114,9 @@ public class Exploration {
                 break;
             }
 
+        }
+        if (!limited){
+            exploreRemaining();
         }
         returnHome();
     }    
@@ -263,5 +276,27 @@ public class Exploration {
         int col = robot.getCol();
         return (isExploredAndNotObstacle(row - 1, col - 1) && isExploredAndFree(row, col - 1) && isExploredAndNotObstacle(row + 1, col - 1));
     }
+
+    private void exploreRemaining() {
+        int[] target;
+        target = map.getNextNearestUnexplored();
+        
+        while(target[0] != -1 && target[1] != -1){
+            System.out.print(Arrays.toString(target));
+            FastestPath fastestPath = new FastestPath(robot, map);
+            fastestPath.run(target[0], target[1]);
+            sense();
+            move(MOVEMENT.RIGHT);
+            sense();
+            move(MOVEMENT.RIGHT);
+            sense();
+            move(MOVEMENT.RIGHT);
+            sense();
+            move(MOVEMENT.RIGHT);
+            sense();
+            target = map.getNextNearestUnexplored();
+        }
+    }
+
 
 }

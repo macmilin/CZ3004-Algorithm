@@ -6,9 +6,9 @@ public class Constant {
     // range of short range sensor (tiles)
     public static final int SENSOR_SHORT_RANGE_MAX = 2;
     // range of long range sensor (tiles)
-    public static final int SENSOR_LONG_RANGE_MIN = 3;
+    public static final int SENSOR_LONG_RANGE_MIN = 1;
     // range of long range sensor (tiles)
-    public static final int SENSOR_LONG_RANGE_MAX = 4;
+    public static final int SENSOR_LONG_RANGE_MAX = 5;
 
     public static final int SPEED = 50;
     public static final DIRECTION START_DIR = DIRECTION.NORTH;
@@ -28,7 +28,7 @@ public class Constant {
     public static final String TURN_LEFT = "A|";
     public static final String TURN_RIGHT = "D|";
     public static final String CALIBRATE_SENSOR = "C|";
-    public static final String SENSE_DATA = "R";
+    public static final String SENSE_DATA = "R|";
     /*
     public static final String SHORT_CUT_1 = "F1|";
     public static final String SHORT_CUT_2 = "F2|";
