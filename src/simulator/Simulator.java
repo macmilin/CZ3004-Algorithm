@@ -22,7 +22,7 @@ public class Simulator {
     private static final int ROW_SIZE = 20;
     private static final int COL_SIZE = 15;
     private static Map map;
-    private static Map realRunMap;
+    //private static Map realRunMap;
     private static int coverageLimit;
     private static int timeLimit;
     //private Map screen;
@@ -33,12 +33,13 @@ public class Simulator {
     private static JPanel controls;
 
     private static Robot bot;
-    private static Robot realRunRobot;
+    //private static Robot realRunRobot;
 
     private static Communication comms = Communication.getComms();
 
     public static void main(String[] args) {
         bot = new Robot(1, 1, false);
+        //realRunRobot = new Robot(1, 1, true);
 
         displaySimulator();
         //testComms();
@@ -56,8 +57,12 @@ public class Simulator {
         // Initialize map screen
         map = new Map(bot);
         screen = new JPanel(new CardLayout());
+        //realRunMap = new Map(realRunRobot);
+
         content.add(screen, BorderLayout.CENTER);
         screen.add(map, "MAP");
+
+
 
         // Initialize control buttons
         controls = new JPanel(new GridLayout(5,1));
@@ -167,10 +172,9 @@ public class Simulator {
 
         class MTRealRun extends SwingWorker<Integer, String> {
             protected Integer doInBackground() throws Exception {
+                bot.setRealRun(true);
                 comms.openSocket();
-                realRunRobot = new Robot(1, 1, true);
-                realRunMap = new Map(realRunRobot);
-                Exploration exploration = new Exploration(3600, 300, realRunRobot, realRunMap, false);
+                Exploration exploration = new Exploration(3600, 300, bot, map, false);
                 exploration.run();
 
                 return 222;

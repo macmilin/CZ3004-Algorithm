@@ -61,10 +61,12 @@ public class Map extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
+        //System.out.println(g);
         g.setColor(Color.LIGHT_GRAY);
         g.fillRect(0, 0, WIDTH, HEIGHT);
         for(int i = 0; i < mapTile.length; i++){
             for(int j = 0; j < mapTile[0].length; j++){
+                //System.out.println("row:" + i + " col:" + j);
                 mapTile[i][j].renderTile(g);
             }
         }

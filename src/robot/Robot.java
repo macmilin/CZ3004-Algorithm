@@ -7,6 +7,9 @@ import robot.Constant.DIRECTION;
 import robot.Constant.MOVEMENT;
 import communication.Communication;
 import java.awt.*;
+import java.util.concurrent.TimeUnit;
+import java.util.Arrays;
+
 
 public class Robot {
     
@@ -29,7 +32,7 @@ public class Robot {
     // SR on left facing west
     private final Sensor srLeftT;
     // SR on right facing east
-    private final Sensor srRightC;
+    private final Sensor srRightT;
     // LR on left facing west
     private final Sensor lrLeftC;
     
@@ -47,8 +50,8 @@ public class Robot {
         srFrontC = new Sensor(Constant.SENSOR_SHORT_RANGE_MIN, Constant.SENSOR_SHORT_RANGE_MAX, row + 1, col, dir, "SHORT_RANGE_FRONT_CENTER");
         srFrontR = new Sensor(Constant.SENSOR_SHORT_RANGE_MIN, Constant.SENSOR_SHORT_RANGE_MAX, row + 1, col + 1, dir, "SHORT_RANGE_FRONT_RIGHT");
         srLeftT = new Sensor(Constant.SENSOR_SHORT_RANGE_MIN, Constant.SENSOR_SHORT_RANGE_MAX, row + 1, col - 1, newDir(MOVEMENT.LEFT), "SHORT_RANGE_LEFT_TOP");
-        srRightC = new Sensor(Constant.SENSOR_SHORT_RANGE_MIN, Constant.SENSOR_SHORT_RANGE_MAX, row + 1, col + 1, newDir(MOVEMENT.RIGHT), "SHORT_RANGE_RIGHT_CENTER");
-        lrLeftC = new Sensor(Constant.SENSOR_LONG_RANGE_MIN, Constant.SENSOR_LONG_RANGE_MAX, row + 1, col - 1, newDir(MOVEMENT.LEFT), "LONG_RANGE_LEFT_CENTER" );
+        srRightT = new Sensor(Constant.SENSOR_SHORT_RANGE_MIN, Constant.SENSOR_SHORT_RANGE_MAX, row + 1, col + 1, newDir(MOVEMENT.RIGHT), "SHORT_RANGE_RIGHT_TOP");
+        lrLeftC = new Sensor(Constant.SENSOR_LONG_RANGE_MIN, Constant.SENSOR_LONG_RANGE_MAX, row, col - 1, newDir(MOVEMENT.LEFT), "LONG_RANGE_LEFT_CENTER" );
         
     }
 
@@ -302,32 +305,36 @@ public class Robot {
             result[1] = srFrontC.senseSimulator(map);
             result[2] = srFrontR.senseSimulator(map);
             result[3] = srLeftT.senseSimulator(map);
-            result[4] = srRightC.senseSimulator(map);
+            result[4] = srRightT.senseSimulator(map);
             result[5] = lrLeftC.senseSimulator(map);
         } else {
             Communication comms = Communication.getComms();
-            comms.sendMessage(Constant.MOVE_FORWARD);
-            comms.sendMessage(Constant.MOVE_BACK);
+
             comms.sendMessage(Constant.SENSE_DATA);
-            comms.sendMessage(Constant.TURN_RIGHT);
             String message = comms.receiveMessage();
-            String[] messageArr = message.split("|");
+            System.out.println(message);
 
-            if (messageArr[0].equals(Constant.SENSE_DATA)) {
-                result[0] = Integer.parseInt(messageArr[1]);
-                result[1] = Integer.parseInt(messageArr[2]);
-                result[2] = Integer.parseInt(messageArr[3]);
-                result[3] = Integer.parseInt(messageArr[4]);
-                result[4] = Integer.parseInt(messageArr[5]);
-                result[5] = Integer.parseInt(messageArr[6]);
-            }
+            //comms.sendMessage(Constant.MOVE_FORWARD);
+            //comms.sendMessage(Constant.MOVE_FORWARD);
+            //String message = comms.receiveMessage();
+            //System.out.println(message);
+            String[] messageArr = message.split("\\|");
+            System.out.println(Arrays.toString(messageArr));
 
+            
+            result[0] = Integer.parseInt(messageArr[0]);
+            result[1] = Integer.parseInt(messageArr[1]);
+            result[2] = Integer.parseInt(messageArr[2]);
+            result[3] = Integer.parseInt(messageArr[3]);
+            result[4] = Integer.parseInt(messageArr[4]);
+            result[5] = Integer.parseInt(messageArr[5]);
+            
             srFrontL.senseReal(map, result[0]);
             srFrontC.senseReal(map, result[1]);
             srFrontR.senseReal(map, result[2]);
             srLeftT.senseReal(map, result[3]);
-            srRightC.senseReal(map, result[4]);
-            srLeftT.senseReal(map, result[5]);
+            srRightT.senseReal(map, result[4]);
+            lrLeftC.senseReal(map, result[5]);
         }
 
         return result;
@@ -341,7 +348,7 @@ public class Robot {
                 srFrontR.setSensor(this.row + 1, this.col + 1, this.dir);
                 srLeftT.setSensor(this.row + 1, this.col - 1, newDir(MOVEMENT.LEFT));
                 lrLeftC.setSensor(this.row, this.col - 1, newDir(MOVEMENT.LEFT));
-                srRightC.setSensor(this.row + 1, this.col + 1, newDir(MOVEMENT.RIGHT));
+                srRightT.setSensor(this.row + 1, this.col + 1, newDir(MOVEMENT.RIGHT));
                 break;
             case EAST:
                 srFrontL.setSensor(this.row + 1, this.col + 1, this.dir);
@@ -349,7 +356,7 @@ public class Robot {
                 srFrontR.setSensor(this.row - 1, this.col + 1, this.dir);
                 srLeftT.setSensor(this.row + 1, this.col + 1, newDir(MOVEMENT.LEFT));
                 lrLeftC.setSensor(this.row + 1, this.col, newDir(MOVEMENT.LEFT));
-                srRightC.setSensor(this.row - 1, this.col + 1, newDir(MOVEMENT.RIGHT));
+                srRightT.setSensor(this.row - 1, this.col + 1, newDir(MOVEMENT.RIGHT));
                 break;
             case SOUTH:
                 srFrontL.setSensor(this.row - 1, this.col + 1, this.dir);
@@ -357,7 +364,7 @@ public class Robot {
                 srFrontR.setSensor(this.row - 1, this.col - 1, this.dir);
                 srLeftT.setSensor(this.row - 1, this.col + 1, newDir(MOVEMENT.LEFT));
                 lrLeftC.setSensor(this.row, this.col + 1, newDir(MOVEMENT.LEFT));
-                srRightC.setSensor(this.row - 1, this.col - 1, newDir(MOVEMENT.RIGHT));
+                srRightT.setSensor(this.row - 1, this.col - 1, newDir(MOVEMENT.RIGHT));
                 break;
             case WEST:
                 srFrontL.setSensor(this.row - 1, this.col - 1, this.dir);
@@ -365,7 +372,7 @@ public class Robot {
                 srFrontR.setSensor(this.row + 1, this.col - 1, this.dir);
                 srLeftT.setSensor(this.row - 1, this.col - 1, newDir(MOVEMENT.LEFT));
                 lrLeftC.setSensor(this.row - 1, this.col, newDir(MOVEMENT.LEFT));
-                srRightC.setSensor(this.row + 1, this.col - 1, newDir(MOVEMENT.RIGHT));
+                srRightT.setSensor(this.row + 1, this.col - 1, newDir(MOVEMENT.RIGHT));
                 break;
         }
 

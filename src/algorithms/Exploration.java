@@ -30,6 +30,7 @@ public class Exploration {
         if (robot.getRealRun()) {
             System.out.println("Calibrating...");
             //Communication.getComms().sendMessage("Hello from ALgo");
+            
             /*
             while (true) {
                 System.out.println("Waiting for Start Command");
@@ -50,6 +51,8 @@ public class Exploration {
         }*/
 
         sense();
+        System.out.println("After first sense");
+
 
         areaExplored = getAreaExplored();
         System.out.println("Explored Area: " + areaExplored);
