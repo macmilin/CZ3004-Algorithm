@@ -100,7 +100,7 @@ public class Sensor {
 
         System.out.println("Sensor ID: " + id + " Value: " + sensorVal + " Pos: " + row + ", " + col);
 
-        int sensorValue = sensorVal + 1;
+        int sensorValue = sensorVal;
 
         // Check if anything before the min range of the sensor is valid if min range is greater than 1
         for (int i = 1; i < this.min; i++) {
