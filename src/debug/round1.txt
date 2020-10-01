@@ -1,0 +1,255 @@
+Opening socket's connection...
+Socket successfully opened.
+Calibrating...
+Starting exploration...
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|1|-1
+-1|-1|-1|-1|1|-1
+[-1, -1, -1, -1, 1, -1]
+Sensor ID: SHORT_RANGE_FRONT_LEFT Value: -1 Pos: 2, 0
+Sensor ID: SHORT_RANGE_FRONT_CENTER Value: -1 Pos: 2, 1
+Sensor ID: SHORT_RANGE_FRONT_RIGHT Value: -1 Pos: 2, 2
+Sensor ID: SHORT_RANGE_LEFT_TOP Value: -1 Pos: 2, 0
+Sensor ID: SHORT_RANGE_RIGHT_TOP Value: 1 Pos: 2, 2
+Sensor ID: SHORT_RANGE_RIGHT_TOP Obstacle at 2 4
+Sensor ID: LONG_RANGE_LEFT_CENTER Value: -1 Pos: 1, 0
+After first sense
+Explored Area: 26
+Send: D|
+Send: R|
+Receiving a message...
+Received: 1|1|1|-1|1|-1
+1|1|1|-1|1|-1
+[1, 1, 1, -1, 1, -1]
+Sensor ID: SHORT_RANGE_FRONT_LEFT Value: 1 Pos: 2, 2
+Sensor ID: SHORT_RANGE_FRONT_LEFT Obstacle at 2 4
+Sensor ID: SHORT_RANGE_FRONT_CENTER Value: 1 Pos: 1, 2
+Sensor ID: SHORT_RANGE_FRONT_CENTER Obstacle at 1 4
+Sensor ID: SHORT_RANGE_FRONT_RIGHT Value: 1 Pos: 0, 2
+Sensor ID: SHORT_RANGE_FRONT_RIGHT Obstacle at 0 4
+Sensor ID: SHORT_RANGE_LEFT_TOP Value: -1 Pos: 2, 2
+Sensor ID: SHORT_RANGE_RIGHT_TOP Value: 1 Pos: 0, 2
+Sensor ID: LONG_RANGE_LEFT_CENTER Value: -1 Pos: 2, 1
+Right empty. Rotate right
+Send: W|
+Send: R|
+Receiving a message...
+Received: 1|1|1|-1|1|-1
+1|1|1|-1|1|-1
+[1, 1, 1, -1, 1, -1]
+Sensor ID: SHORT_RANGE_FRONT_LEFT Value: 1 Pos: 2, 3
+Sensor ID: SHORT_RANGE_FRONT_LEFT Obstacle at 2 5
+Sensor ID: SHORT_RANGE_FRONT_CENTER Value: 1 Pos: 1, 3
+Sensor ID: SHORT_RANGE_FRONT_CENTER Obstacle at 1 5
+Sensor ID: SHORT_RANGE_FRONT_RIGHT Value: 1 Pos: 0, 3
+Sensor ID: SHORT_RANGE_FRONT_RIGHT Obstacle at 0 5
+Sensor ID: SHORT_RANGE_LEFT_TOP Value: -1 Pos: 2, 3
+Sensor ID: SHORT_RANGE_RIGHT_TOP Value: 1 Pos: 0, 3
+Sensor ID: LONG_RANGE_LEFT_CENTER Value: -1 Pos: 2, 2
+Forward empty after right rotation. Move forward
+Area explored: 41
+Send: A|
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|1|5
+-1|-1|-1|-1|1|5
+[-1, -1, -1, -1, 1, 5]
+Sensor ID: SHORT_RANGE_FRONT_LEFT Value: -1 Pos: 2, 1
+Sensor ID: SHORT_RANGE_FRONT_CENTER Value: -1 Pos: 2, 2
+Sensor ID: SHORT_RANGE_FRONT_RIGHT Value: -1 Pos: 2, 3
+Sensor ID: SHORT_RANGE_LEFT_TOP Value: -1 Pos: 2, 1
+Sensor ID: SHORT_RANGE_RIGHT_TOP Value: 1 Pos: 2, 3
+Sensor ID: SHORT_RANGE_RIGHT_TOP Obstacle at 2 5
+Sensor ID: LONG_RANGE_LEFT_CENTER Value: 5 Pos: 1, 1
+Left empty. Rotate left
+Send: W|
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|1|5
+-1|-1|-1|-1|1|5
+[-1, -1, -1, -1, 1, 5]
+Sensor ID: SHORT_RANGE_FRONT_LEFT Value: -1 Pos: 3, 1
+Sensor ID: SHORT_RANGE_FRONT_CENTER Value: -1 Pos: 3, 2
+Sensor ID: SHORT_RANGE_FRONT_RIGHT Value: -1 Pos: 3, 3
+Sensor ID: SHORT_RANGE_LEFT_TOP Value: -1 Pos: 3, 1
+Sensor ID: SHORT_RANGE_RIGHT_TOP Value: 1 Pos: 3, 3
+Sensor ID: SHORT_RANGE_RIGHT_TOP Obstacle at 3 5
+Sensor ID: LONG_RANGE_LEFT_CENTER Value: 5 Pos: 2, 1
+Forward empty after left rotation. Move forward
+Area explored: 44
+Send: W|
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|1|-1
+-1|-1|-1|-1|1|-1
+[-1, -1, -1, -1, 1, -1]
+Sensor ID: SHORT_RANGE_FRONT_LEFT Value: -1 Pos: 4, 1
+Sensor ID: SHORT_RANGE_FRONT_CENTER Value: -1 Pos: 4, 2
+Sensor ID: SHORT_RANGE_FRONT_RIGHT Value: -1 Pos: 4, 3
+Sensor ID: SHORT_RANGE_LEFT_TOP Value: -1 Pos: 4, 1
+Sensor ID: SHORT_RANGE_RIGHT_TOP Value: 1 Pos: 4, 3
+Sensor ID: SHORT_RANGE_RIGHT_TOP Obstacle at 4 5
+Sensor ID: LONG_RANGE_LEFT_CENTER Value: -1 Pos: 3, 1
+Forward empty. Move forward
+Area explored: 47
+Send: W|
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|2|1|-1
+-1|-1|-1|2|1|-1
+[-1, -1, -1, 2, 1, -1]
+Sensor ID: SHORT_RANGE_FRONT_LEFT Value: -1 Pos: 5, 1
+Sensor ID: SHORT_RANGE_FRONT_CENTER Value: -1 Pos: 5, 2
+Sensor ID: SHORT_RANGE_FRONT_RIGHT Value: -1 Pos: 5, 3
+Sensor ID: SHORT_RANGE_LEFT_TOP Value: 2 Pos: 5, 1
+Sensor ID: SHORT_RANGE_RIGHT_TOP Value: 1 Pos: 5, 3
+Sensor ID: SHORT_RANGE_RIGHT_TOP Obstacle at 5 5
+Sensor ID: LONG_RANGE_LEFT_CENTER Value: -1 Pos: 4, 1
+Forward empty. Move forward
+Area explored: 51
+Send: D|
+Send: R|
+Receiving a message...
+Received: 1|1|1|-1|-1|-1
+1|1|1|-1|-1|-1
+[1, 1, 1, -1, -1, -1]
+Sensor ID: SHORT_RANGE_FRONT_LEFT Value: 1 Pos: 5, 3
+Sensor ID: SHORT_RANGE_FRONT_LEFT Obstacle at 5 5
+Sensor ID: SHORT_RANGE_FRONT_CENTER Value: 1 Pos: 4, 3
+Sensor ID: SHORT_RANGE_FRONT_CENTER Obstacle at 4 5
+Sensor ID: SHORT_RANGE_FRONT_RIGHT Value: 1 Pos: 3, 3
+Sensor ID: SHORT_RANGE_FRONT_RIGHT Obstacle at 3 5
+Sensor ID: SHORT_RANGE_LEFT_TOP Value: -1 Pos: 5, 3
+Sensor ID: SHORT_RANGE_RIGHT_TOP Value: -1 Pos: 3, 3
+Sensor ID: LONG_RANGE_LEFT_CENTER Value: -1 Pos: 5, 2
+Right empty. Rotate right
+Send: W|
+Send: R|
+Receiving a message...
+Received: 1|1|1|-1|-1|-1
+1|1|1|-1|-1|-1
+[1, 1, 1, -1, -1, -1]
+Sensor ID: SHORT_RANGE_FRONT_LEFT Value: 1 Pos: 5, 4
+Sensor ID: SHORT_RANGE_FRONT_LEFT Obstacle at 5 6
+Sensor ID: SHORT_RANGE_FRONT_CENTER Value: 1 Pos: 4, 4
+Sensor ID: SHORT_RANGE_FRONT_CENTER Obstacle at 4 6
+Sensor ID: SHORT_RANGE_FRONT_RIGHT Value: 1 Pos: 3, 4
+Sensor ID: SHORT_RANGE_FRONT_RIGHT Obstacle at 3 6
+Sensor ID: SHORT_RANGE_LEFT_TOP Value: -1 Pos: 5, 4
+Sensor ID: SHORT_RANGE_RIGHT_TOP Value: -1 Pos: 3, 4
+Sensor ID: LONG_RANGE_LEFT_CENTER Value: -1 Pos: 5, 3
+Forward empty after right rotation. Move forward
+Area explored: 62
+Send: A|
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|1|5
+-1|-1|-1|-1|1|5
+[-1, -1, -1, -1, 1, 5]
+Sensor ID: SHORT_RANGE_FRONT_LEFT Value: -1 Pos: 5, 2
+Sensor ID: SHORT_RANGE_FRONT_CENTER Value: -1 Pos: 5, 3
+Sensor ID: SHORT_RANGE_FRONT_RIGHT Value: -1 Pos: 5, 4
+Sensor ID: SHORT_RANGE_LEFT_TOP Value: -1 Pos: 5, 2
+Sensor ID: SHORT_RANGE_RIGHT_TOP Value: 1 Pos: 5, 4
+Sensor ID: SHORT_RANGE_RIGHT_TOP Obstacle at 5 6
+Sensor ID: LONG_RANGE_LEFT_CENTER Value: 5 Pos: 4, 2
+Left empty. Rotate left
+Send: W|
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|1|5
+-1|-1|-1|-1|1|5
+[-1, -1, -1, -1, 1, 5]
+Sensor ID: SHORT_RANGE_FRONT_LEFT Value: -1 Pos: 6, 2
+Sensor ID: SHORT_RANGE_FRONT_CENTER Value: -1 Pos: 6, 3
+Sensor ID: SHORT_RANGE_FRONT_RIGHT Value: -1 Pos: 6, 4
+Sensor ID: SHORT_RANGE_LEFT_TOP Value: -1 Pos: 6, 2
+Sensor ID: SHORT_RANGE_RIGHT_TOP Value: 1 Pos: 6, 4
+Sensor ID: SHORT_RANGE_RIGHT_TOP Obstacle at 6 6
+Sensor ID: LONG_RANGE_LEFT_CENTER Value: 5 Pos: 5, 2
+Forward empty after left rotation. Move forward
+Area explored: 66
+Send: W|
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|-1
+-1|-1|-1|1|1|-1
+[-1, -1, -1, 1, 1, -1]
+Sensor ID: SHORT_RANGE_FRONT_LEFT Value: -1 Pos: 7, 2
+Sensor ID: SHORT_RANGE_FRONT_CENTER Value: -1 Pos: 7, 3
+Sensor ID: SHORT_RANGE_FRONT_RIGHT Value: -1 Pos: 7, 4
+Sensor ID: SHORT_RANGE_LEFT_TOP Value: 1 Pos: 7, 2
+Sensor ID: SHORT_RANGE_LEFT_TOP Obstacle at 7 0
+Sensor ID: SHORT_RANGE_RIGHT_TOP Value: 1 Pos: 7, 4
+Sensor ID: SHORT_RANGE_RIGHT_TOP Obstacle at 7 6
+Sensor ID: LONG_RANGE_LEFT_CENTER Value: -1 Pos: 6, 2
+Forward empty. Move forward
+Area explored: 70
+Send: W|
+Send: R|
+Receiving a message...
+Received: 2|2|2|2|2|5
+2|2|2|2|2|5
+[2, 2, 2, 2, 2, 5]
+Sensor ID: SHORT_RANGE_FRONT_LEFT Value: 2 Pos: 8, 2
+Sensor ID: SHORT_RANGE_FRONT_CENTER Value: 2 Pos: 8, 3
+Sensor ID: SHORT_RANGE_FRONT_RIGHT Value: 2 Pos: 8, 4
+Sensor ID: SHORT_RANGE_LEFT_TOP Value: 2 Pos: 8, 2
+Sensor ID: SHORT_RANGE_RIGHT_TOP Value: 2 Pos: 8, 4
+Sensor ID: LONG_RANGE_LEFT_CENTER Value: 5 Pos: 7, 2
+Forward empty. Move forward
+Area explored: 75
+Send: D|
+Send: R|
+Receiving a message...
+Received: 1|1|1|1|2|5
+1|1|1|1|2|5
+[1, 1, 1, 1, 2, 5]
+Sensor ID: SHORT_RANGE_FRONT_LEFT Value: 1 Pos: 8, 4
+Sensor ID: SHORT_RANGE_FRONT_LEFT Obstacle at 8 6
+Sensor ID: SHORT_RANGE_FRONT_CENTER Value: 1 Pos: 7, 4
+Sensor ID: SHORT_RANGE_FRONT_CENTER Obstacle at 7 6
+Sensor ID: SHORT_RANGE_FRONT_RIGHT Value: 1 Pos: 6, 4
+Sensor ID: SHORT_RANGE_FRONT_RIGHT Obstacle at 6 6
+Sensor ID: SHORT_RANGE_LEFT_TOP Value: 1 Pos: 8, 4
+Sensor ID: SHORT_RANGE_LEFT_TOP Obstacle at 10 4
+Sensor ID: SHORT_RANGE_RIGHT_TOP Value: 2 Pos: 6, 4
+Sensor ID: LONG_RANGE_LEFT_CENTER Value: 5 Pos: 8, 3
+Right empty. Rotate right
+Send: W|
+Send: R|
+Receiving a message...
+Received: 1|1|1|1|-1|5
+1|1|1|1|-1|5
+[1, 1, 1, 1, -1, 5]
+Sensor ID: SHORT_RANGE_FRONT_LEFT Value: 1 Pos: 8, 5
+Sensor ID: SHORT_RANGE_FRONT_LEFT Obstacle at 8 7
+Sensor ID: SHORT_RANGE_FRONT_CENTER Value: 1 Pos: 7, 5
+Sensor ID: SHORT_RANGE_FRONT_CENTER Obstacle at 7 7
+Sensor ID: SHORT_RANGE_FRONT_RIGHT Value: 1 Pos: 6, 5
+Sensor ID: SHORT_RANGE_FRONT_RIGHT Obstacle at 6 7
+Sensor ID: SHORT_RANGE_LEFT_TOP Value: 1 Pos: 8, 5
+Sensor ID: SHORT_RANGE_LEFT_TOP Obstacle at 10 5
+Sensor ID: SHORT_RANGE_RIGHT_TOP Value: -1 Pos: 6, 5
+Sensor ID: LONG_RANGE_LEFT_CENTER Value: 5 Pos: 8, 4
+Forward empty after right rotation. Move forward
+Area explored: 86
+Send: A|
+Send: R|
+Receiving a message...
+Received: 2|1|2|2|1|5
+2|1|2|2|1|5
+[2, 1, 2, 2, 1, 5]
+Sensor ID: SHORT_RANGE_FRONT_LEFT Value: 2 Pos: 8, 3
+Sensor ID: SHORT_RANGE_FRONT_CENTER Value: 1 Pos: 8, 4
+Sensor ID: SHORT_RANGE_FRONT_CENTER Obstacle at 10 4
+Sensor ID: SHORT_RANGE_FRONT_RIGHT Value: 2 Pos: 8, 5
+Sensor ID: SHORT_RANGE_LEFT_TOP Value: 2 Pos: 8, 3
+Sensor ID: SHORT_RANGE_RIGHT_TOP Value: 1 Pos: 8, 5
+Sensor ID: SHORT_RANGE_RIGHT_TOP Obstacle at 8 7
+Sensor ID: LONG_RANGE_LEFT_CENTER Value: 5 Pos: 7, 3
+Left empty. Rotate left
+Send: W|
+Send: R|
+Receiving a message...

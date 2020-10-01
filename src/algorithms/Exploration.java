@@ -50,9 +50,12 @@ public class Exploration {
             Communication.getComms().sendMessage(Constant.START_EXPLORATION);
         }*/
 
+        /*
+        if (robot.getRealRun()) {
+            Communication.getComms().sendMessage(Constant.CALIBRATE_SENSOR);
+        }*/
+        
         sense();
-        System.out.println("After first sense");
-
 
         areaExplored = getAreaExplored();
         System.out.println("Explored Area: " + areaExplored);
@@ -65,7 +68,15 @@ public class Exploration {
         System.out.println("Exploration complete!");
 
         if (robot.getRealRun()) {
-            Communication.getComms().sendMessage(Constant.START_FASTEST_PATH);
+            
+            while (true) {
+                System.out.println("Waiting for Fastest Path Command");
+                String msg = Communication.getComms().receiveMessage();
+                if (msg.equals(Constant.START_FASTEST_PATH)){
+                    break;
+                }
+            }
+
             FastestPath fastestPath = new FastestPath(robot, map);
             fastestPath.run(Constant.GOAL_ROW, Constant.GOAL_COL);
         }
@@ -115,6 +126,10 @@ public class Exploration {
             }
 
         }
+        System.out.println(System.currentTimeMillis());
+        System.out.println(endTime);
+        System.out.println(coverageLimit);
+
         if (!limited){
             exploreRemaining();
         }
@@ -140,6 +155,7 @@ public class Exploration {
     private void move(MOVEMENT m) {
         robot.move(m, false);
         map.paintComponent(map.getGraphics());
+        System.out.print("After paint");
         if (m != MOVEMENT.CALIBRATE) {
             sense();
         } else {

@@ -88,7 +88,7 @@ public class Simulator {
                 map.paintComponent(map.getGraphics());
 
                 Exploration exploration;
-                exploration = new Exploration(30, 300, bot, map, false);
+                exploration = new Exploration(18000, 300, bot, map, false);
 
                 /*
                 if (realRun) {
@@ -120,7 +120,7 @@ public class Simulator {
                 map.paintComponent(map.getGraphics());
 
                 Exploration exploration;
-                exploration = new Exploration(1800, coverageLimit, bot, map, true);
+                exploration = new Exploration(18000, coverageLimit, bot, map, true);
                 exploration.run();
                 System.out.println(map.generateMapDescriptorPartOne());
                 System.out.println(map.generateMapDescriptorPartTwo());
@@ -174,7 +174,7 @@ public class Simulator {
             protected Integer doInBackground() throws Exception {
                 bot.setRealRun(true);
                 comms.openSocket();
-                Exploration exploration = new Exploration(3600, 300, bot, map, false);
+                Exploration exploration = new Exploration(18000, 300, bot, map, false);
                 exploration.run();
 
                 return 222;

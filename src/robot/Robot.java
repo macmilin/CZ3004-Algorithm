@@ -159,7 +159,7 @@ public class Robot {
                 System.out.println("Something went wrong in Robot.move()!");
             }
         }
-        
+        System.out.println("Robot move from " + row + ", " + col);
         switch (m) {
             case FORWARD:
                 switch (dir) {

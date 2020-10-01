@@ -120,8 +120,13 @@ public class Sensor {
         for (int i = this.min; i <= this.max; i++) {
             int row = this.row + (rowChange * i);
             int col = this.col + (colChange * i);
-
+            System.out.println("ROW: " + row + " COL: " + col);
             if (map.isValid(row, col)) {
+                /*
+                if(map.getTile(row, col).getExplored() && map.getTile(row, col).getState() == 1){
+                    break;
+                }*/
+
                 map.getTile(row, col).setExplored(true);
 
                 if (sensorValue == i) {
@@ -130,14 +135,14 @@ public class Sensor {
                     break;
                 }
 
-                /*
+                
                 if (map.getTile(row, col).getState() == 1) {
                     if (id.equals("SHORT_RANGE_FRONT_LEFT") || id.equals("SHORT_RANGE_FRONT_CENTER") || id.equals("SHORT_RANGE_FRONT_RIGHT")) {
                         map.setObstacle(row, col, false);
                     } else {
                         break;
                     }
-                }*/
+                }
 
             }
         }
