@@ -14,6 +14,8 @@ import map.*;
 import robot.Robot;
 import algorithms.*;
 import communication.*;
+import robot.Constant;
+import java.util.Scanner;
 
 public class Simulator {
 
@@ -43,6 +45,7 @@ public class Simulator {
 
         displaySimulator();
         //testComms();
+        //manualInput();
     }
 
     private static void displaySimulator() {
@@ -175,6 +178,7 @@ public class Simulator {
                 bot.setRealRun(true);
                 comms.openSocket();
                 Exploration exploration = new Exploration(18000, 300, bot, map, false);
+                exploration.setImageRecRun(true);
                 exploration.run();
 
                 return 222;
@@ -278,12 +282,39 @@ public class Simulator {
             }
         });
 
+        // Real Run
+        JButton setSpeedButton = new JButton("Change Speed");
+        setSpeedButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                JDialog inputDialog = new JDialog(win, "Set Speed", true);
+                inputDialog.setSize(400, 100);
+                inputDialog.setLayout(new FlowLayout());
+                final JTextField inputField = new JTextField(5);
+                JButton speedButton = new JButton("Set");
+
+                speedButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        inputDialog.setVisible(false);
+                        int speed = (int) (Integer.parseInt(inputField.getText()));
+                        speed = (int)(1000 / speed);
+                        bot.setSpeed(speed);
+                    }
+                });
+                
+                inputDialog.add(new JLabel("Set Speed X per Second: "));
+                inputDialog.add(inputField);
+                inputDialog.add(speedButton);
+                inputDialog.setVisible(true);
+            }
+        });
+
         controls.add(loadMapButton);
         controls.add(explorationButton);
         controls.add(fastestPathButton);
         controls.add(timeLimitedButton);
         controls.add(coverageLimitedButton);
         controls.add(realRunButton);
+        controls.add(setSpeedButton);
     }
 
     public static void loadMap() {
@@ -347,12 +378,21 @@ public class Simulator {
         Communication comms = new Communication();
         comms = comms.getComms();
         comms.openSocket();
-        System.out.println("After socket");
-        while(comms.isConnected()){
-            System.out.println("Connected");
-            //comms.testSendMessage("HI");
-            comms.testReceiveMessage();
-            comms.closeSocket();
+        while(true){
+            comms.sendMessage(Constant.TAKE_PICTURE);
+        }
+
+    }
+
+    public static void manualInput() {
+        Communication comms = new Communication();
+        comms = comms.getComms();
+        comms.openSocket();
+        while(true){
+            Scanner s = new Scanner(System.in);
+            String message = s.nextLine();
+            //System.out.println(message);
+            comms.sendMessage(message);
         }
     }
 

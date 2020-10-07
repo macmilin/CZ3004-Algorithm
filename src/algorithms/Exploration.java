@@ -7,6 +7,7 @@ import robot.Constant.DIRECTION;
 import robot.Constant.MOVEMENT;
 import communication.*;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 public class Exploration {
     private int timeLimit;
@@ -17,6 +18,10 @@ public class Exploration {
     private Map map;
     private int areaExplored;
     private boolean limited;
+    private boolean imageRecRun;
+    private boolean firstMove;
+    private int wayPointX;
+    private int wayPointY;
 
     public Exploration(int timeLimit, int coverageLimit, Robot robot, Map map, boolean limited) {
         this.timeLimit = timeLimit;
@@ -24,19 +29,20 @@ public class Exploration {
         this.robot = robot;
         this.map = map;
         this.limited = limited;
+        this.firstMove = false;
     }
 
     public void run() {
         if (robot.getRealRun()) {
             System.out.println("Calibrating...");
-            //Communication.getComms().sendMessage("Hello from ALgo");
-            
             /*
             while (true) {
                 System.out.println("Waiting for Start Command");
                 String msg = Communication.getComms().receiveMessage();
                 if (msg.equals(Constant.START_EXPLORATION)){
                     break;
+                }else {
+                    getWayPoint(msg);
                 }
             }*/
         }
@@ -66,6 +72,7 @@ public class Exploration {
         map.paintComponent(map.getGraphics());
 
         System.out.println("Exploration complete!");
+        sendMDFToAndroid();
 
         if (robot.getRealRun()) {
             
@@ -86,6 +93,13 @@ public class Exploration {
         robot.setSensors();
         robot.sense(map);
         map.paintComponent(map.getGraphics());
+        robot.takePicture(imageRecRun, map);
+
+        try {
+            TimeUnit.MILLISECONDS.sleep(500);
+        } catch (InterruptedException e) {
+            System.out.println("Something went wrong in Robot.move()!");
+        }
     }
 
 
@@ -96,21 +110,32 @@ public class Exploration {
             System.out.println("Right empty. Rotate right");
             if (checkFront()) {
                 move(MOVEMENT.FORWARD);
+                if(!firstMove) {
+                    firstMove = true;
+                }
                 System.out.println("Forward empty after right rotation. Move forward");
             }
         } else if (checkFront()) {
             move(MOVEMENT.FORWARD);
+            if(!firstMove) {
+                firstMove = true;
+            }
             System.out.println("Forward empty. Move forward");
         } else if (checkLeft()) {
             move(MOVEMENT.LEFT);
             System.out.println("Left empty. Rotate left");
             if (checkFront()) {
                 move(MOVEMENT.FORWARD);
+                if(!firstMove) {
+                    firstMove = true;
+                }
                 System.out.println("Forward empty after left rotation. Move forward");
             }
         } else {
-            move(MOVEMENT.RIGHT);
-            move(MOVEMENT.RIGHT);
+            move(MOVEMENT.LEFT);
+            sense();
+            move(MOVEMENT.LEFT);
+            sense();
             System.out.println("Deadend. U-turn");
         }
     }
@@ -120,8 +145,9 @@ public class Exploration {
             nextStep();
             areaExplored = getAreaExplored();
             System.out.println("Area explored: " + areaExplored);
+            System.out.println("========================");
 
-            if (robot.getRow() == startR && robot.getCol() == startC){
+            if (robot.getRow() == startR && robot.getCol() == startC && firstMove){
                 break;
             }
 
@@ -130,10 +156,12 @@ public class Exploration {
         System.out.println(endTime);
         System.out.println(coverageLimit);
 
+        /*
         if (!limited){
             exploreRemaining();
         }
         returnHome();
+        */
     }    
 
     private boolean isExploredAndNotObstacle(int r, int c) {
@@ -153,9 +181,9 @@ public class Exploration {
     }
 
     private void move(MOVEMENT m) {
-        robot.move(m, false);
+        robot.move(m, false, map);
         map.paintComponent(map.getGraphics());
-        System.out.print("After paint");
+        //System.out.print("After paint");
         if (m != MOVEMENT.CALIBRATE) {
             sense();
         } else {
@@ -314,5 +342,31 @@ public class Exploration {
         }
     }
 
+    public void setImageRecRun(boolean b){
+        imageRecRun = b;
+    }
+
+    public void getWayPoint(String wayPointString) {
+        //String wayPointString = Communication.getComms().receiveMessage();
+        String[] wayPointStringArr = wayPointString.split(",");
+        wayPointX = Integer.parseInt(wayPointStringArr[0]);
+        wayPointY = Integer.parseInt(wayPointStringArr[1]);
+        System.out.println("Way point is: " + wayPointX + ", " + wayPointY);
+    }
+
+    public void sendMDFToAndroid() {
+        String explored = map.generateMapDescriptorPartOne();
+        String obstacle = map.generateMapDescriptorPartTwo();
+
+        String data = "M{\"map\":[{\"explored\":\"";
+        data += explored;
+        data += "\",\"length\":";
+        data += explored.length() * 4;
+        data += "\",\"obstacle\":\"";
+        data += obstacle;
+        data += "\"}]}";
+
+        Communication.getComms().sendMessage(data);
+    }
 
 }

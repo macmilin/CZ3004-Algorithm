@@ -15,13 +15,13 @@ public class Robot {
     
     private boolean reachedGoal;
     private boolean realRun;
-
     private int row; 
     private int col; 
     private DIRECTION dir;
     private int speed;
     private static int TILE_SIZE = 35;
     private static int ROW_SIZE = 20;
+    private int countForward = 0;
     
     // SR on front left facing north
     private final Sensor srFrontL;
@@ -30,7 +30,7 @@ public class Robot {
     // SR on front right facing north
     private final Sensor srFrontR;
     // SR on left facing west
-    private final Sensor srLeftT;
+    private final Sensor srRightB;
     // SR on right facing east
     private final Sensor srRightT;
     // LR on left facing west
@@ -49,7 +49,7 @@ public class Robot {
         srFrontL = new Sensor(Constant.SENSOR_SHORT_RANGE_MIN, Constant.SENSOR_SHORT_RANGE_MAX, row + 1, col - 1, dir, "SHORT_RANGE_FRONT_LEFT");
         srFrontC = new Sensor(Constant.SENSOR_SHORT_RANGE_MIN, Constant.SENSOR_SHORT_RANGE_MAX, row + 1, col, dir, "SHORT_RANGE_FRONT_CENTER");
         srFrontR = new Sensor(Constant.SENSOR_SHORT_RANGE_MIN, Constant.SENSOR_SHORT_RANGE_MAX, row + 1, col + 1, dir, "SHORT_RANGE_FRONT_RIGHT");
-        srLeftT = new Sensor(Constant.SENSOR_SHORT_RANGE_MIN, Constant.SENSOR_SHORT_RANGE_MAX, row + 1, col - 1, newDir(MOVEMENT.LEFT), "SHORT_RANGE_LEFT_TOP");
+        srRightB = new Sensor(Constant.SENSOR_SHORT_RANGE_MIN, Constant.SENSOR_SHORT_RANGE_MAX, row - 1, col + 1, newDir(MOVEMENT.RIGHT), "SHORT_RANGE_RIGHT_BOTTOM");
         srRightT = new Sensor(Constant.SENSOR_SHORT_RANGE_MIN, Constant.SENSOR_SHORT_RANGE_MAX, row + 1, col + 1, newDir(MOVEMENT.RIGHT), "SHORT_RANGE_RIGHT_TOP");
         lrLeftC = new Sensor(Constant.SENSOR_LONG_RANGE_MIN, Constant.SENSOR_LONG_RANGE_MAX, row, col - 1, newDir(MOVEMENT.LEFT), "LONG_RANGE_LEFT_CENTER" );
         
@@ -149,10 +149,8 @@ public class Robot {
     }
 
     
-    public void move(MOVEMENT m, boolean sendMoveToAndroid) {
+    public void move(MOVEMENT m, boolean sendMoveToAndroid, Map map) {
         if (!realRun) {
-            // Emulate real movement by pausing execution.
-            //System.out.println("MOVE");
             try {
                 TimeUnit.MILLISECONDS.sleep(speed);
             } catch (InterruptedException e) {
@@ -160,8 +158,25 @@ public class Robot {
             }
         }
         System.out.println("Robot move from " + row + ", " + col);
+        System.out.println("Robot is facing " + dir);
         switch (m) {
             case FORWARD:
+                //System.out.println(map);
+                //System.out.println(canCalibrate(map));
+                if (realRun && countForward >= 0 && canCalibrate(map)) {
+                    sendMovement(MOVEMENT.CALIBRATE, false);
+                    Communication comms = Communication.getComms();
+                    String result = comms.receiveMessage();
+                    if (result.equals(Constant.CALIBRATE_SENSOR_PASS)){
+                        System.out.println("Calibration Successful");
+                        countForward = 0;
+                    }else {
+                        System.out.println("Calibration Fail");
+                    }
+                    
+                }else {
+                    countForward++;
+                }
                 switch (dir) {
                     case NORTH:
                         row++;
@@ -179,8 +194,8 @@ public class Robot {
                 break;
             case BACKWARD:
                 // U-turn
-                dir = newDir(MOVEMENT.RIGHT);
-                dir = newDir(MOVEMENT.RIGHT);
+                dir = newDir(MOVEMENT.LEFT);
+                dir = newDir(MOVEMENT.LEFT);
                 break;
                 /*
                 switch (dir) {
@@ -304,15 +319,19 @@ public class Robot {
             result[0] = srFrontL.senseSimulator(map);
             result[1] = srFrontC.senseSimulator(map);
             result[2] = srFrontR.senseSimulator(map);
-            result[3] = srLeftT.senseSimulator(map);
+            result[3] = srRightB.senseSimulator(map);
             result[4] = srRightT.senseSimulator(map);
             result[5] = lrLeftC.senseSimulator(map);
         } else {
             Communication comms = Communication.getComms();
 
+            comms.sendMessage(Constant.SENSE_DATA_RAW);
+            comms.receiveMessage();
+            
             comms.sendMessage(Constant.SENSE_DATA);
             String message = comms.receiveMessage();
-            System.out.println(message);
+            //System.out.println(message);
+
 
             //comms.sendMessage(Constant.MOVE_FORWARD);
             //comms.sendMessage(Constant.MOVE_FORWARD);
@@ -332,7 +351,7 @@ public class Robot {
             srFrontL.senseReal(map, result[0]);
             srFrontC.senseReal(map, result[1]);
             srFrontR.senseReal(map, result[2]);
-            srLeftT.senseReal(map, result[3]);
+            srRightB.senseReal(map, result[3]);
             srRightT.senseReal(map, result[4]);
             lrLeftC.senseReal(map, result[5]);
         }
@@ -346,7 +365,7 @@ public class Robot {
                 srFrontL.setSensor(this.row + 1, this.col - 1, this.dir);
                 srFrontC.setSensor(this.row + 1, this.col, this.dir);
                 srFrontR.setSensor(this.row + 1, this.col + 1, this.dir);
-                srLeftT.setSensor(this.row + 1, this.col - 1, newDir(MOVEMENT.LEFT));
+                srRightB.setSensor(this.row - 1, this.col + 1, newDir(MOVEMENT.RIGHT));
                 lrLeftC.setSensor(this.row, this.col - 1, newDir(MOVEMENT.LEFT));
                 srRightT.setSensor(this.row + 1, this.col + 1, newDir(MOVEMENT.RIGHT));
                 break;
@@ -354,7 +373,7 @@ public class Robot {
                 srFrontL.setSensor(this.row + 1, this.col + 1, this.dir);
                 srFrontC.setSensor(this.row, this.col + 1, this.dir);
                 srFrontR.setSensor(this.row - 1, this.col + 1, this.dir);
-                srLeftT.setSensor(this.row + 1, this.col + 1, newDir(MOVEMENT.LEFT));
+                srRightB.setSensor(this.row - 1, this.col - 1, newDir(MOVEMENT.RIGHT));
                 lrLeftC.setSensor(this.row + 1, this.col, newDir(MOVEMENT.LEFT));
                 srRightT.setSensor(this.row - 1, this.col + 1, newDir(MOVEMENT.RIGHT));
                 break;
@@ -362,7 +381,7 @@ public class Robot {
                 srFrontL.setSensor(this.row - 1, this.col + 1, this.dir);
                 srFrontC.setSensor(this.row - 1, this.col, this.dir);
                 srFrontR.setSensor(this.row - 1, this.col - 1, this.dir);
-                srLeftT.setSensor(this.row - 1, this.col + 1, newDir(MOVEMENT.LEFT));
+                srRightB.setSensor(this.row + 1, this.col - 1, newDir(MOVEMENT.RIGHT));
                 lrLeftC.setSensor(this.row, this.col + 1, newDir(MOVEMENT.LEFT));
                 srRightT.setSensor(this.row - 1, this.col - 1, newDir(MOVEMENT.RIGHT));
                 break;
@@ -370,7 +389,7 @@ public class Robot {
                 srFrontL.setSensor(this.row - 1, this.col - 1, this.dir);
                 srFrontC.setSensor(this.row, this.col - 1, this.dir);
                 srFrontR.setSensor(this.row + 1, this.col - 1, this.dir);
-                srLeftT.setSensor(this.row - 1, this.col - 1, newDir(MOVEMENT.LEFT));
+                srRightB.setSensor(this.row + 1, this.col + 1, newDir(MOVEMENT.RIGHT));
                 lrLeftC.setSensor(this.row - 1, this.col, newDir(MOVEMENT.LEFT));
                 srRightT.setSensor(this.row + 1, this.col - 1, newDir(MOVEMENT.RIGHT));
                 break;
@@ -381,4 +400,139 @@ public class Robot {
     public void setRealRun(boolean realRun) {
         this.realRun = realRun;
     }
+
+    
+    public boolean canCalibrate(Map map) {
+        switch (dir) {
+            case NORTH:
+                if (map.isWallOrObstacle(row + 1, col + 2) && map.isWallOrObstacle(row, col + 2) && map.isWallOrObstacle(row - 1, col + 2)){
+                    return true;
+                }else if (map.isWallOrObstacle(row + 1, col + 2) && map.isWallOrObstacle(row, col + 2)){
+                    return true;
+                }else if (map.isWallOrObstacle(row, col + 2) && map.isWallOrObstacle(row - 1, col + 2)) {
+                    return true;
+                }else {
+                    return false;
+                }
+                //return map.isWallOrObstacle(row + 1, col + 2) && map.isWallOrObstacle(row, col + 2) && map.isWallOrObstacle(row - 1, col + 2);
+            case EAST:
+                if (map.isWallOrObstacle(row - 2, col + 1) && map.isWallOrObstacle(row - 2, col) && map.isWallOrObstacle(row - 2, col - 1)){
+                    return true;
+                }else if (map.isWallOrObstacle(row - 2, col + 1) && map.isWallOrObstacle(row - 2, col)) {
+                    return true;
+                }else if (map.isWallOrObstacle(row - 2, col) && map.isWallOrObstacle(row - 2, col - 1)) {
+                    return true;
+                }else {
+                    return false;
+                }
+                //return map.isWallOrObstacle(row - 2, col + 1) && map.isWallOrObstacle(row - 2, col) && map.isWallOrObstacle(row - 2, col - 1);
+            case SOUTH:
+                if (map.isWallOrObstacle(row - 1, col - 2) && map.isWallOrObstacle(row, col - 2) && map.isWallOrObstacle(row + 1, col - 2)){
+                    return true;
+                }else if (map.isWallOrObstacle(row - 1, col - 2) && map.isWallOrObstacle(row, col - 2)) {
+                    return true;
+                }else if (map.isWallOrObstacle(row, col - 2) && map.isWallOrObstacle(row + 1, col - 2)) {
+                    return true;
+                }else {
+                    return false;
+                }
+                //return map.isWallOrObstacle(row - 1, col - 2) && map.isWallOrObstacle(row, col - 2) && map.isWallOrObstacle(row + 1, col - 2);
+            case WEST:
+                if (map.isWallOrObstacle(row + 2, col - 1) && map.isWallOrObstacle(row + 2, col) && map.isWallOrObstacle(row + 2, col + 1)){
+                    return true;
+                }else if (map.isWallOrObstacle(row + 2, col - 1) && map.isWallOrObstacle(row + 2, col)) {
+                    return true;
+                }else if (map.isWallOrObstacle(row + 2, col) && map.isWallOrObstacle(row + 2, col + 1)){
+                    return true;
+                }else {
+                    return false;
+                }
+                //return map.isWallOrObstacle(row + 2, col - 1) && map.isWallOrObstacle(row + 2, col) && map.isWallOrObstacle(row + 2, col + 1);
+        }
+
+        return false;
+    }
+
+    public int[] huggedObstacle(Map map) {
+        //System.out.println("Check is hugged obstacle");
+        //System.out.println(dir);
+        // [1/0, row, col]
+        int[] result = new int[3];
+        switch (dir) {
+            case NORTH:
+                /*
+                System.out.println("Check is hugged obstacle robot face north --> NO");
+                System.out.println(map);
+                System.out.println(map.isValid(row, col + 2));
+                System.out.println(map.getTile(row, col + 2).getState());
+                System.out.println("A");
+                */
+                if (map.isValid(row, col + 2) && map.getTile(row, col + 2).getState() == 1){
+                    System.out.println("Check is hugged obstacle robot face north --> YES");
+                    result[0] = 1;
+                    result[1] = row;
+                    result[2] = col + 2;
+                    return result;
+                }
+                System.out.println("Check is hugged obstacle robot face north --> AFTERR IF");
+                break;
+            case EAST:
+                if (map.isValid(row - 2, col) && map.getTile(row - 2, col).getState() == 1){
+                    System.out.println("Check is hugged obstacle robot face east --> YES");
+                    result[0] = 1;
+                    result[1] = row - 2;
+                    result[2] = col;
+                    return result;
+                }
+                break;
+            case SOUTH:
+                if (map.isValid(row, col - 2) && map.getTile(row, col - 2).getState() == 1){
+                    System.out.println("Check is hugged obstacle robot face south --> YES");
+                    result[0] = 1;
+                    result[1] = row;
+                    result[2] = col - 2;
+                    return result;
+                }
+                break;
+            case WEST:
+                if (map.isValid(row + 2, col) && map.getTile(row + 2, col).getState() == 1){
+                    System.out.println("Check is hugged obstacle robot face west --> YES");
+                    result[0] = 1;
+                    result[1] = row + 2;
+                    result[2] = col;
+                    return result;
+                }
+                break;
+        }
+
+        result[0] = 0;
+        result[1] = row;
+        result[2] = col;
+        return result;
+    }
+
+    public void takePicture(boolean imageRecRun, Map map) {
+        if (imageRecRun) {
+            //Communication comms = Communication.getComms();
+            //comms.sendMessage(Constant.TAKE_PICTURE);
+
+            int[] result = huggedObstacle(map);
+            
+            if (result[0] == 1) {
+                System.out.println("Yes hugged obstacle");
+                Communication comms = Communication.getComms();
+                String data = Constant.TAKE_PICTURE;
+                /*
+                data += "|";
+                data += result[1];
+                data += "|";
+                data += result[2];*/
+                
+                comms.sendMessage(data);
+            }
+        }
+    }
+
+
+
 }
