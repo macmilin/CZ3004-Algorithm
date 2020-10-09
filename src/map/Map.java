@@ -165,6 +165,9 @@ public class Map extends JPanel {
 
 
     public void setObstacle(int row, int col, boolean obstacle) {
+        if (isInStartGoal(row, col)){
+            return;
+        }
 
         if(obstacle){
             mapTile[row][col].setState(1);
@@ -298,6 +301,48 @@ public class Map extends JPanel {
             return true;
         }
         return false;
+    }
+
+    public boolean isInStartGoal(int row, int col) {
+        if (row == 0 && col == 0){
+            return true;
+        }else if (row == 1 && col == 0){
+            return true;
+        }else if (row == 2 && col == 0){
+            return true;
+        }else if (row == 0 && col == 1){
+            return true;
+        }else if (row == 1 && col == 1){
+            return true;
+        }else if (row == 2 && col == 1){
+            return true;
+        }else if (row == 0 && col == 2){
+            return true;
+        }else if (row == 1 && col == 2){
+            return true;
+        }else if (row == 2 && col == 2){
+            return true;
+        }else if (row == 19 && col == 12){
+            return true;
+        }else if (row == 18 && col == 12){
+            return true;
+        }else if (row == 17 && col == 12){
+            return true;
+        }else if (row == 19 && col == 13){
+            return true;
+        }else if (row == 18 && col == 13){
+            return true;
+        }else if (row == 17 && col == 13){
+            return true;
+        }else if (row == 19 && col == 14){
+            return true;
+        }else if (row == 18 && col == 14){
+            return true;
+        }else if (row == 17 && col == 14){
+            return true;
+        }else {
+            return false;
+        }
     }
 
 }

@@ -137,7 +137,7 @@ public class Sensor {
 
                 
                 if (map.getTile(row, col).getState() == 1) {
-                    if (id.equals("SHORT_RANGE_FRONT_LEFT") || id.equals("SHORT_RANGE_FRONT_CENTER") || id.equals("SHORT_RANGE_FRONT_RIGHT")) {
+                    if (id.equals("SHORT_RANGE_FRONT_LEFT") || id.equals("SHORT_RANGE_FRONT_CENTER") || id.equals("SHORT_RANGE_FRONT_RIGHT") /*|| id.equals("LONG_RANGE_LEFT_CENTER")*/) {
                         map.setObstacle(row, col, false);
                     } else {
                         break;

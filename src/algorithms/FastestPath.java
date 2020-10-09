@@ -217,11 +217,11 @@ public class FastestPath {
             //System.out.println(cur.getRow() + " " + cur.getCol());
             if (nextDir == curDir){
                 //System.out.println("Forward");
-                robot.move(MOVEMENT.FORWARD, false, map);
+                robot.moveFast(MOVEMENT.FORWARD, false, map);
             }else {
                 //System.out.println("Turn");
-                robot.move(getTurnDirection(curDir, nextDir), false, map);
-                robot.move(MOVEMENT.FORWARD, false, map);
+                robot.moveFast(getTurnDirection(curDir, nextDir), false, map);
+                robot.moveFast(MOVEMENT.FORWARD, false, map);
                 curDir = nextDir;
             }
             map.paintComponent(map.getGraphics());

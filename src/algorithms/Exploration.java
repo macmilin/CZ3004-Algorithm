@@ -22,6 +22,7 @@ public class Exploration {
     private boolean firstMove;
     private int wayPointX;
     private int wayPointY;
+    private boolean updateAndroid;
 
     public Exploration(int timeLimit, int coverageLimit, Robot robot, Map map, boolean limited) {
         this.timeLimit = timeLimit;
@@ -30,21 +31,24 @@ public class Exploration {
         this.map = map;
         this.limited = limited;
         this.firstMove = false;
+        this.updateAndroid = true;
     }
 
     public void run() {
         if (robot.getRealRun()) {
             System.out.println("Calibrating...");
-            /*
+            
             while (true) {
                 System.out.println("Waiting for Start Command");
                 String msg = Communication.getComms().receiveMessage();
                 if (msg.equals(Constant.START_EXPLORATION)){
                     break;
                 }else {
-                    getWayPoint(msg);
+                    if(!msg.equals(Constant.CALIBRATE_SENSOR_PASS) && !msg.equals(Constant.CALIBRATE_SENSOR_FAIL)){
+                        getWayPoint(msg);
+                    }
                 }
-            }*/
+            }
         }
 
         System.out.println("Starting exploration...");
@@ -72,8 +76,7 @@ public class Exploration {
         map.paintComponent(map.getGraphics());
 
         System.out.println("Exploration complete!");
-        sendMDFToAndroid();
-
+        
         if (robot.getRealRun()) {
             
             while (true) {
@@ -85,7 +88,9 @@ public class Exploration {
             }
 
             FastestPath fastestPath = new FastestPath(robot, map);
-            fastestPath.run(Constant.GOAL_ROW, Constant.GOAL_COL);
+            fastestPath.run(wayPointY, wayPointX);
+            FastestPath fastestPath2 = new FastestPath(robot, map);
+            fastestPath2.run(Constant.GOAL_ROW, Constant.GOAL_COL);
         }
     }
 
@@ -93,7 +98,7 @@ public class Exploration {
         robot.setSensors();
         robot.sense(map);
         map.paintComponent(map.getGraphics());
-        robot.takePicture(imageRecRun, map);
+        //robot.takePicture(imageRecRun, map);
 
         try {
             TimeUnit.MILLISECONDS.sleep(500);
@@ -181,7 +186,7 @@ public class Exploration {
     }
 
     private void move(MOVEMENT m) {
-        robot.move(m, false, map);
+        robot.move(m, updateAndroid, map);
         map.paintComponent(map.getGraphics());
         //System.out.print("After paint");
         if (m != MOVEMENT.CALIBRATE) {
@@ -352,21 +357,6 @@ public class Exploration {
         wayPointX = Integer.parseInt(wayPointStringArr[0]);
         wayPointY = Integer.parseInt(wayPointStringArr[1]);
         System.out.println("Way point is: " + wayPointX + ", " + wayPointY);
-    }
-
-    public void sendMDFToAndroid() {
-        String explored = map.generateMapDescriptorPartOne();
-        String obstacle = map.generateMapDescriptorPartTwo();
-
-        String data = "M{\"map\":[{\"explored\":\"";
-        data += explored;
-        data += "\",\"length\":";
-        data += explored.length() * 4;
-        data += "\",\"obstacle\":\"";
-        data += obstacle;
-        data += "\"}]}";
-
-        Communication.getComms().sendMessage(data);
     }
 
 }

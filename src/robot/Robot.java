@@ -133,14 +133,42 @@ public class Robot {
             case NORTH:
                 break;
             case EAST:
-                dir = newDir(MOVEMENT.LEFT);
+                System.out.println("End exploration. Robot is facing East");
+                sendMovement(MOVEMENT.CALIBRATE);
+                System.out.println("Robot is calibrating");
+                dir = newDir(MOVEMENT.RIGHT);
+                sendMovement(MOVEMENT.RIGHT);
+                System.out.println("Robot turn right");
+                sendMovement(MOVEMENT.CALIBRATE);
+                System.out.println("Robot is calibrating");
+                dir = newDir(MOVEMENT.RIGHT);
+                sendMovement(MOVEMENT.RIGHT);
+                System.out.println("Robot turn right");
+                sendMovement(MOVEMENT.CALIBRATE);
+                System.out.println("Robot is calibrating");
+                dir = newDir(MOVEMENT.RIGHT);
+                sendMovement(MOVEMENT.RIGHT);
+                System.out.println("Robot turn right");
                 break;
             case SOUTH:
+                System.out.println("End exploration. Robot is facing South");
+                sendMovement(MOVEMENT.CALIBRATE);
+                System.out.println("Robot is calibrating");
                 dir = newDir(MOVEMENT.RIGHT);
+                sendMovement(MOVEMENT.RIGHT);
+                System.out.println("Robot turn right");
+                sendMovement(MOVEMENT.CALIBRATE_FRONT);
+                System.out.println("Robot is calibrating front");
                 dir = newDir(MOVEMENT.RIGHT);
+                sendMovement(MOVEMENT.RIGHT);
+                System.out.println("Robot turn right");
                 break;
             case WEST:
+                sendMovement(MOVEMENT.CALIBRATE_FRONT);
+                System.out.println("Robot is calibrating front");
                 dir = newDir(MOVEMENT.RIGHT);
+                sendMovement(MOVEMENT.RIGHT);
+                System.out.println("Robot turn right");
                 break;
             default:
                 System.out.println("Error in Robot.face()!");
@@ -149,7 +177,7 @@ public class Robot {
     }
 
     
-    public void move(MOVEMENT m, boolean sendMoveToAndroid, Map map) {
+    public void move(MOVEMENT m, boolean updateAndroid, Map map) {
         if (!realRun) {
             try {
                 TimeUnit.MILLISECONDS.sleep(speed);
@@ -161,22 +189,6 @@ public class Robot {
         System.out.println("Robot is facing " + dir);
         switch (m) {
             case FORWARD:
-                //System.out.println(map);
-                //System.out.println(canCalibrate(map));
-                if (realRun && countForward >= 0 && canCalibrate(map)) {
-                    sendMovement(MOVEMENT.CALIBRATE, false);
-                    Communication comms = Communication.getComms();
-                    String result = comms.receiveMessage();
-                    if (result.equals(Constant.CALIBRATE_SENSOR_PASS)){
-                        System.out.println("Calibration Successful");
-                        countForward = 0;
-                    }else {
-                        System.out.println("Calibration Fail");
-                    }
-                    
-                }else {
-                    countForward++;
-                }
                 switch (dir) {
                     case NORTH:
                         row++;
@@ -225,13 +237,32 @@ public class Robot {
         }
 
         if (realRun) {
-            sendMovement(m, false);
+            sendMovement(m);
         }
 
+        if (realRun && countForward >= 0 && canCalibrate(map)) {
+            sendMovement(MOVEMENT.CALIBRATE);
+            Communication comms = Communication.getComms();
+            String result = comms.receiveMessage();
+            if (result.equals(Constant.CALIBRATE_SENSOR_PASS)){
+                System.out.println("Calibration Successful");
+                countForward = 0;
+            }else {
+                System.out.println("Calibration Fail");
+            }
+                    
+        }else {
+            countForward++;
+        }
+
+        if (updateAndroid) {
+            sendRobotData();
+            sendMDFToAndroid(map);
+        }
         updateReachedGoal();
     }
 
-    public void sendMovement(MOVEMENT m, boolean sendMoveToAndroid) {
+    public void sendMovement(MOVEMENT m) {
         Communication comms = Communication.getComms();
         switch(m){
             case FORWARD:
@@ -250,6 +281,9 @@ public class Robot {
                 break;
             case CALIBRATE:
                 comms.sendMessage(Constant.CALIBRATE_SENSOR);
+                break;
+            case CALIBRATE_FRONT:
+                comms.sendMessage(Constant.CALIBRATE_SENSOR_FRONT);
                 break;
             default:
                 System.out.println("Error in sending movement");
@@ -325,10 +359,11 @@ public class Robot {
         } else {
             Communication comms = Communication.getComms();
 
-            comms.sendMessage(Constant.SENSE_DATA_RAW);
-            comms.receiveMessage();
+            //comms.sendMessage(Constant.SENSE_DATA_RAW);
+            //comms.receiveMessage();
             
             comms.sendMessage(Constant.SENSE_DATA);
+            
             String message = comms.receiveMessage();
             //System.out.println(message);
 
@@ -532,6 +567,118 @@ public class Robot {
             }
         }
     }
+
+    public void sendMDFToAndroid(Map map) {
+        String explored = map.generateMapDescriptorPartOne();
+        String obstacle = map.generateMapDescriptorPartTwo();
+
+        String data = "M{\"map\":[{\"explored\":\"";
+        data += explored;
+        data += "\",\"length\":";
+        data += 300;
+        data += ",\"obstacle\":\"";
+        data += obstacle;
+        data += "\"}]}\n";
+
+        Communication.getComms().sendMessage(data);
+    }
+
+    public void sendRobotData(){
+        String data = "RP{\"robotPosition\":[";
+        data += col - 1;
+        data += ',';
+        data += 19 - row - 1;
+        data += ',';
+        int d = 0;
+        switch (dir) {
+            case NORTH:
+                d = 0;
+                break;
+            case EAST:
+                d = 90;
+                break;
+            case SOUTH:
+                d = 180;
+                break;
+            case WEST:
+                d = 270;
+                break;
+        }
+        data += d;
+        data += "]}\n";
+        Communication.getComms().sendMessage(data);
+    }
+
+    public void moveFast(MOVEMENT m, boolean updateAndroid, Map map) {
+        if (!realRun) {
+            try {
+                TimeUnit.MILLISECONDS.sleep(speed);
+            } catch (InterruptedException e) {
+                System.out.println("Something went wrong in Robot.move()!");
+            }
+        }
+        System.out.println("Robot move from " + row + ", " + col);
+        System.out.println("Robot is facing " + dir);
+        switch (m) {
+            case FORWARD:
+                switch (dir) {
+                    case NORTH:
+                        row++;
+                        break;
+                    case EAST:
+                        col++;
+                        break;
+                    case SOUTH:
+                        row--;
+                        break;
+                    case WEST:
+                        col--;
+                        break;
+                }
+                break;
+            case BACKWARD:
+                // U-turn
+                dir = newDir(MOVEMENT.LEFT);
+                dir = newDir(MOVEMENT.LEFT);
+                break;
+                /*
+                switch (dir) {
+                    case NORTH:
+                        row--;
+                        break;
+                    case EAST:
+                        col--;
+                        break;
+                    case SOUTH:
+                        row++;
+                        break;
+                    case WEST:
+                        col++;
+                        break;
+                }
+                break;*/
+            case RIGHT:
+            case LEFT:
+                dir = newDir(m);
+                break;
+            case CALIBRATE:
+                break;
+            default:
+                System.out.println("Error in Robot.move()!");
+                break;
+        }
+
+        if (realRun) {
+            sendMovement(m);
+        }
+
+        if (updateAndroid) {
+            sendRobotData();
+            sendMDFToAndroid(map);
+        }
+        updateReachedGoal();
+    }
+    
 
 
 

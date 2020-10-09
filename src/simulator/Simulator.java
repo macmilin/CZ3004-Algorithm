@@ -157,6 +157,9 @@ public class Simulator {
                 bot.reset();
                 map.paintComponent(map.getGraphics());
 
+                int wayPointY = 10;
+                int wayPointX = 10;
+
                 /*
                 if (realRun) {
                     while (true) {
@@ -167,7 +170,9 @@ public class Simulator {
                 }*/
 
                 FastestPath fastestPath = new FastestPath(bot, map);
-                fastestPath.run(18, 13);
+                fastestPath.run(wayPointY, wayPointX);
+                FastestPath fastestPath2 = new FastestPath(bot, map);
+                fastestPath2.run(18, 13);
 
                 return 222;
             }
