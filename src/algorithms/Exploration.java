@@ -98,7 +98,7 @@ public class Exploration {
         robot.setSensors();
         robot.sense(map);
         map.paintComponent(map.getGraphics());
-        //robot.takePicture(imageRecRun, map);
+        robot.takePicture(imageRecRun, map);
 
         try {
             TimeUnit.MILLISECONDS.sleep(500);

@@ -239,7 +239,11 @@ public class Robot {
         if (realRun) {
             sendMovement(m);
         }
-
+        /*
+        if (realRun && canAlignFront(map)){
+            sendMovement(MOVEMENT.CALIBRATE_FRONT);
+        }*/
+        
         if (realRun && countForward >= 0 && canCalibrate(map)) {
             sendMovement(MOVEMENT.CALIBRATE);
             Communication comms = Communication.getComms();
@@ -488,11 +492,27 @@ public class Robot {
         return false;
     }
 
+    public boolean canAlignFront(Map map) {
+        switch (dir) {
+            case NORTH:
+                return map.isWallOrObstacle(row + 2, col - 1) && map.isWallOrObstacle(row + 2, col) && map.isWallOrObstacle(row + 2, col + 1);
+            case EAST:
+                return map.isWallOrObstacle(row - 1, col + 2) && map.isWallOrObstacle(row, col + 2) && map.isWallOrObstacle(row + 1, col + 2);
+            case SOUTH:
+                return map.isWallOrObstacle(row - 2, col - 1) && map.isWallOrObstacle(row - 2, col) && map.isWallOrObstacle(row - 2, col + 1);
+            case WEST:
+                return map.isWallOrObstacle(row - 1, col - 2) && map.isWallOrObstacle(row, col - 2) && map.isWallOrObstacle(row + 1, col - 2);
+        }
+
+        return false;
+
+    }
+
     public int[] huggedObstacle(Map map) {
         //System.out.println("Check is hugged obstacle");
         //System.out.println(dir);
         // [1/0, row, col]
-        int[] result = new int[3];
+        int[] result = new int[7];
         switch (dir) {
             case NORTH:
                 /*
@@ -502,39 +522,64 @@ public class Robot {
                 System.out.println(map.getTile(row, col + 2).getState());
                 System.out.println("A");
                 */
-                if (map.isValid(row, col + 2) && map.getTile(row, col + 2).getState() == 1){
-                    System.out.println("Check is hugged obstacle robot face north --> YES");
+                if (map.isValid(row, col + 2) && map.getTile(row, col + 2).getState() == 1 ||
+                map.isValid(row + 1, col + 2) && map.getTile(row + 1, col + 2).getState() == 1 ||
+                map.isValid(row - 1, col + 2) && map.getTile(row - 1, col + 2).getState() == 1 ){
+                    //System.out.println("Check is hugged obstacle robot face north --> YES");
                     result[0] = 1;
-                    result[1] = row;
+                    result[1] = row + 1;
                     result[2] = col + 2;
+                    result[3] = row;
+                    result[4] = col + 2;
+                    result[5] = row - 1;
+                    result[6] = col + 2;
                     return result;
                 }
                 System.out.println("Check is hugged obstacle robot face north --> AFTERR IF");
                 break;
             case EAST:
-                if (map.isValid(row - 2, col) && map.getTile(row - 2, col).getState() == 1){
+                if (map.isValid(row - 2, col) && map.getTile(row - 2, col).getState() == 1 ||
+                map.isValid(row - 2, col + 1) && map.getTile(row - 2, col + 1).getState() == 1 ||
+                map.isValid(row - 2, col - 1) && map.getTile(row - 2, col - 1).getState() == 1 ){
                     System.out.println("Check is hugged obstacle robot face east --> YES");
                     result[0] = 1;
                     result[1] = row - 2;
-                    result[2] = col;
+                    result[2] = col + 1;
+                    result[3] = row - 2;
+                    result[4] = col;
+                    result[5] = row - 2;
+                    result[6] = col - 1;
                     return result;
                 }
                 break;
             case SOUTH:
-                if (map.isValid(row, col - 2) && map.getTile(row, col - 2).getState() == 1){
+                if (map.isValid(row, col - 2) && map.getTile(row, col - 2).getState() == 1 ||
+                map.isValid(row - 1, col - 2) && map.getTile(row - 1, col - 2).getState() == 1 ||
+                map.isValid(row + 1, col - 2) && map.getTile(row + 1, col - 2).getState() == 1){
                     System.out.println("Check is hugged obstacle robot face south --> YES");
                     result[0] = 1;
-                    result[1] = row;
+                    result[1] = row - 1;
                     result[2] = col - 2;
+                    result[3] = row;
+                    result[4] = col - 2;
+                    result[5] = row + 1;
+                    result[6] = col - 2;
                     return result;
                 }
                 break;
             case WEST:
-                if (map.isValid(row + 2, col) && map.getTile(row + 2, col).getState() == 1){
+                if (map.isValid(row + 2, col) && map.getTile(row + 2, col).getState() == 1 ||
+                map.isValid(row + 2, col - 1) && map.getTile(row + 2, col - 1).getState() == 1 ||
+                map.isValid(row + 2, col + 1) && map.getTile(row + 2, col + 1).getState() == 1 ){
                     System.out.println("Check is hugged obstacle robot face west --> YES");
                     result[0] = 1;
                     result[1] = row + 2;
-                    result[2] = col;
+                    result[2] = col - 1;
+                    result[3] = row + 2;
+                    result[4] = col;
+                    result[5] = row + 2;
+                    result[6] = col + 1;
+
                     return result;
                 }
                 break;
@@ -543,6 +588,10 @@ public class Robot {
         result[0] = 0;
         result[1] = row;
         result[2] = col;
+        result[3] = row;
+        result[4] = col;
+        result[5] = row;
+        result[6] = col;
         return result;
     }
 
@@ -557,11 +606,19 @@ public class Robot {
                 System.out.println("Yes hugged obstacle");
                 Communication comms = Communication.getComms();
                 String data = Constant.TAKE_PICTURE;
-                /*
+                
                 data += "|";
                 data += result[1];
                 data += "|";
-                data += result[2];*/
+                data += result[2];
+                data += "|";
+                data += result[3];
+                data += "|";
+                data += result[4];
+                data += "|";
+                data += result[5];
+                data += "|";
+                data += result[6];
                 
                 comms.sendMessage(data);
             }
