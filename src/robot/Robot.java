@@ -244,8 +244,9 @@ public class Robot {
             sendMovement(MOVEMENT.CALIBRATE_FRONT);
         }*/
         
-        if (realRun && countForward >= 0 && canCalibrate(map)) {
+        if (realRun && canCalibrate(map)) {
             sendMovement(MOVEMENT.CALIBRATE);
+            /*
             Communication comms = Communication.getComms();
             String result = comms.receiveMessage();
             if (result.equals(Constant.CALIBRATE_SENSOR_PASS)){
@@ -253,9 +254,12 @@ public class Robot {
                 countForward = 0;
             }else {
                 System.out.println("Calibration Fail");
-            }
+            }*/
                     
-        }else {
+        }else if (realRun && countForward >= 3 && canAlignFront(map)){
+            sendMovement(MOVEMENT.CALIBRATE_FRONT);
+            countForward = 0;
+        }else{
             countForward++;
         }
 
@@ -495,13 +499,17 @@ public class Robot {
     public boolean canAlignFront(Map map) {
         switch (dir) {
             case NORTH:
-                return map.isWallOrObstacle(row + 2, col - 1) && map.isWallOrObstacle(row + 2, col) && map.isWallOrObstacle(row + 2, col + 1);
+                return (map.isWallOrObstacle(row + 2, col - 1) && map.isWallOrObstacle(row + 2, col) && map.isWallOrObstacle(row + 2, col + 1))
+                || (map.isWallOrObstacle(row + 3, col - 1) && map.isWallOrObstacle(row + 3, col) && map.isWallOrObstacle(row + 3, col + 1));
             case EAST:
-                return map.isWallOrObstacle(row - 1, col + 2) && map.isWallOrObstacle(row, col + 2) && map.isWallOrObstacle(row + 1, col + 2);
+                return (map.isWallOrObstacle(row - 1, col + 2) && map.isWallOrObstacle(row, col + 2) && map.isWallOrObstacle(row + 1, col + 2))
+                || (map.isWallOrObstacle(row - 1, col + 3) && map.isWallOrObstacle(row, col + 3) && map.isWallOrObstacle(row + 1, col + 3));
             case SOUTH:
-                return map.isWallOrObstacle(row - 2, col - 1) && map.isWallOrObstacle(row - 2, col) && map.isWallOrObstacle(row - 2, col + 1);
+                return (map.isWallOrObstacle(row - 2, col - 1) && map.isWallOrObstacle(row - 2, col) && map.isWallOrObstacle(row - 2, col + 1))
+                || (map.isWallOrObstacle(row - 3, col - 1) && map.isWallOrObstacle(row - 3, col) && map.isWallOrObstacle(row - 3, col + 1));
             case WEST:
-                return map.isWallOrObstacle(row - 1, col - 2) && map.isWallOrObstacle(row, col - 2) && map.isWallOrObstacle(row + 1, col - 2);
+                return (map.isWallOrObstacle(row - 1, col - 2) && map.isWallOrObstacle(row, col - 2) && map.isWallOrObstacle(row + 1, col - 2))
+                || (map.isWallOrObstacle(row - 1, col - 3) && map.isWallOrObstacle(row, col - 3) && map.isWallOrObstacle(row + 1, col - 3));
         }
 
         return false;
@@ -626,13 +634,13 @@ public class Robot {
     }
 
     public void sendMDFToAndroid(Map map) {
-        String explored = map.generateMapDescriptorPartOne();
+        String[] explored = map.generateMapDescriptorPartOne();
         String obstacle = map.generateMapDescriptorPartTwo();
 
         String data = "M{\"map\":[{\"explored\":\"";
-        data += explored;
+        data += explored[0];
         data += "\",\"length\":";
-        data += 300;
+        data += Integer.parseInt(explored[1]);
         data += ",\"obstacle\":\"";
         data += obstacle;
         data += "\"}]}\n";

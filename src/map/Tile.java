@@ -25,7 +25,7 @@ public class Tile {
 
         // Default explored = false
         this.explored = false;
-        if (state == 2 || state == 3){
+        if (state == 2 /*|| state == 3*/){
             this.explored = true;
         }
 
@@ -71,7 +71,14 @@ public class Tile {
         this.virtual = false;
     }
 
+    public void setVirtualWall(boolean bool) {
+        this.virtual = bool;
+    }
+
     public void setVirtual(boolean bool) {
+        if (row == 0 || row == 19 || col == 0 || col == 14){
+            return;
+        }
         this.virtual = bool;
     }
 

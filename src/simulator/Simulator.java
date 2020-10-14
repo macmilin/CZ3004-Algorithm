@@ -100,7 +100,7 @@ public class Simulator {
                 exploration.run();
                     
                 // Test Map Descriptor Generator
-                System.out.println(map.generateMapDescriptorPartOne());
+                System.out.println(map.generateMapDescriptorPartOne()[0]);
                 System.out.println(map.generateMapDescriptorPartTwo());
 
                 /*
@@ -125,7 +125,7 @@ public class Simulator {
                 Exploration exploration;
                 exploration = new Exploration(18000, coverageLimit, bot, map, true);
                 exploration.run();
-                System.out.println(map.generateMapDescriptorPartOne());
+                System.out.println(map.generateMapDescriptorPartOne()[0]);
                 System.out.println(map.generateMapDescriptorPartTwo());
 
                 return 444;
@@ -145,7 +145,7 @@ public class Simulator {
                 Exploration exploration;
                 exploration = new Exploration(timeLimit, 300, bot, map, true);
                 exploration.run();
-                System.out.println(map.generateMapDescriptorPartOne());
+                System.out.println(map.generateMapDescriptorPartOne()[0]);
                 System.out.println(map.generateMapDescriptorPartTwo());
 
                 return 444;
@@ -181,6 +181,7 @@ public class Simulator {
         class MTRealRun extends SwingWorker<Integer, String> {
             protected Integer doInBackground() throws Exception {
                 bot.setRealRun(true);
+                System.out.println("Real run");
                 comms.openSocket();
                 Exploration exploration = new Exploration(18000, 300, bot, map, false);
                 exploration.setImageRecRun(true);
@@ -382,6 +383,7 @@ public class Simulator {
     public static void testComms() {
         Communication comms = new Communication();
         comms = comms.getComms();
+        System.out.println("Test Comm");
         comms.openSocket();
         while(true){
             comms.sendMessage(Constant.TAKE_PICTURE);
@@ -392,6 +394,7 @@ public class Simulator {
     public static void manualInput() {
         Communication comms = new Communication();
         comms = comms.getComms();
+        System.out.println("Manual Input");
         comms.openSocket();
         while(true){
             Scanner s = new Scanner(System.in);
