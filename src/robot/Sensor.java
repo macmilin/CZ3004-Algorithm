@@ -98,7 +98,7 @@ public class Sensor {
             return;
         }*/
 
-        System.out.println("Sensor ID: " + id + " Value: " + sensorVal + " Pos: " + row + ", " + col);
+        //System.out.println("Sensor ID: " + id + " Value: " + sensorVal + " Pos: " + row + ", " + col);
 
         int sensorValue = sensorVal;
 
@@ -120,7 +120,7 @@ public class Sensor {
         for (int i = this.min; i <= this.max; i++) {
             int row = this.row + (rowChange * i);
             int col = this.col + (colChange * i);
-            System.out.println("ROW: " + row + " COL: " + col);
+            //System.out.println("ROW: " + row + " COL: " + col);
             if (map.isValid(row, col)) {
                 /*
                 if(map.getTile(row, col).getExplored() && map.getTile(row, col).getState() == 1){
@@ -131,13 +131,13 @@ public class Sensor {
 
                 if (sensorValue == i) {
                     map.setObstacle(row, col, true);
-                    System.out.println("Sensor ID: " + id + " Obstacle at " + row + " " + col);
+                    //System.out.println("Sensor ID: " + id + " Obstacle at " + row + " " + col);
                     break;
                 }
 
                 
                 if (map.getTile(row, col).getState() == 1) {
-                    if (id.equals("SHORT_RANGE_FRONT_LEFT") || id.equals("SHORT_RANGE_FRONT_CENTER") || id.equals("SHORT_RANGE_FRONT_RIGHT")) {
+                    if (id.equals("SHORT_RANGE_FRONT_LEFT") || id.equals("SHORT_RANGE_FRONT_CENTER") || id.equals("SHORT_RANGE_FRONT_RIGHT") /*|| id.equals("LONG_RANGE_LEFT_CENTER")*/) {
                         map.setObstacle(row, col, false);
                     } else {
                         break;

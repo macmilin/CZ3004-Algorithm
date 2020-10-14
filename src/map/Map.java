@@ -165,6 +165,9 @@ public class Map extends JPanel {
 
 
     public void setObstacle(int row, int col, boolean obstacle) {
+        if (isInStartGoal(row, col)){
+            return;
+        }
 
         if(obstacle){
             mapTile[row][col].setState(1);
@@ -204,6 +207,7 @@ public class Map extends JPanel {
         }
     }
 
+    /*
     public void testMovement() {
         bot.move(MOVEMENT.FORWARD, false);
         paintComponent(this.getGraphics());
@@ -228,7 +232,7 @@ public class Map extends JPanel {
         paintComponent(this.getGraphics());
         bot.move(MOVEMENT.LEFT, false);
         paintComponent(this.getGraphics());
-    }
+    }*/
 
     public int getRowSize() {
         return ROW_SIZE;
@@ -283,6 +287,62 @@ public class Map extends JPanel {
 
         ans = new int[]{-1, -1};
         return ans;
+    }
+
+    public boolean isWallOrObstacle(int row, int col) {
+        //System.out.println("CHECKPOINT1");
+        //System.out.println(mapTile[row][col]);
+        if (!isValid(row, col)) {
+        //System.out.println("CHECKPOINT2");
+            return true;
+        }
+        //System.out.println(mapTile[row][col]);
+        if (mapTile[row][col].getExplored() && mapTile[row][col].getState() == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isInStartGoal(int row, int col) {
+        if (row == 0 && col == 0){
+            return true;
+        }else if (row == 1 && col == 0){
+            return true;
+        }else if (row == 2 && col == 0){
+            return true;
+        }else if (row == 0 && col == 1){
+            return true;
+        }else if (row == 1 && col == 1){
+            return true;
+        }else if (row == 2 && col == 1){
+            return true;
+        }else if (row == 0 && col == 2){
+            return true;
+        }else if (row == 1 && col == 2){
+            return true;
+        }else if (row == 2 && col == 2){
+            return true;
+        }else if (row == 19 && col == 12){
+            return true;
+        }else if (row == 18 && col == 12){
+            return true;
+        }else if (row == 17 && col == 12){
+            return true;
+        }else if (row == 19 && col == 13){
+            return true;
+        }else if (row == 18 && col == 13){
+            return true;
+        }else if (row == 17 && col == 13){
+            return true;
+        }else if (row == 19 && col == 14){
+            return true;
+        }else if (row == 18 && col == 14){
+            return true;
+        }else if (row == 17 && col == 14){
+            return true;
+        }else {
+            return false;
+        }
     }
 
 }
