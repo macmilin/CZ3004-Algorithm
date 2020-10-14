@@ -640,7 +640,7 @@ public class Robot {
         String data = "M{\"map\":[{\"explored\":\"";
         data += explored[0];
         data += "\",\"length\":";
-        data += Integer.parseInt(explored[1]);
+        data += obstacle.length()*4;
         data += ",\"obstacle\":\"";
         data += obstacle;
         data += "\"}]}\n";
