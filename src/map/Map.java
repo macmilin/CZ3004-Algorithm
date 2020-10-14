@@ -52,7 +52,7 @@ public class Map extends JPanel {
                 mapTile[i][j] = new Tile(i, j, map[ROW_SIZE-1-i][j]);
                 // Set the virtual walls of the arena
                 if (i == 0 || j == 0 || i == ROW_SIZE - 1 || j ==COL_SIZE - 1) {
-                    mapTile[i][j].setVirtual(true);
+                    mapTile[i][j].setVirtualWall(true);
                 }
             }
         }
@@ -87,7 +87,7 @@ public class Map extends JPanel {
                 mapTile[i][j] = new Tile(i, j, map[ROW_SIZE-1-i][j]);
                 // Set the virtual walls of the arena
                 if (i == 0 || j == 0 || i == ROW_SIZE - 1 || j == COL_SIZE - 1) {
-                    mapTile[i][j].setVirtual(true);
+                    mapTile[i][j].setVirtualWall(true);
                 }
             }
         }
@@ -102,16 +102,18 @@ public class Map extends JPanel {
         return Integer.toHexString(dec);
     }
 
-    public String generateMapDescriptorPartOne() {
+    public String[] generateMapDescriptorPartOne() {
         StringBuilder ans = new StringBuilder();
         StringBuilder bin = new StringBuilder();
-        
+        String[] ansArr = new String[2];
+        int length = 0;
         bin.append("11");
         
         for(int i = 0; i < mapTile.length; i++){
             for(int j = 0; j < mapTile[0].length; j++){
                 if(mapTile[i][j].getExplored()){
                     bin.append("1");
+                    length++;
                 }else{
                     bin.append("0");
                 }
@@ -125,7 +127,9 @@ public class Map extends JPanel {
 
         bin.append("11");
         ans.append(binToHex(bin.toString()));
-        return ans.toString();
+        ansArr[0] = ans.toString();
+        ansArr[1] = Integer.toString(length);
+        return ansArr;
     }
 
     public String generateMapDescriptorPartTwo() {
