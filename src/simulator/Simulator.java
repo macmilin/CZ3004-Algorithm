@@ -16,6 +16,8 @@ import algorithms.*;
 import communication.*;
 import robot.Constant;
 import java.util.Scanner;
+import java.io.*;
+import java.util.concurrent.TimeUnit;
 
 public class Simulator {
 
@@ -180,8 +182,23 @@ public class Simulator {
 
         class MTRealRun extends SwingWorker<Integer, String> {
             protected Integer doInBackground() throws Exception {
+                /*
+                try {
+                    bot.setRealRun(true);
+                    comms.openSocket();
+                    Exploration exploration = new Exploration(18000, 300, bot, map, false);
+                    exploration.setImageRecRun(true);
+                    exploration.run();
+                    
+                } catch (IOException e) {
+                    System.out.println("IOEXception in real run.");
+                    comms.openSocket();
+                } catch (Exception e) {
+                    System.out.println("Exception in real run.");
+                    comms.openSocket();
+                }*/
+
                 bot.setRealRun(true);
-                System.out.println("Real run");
                 comms.openSocket();
                 Exploration exploration = new Exploration(18000, 300, bot, map, false);
                 exploration.setImageRecRun(true);
@@ -190,6 +207,7 @@ public class Simulator {
                 return 222;
             }
         }
+        
 
 
         // Load Map Button
@@ -384,9 +402,14 @@ public class Simulator {
         comms = comms.getComms();
         System.out.println("Test Comm");
         comms.openSocket();
-        while(true){
-            comms.sendMessage(Constant.TAKE_PICTURE);
+        try {
+            TimeUnit.MILLISECONDS.sleep(5000);
+        } catch (InterruptedException e) {
+            System.out.println("Something went wrong in test");
         }
+        System.out.println("Test");
+        comms.closeSocket();
+        comms.openSocket();
 
     }
 

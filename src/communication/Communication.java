@@ -131,9 +131,15 @@ public class Communication {
             System.out.println("IOEXception in receiving message.");
             e.printStackTrace();
             System.out.println(socket);
+            closeSocket();
+            openSocket();
+            receiveMessage();
         } catch (Exception e) {
             System.out.println("Exception in sending message.");
             System.out.println(e.toString());
+            closeSocket();
+            openSocket();
+            receiveMessage();
         }
 
         return null;

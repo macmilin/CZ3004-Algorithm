@@ -1,7 +1,6 @@
 package robot;
 
 
-import java.util.concurrent.TimeUnit;
 import map.Map;
 import robot.Constant.DIRECTION;
 import robot.Constant.MOVEMENT;
