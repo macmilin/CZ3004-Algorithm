@@ -117,6 +117,7 @@ public class Communication {
 
     public String receiveMessage() {
         System.out.println("Receiving a message...");
+
         try {
             StringBuilder sb = new StringBuilder();
             String input = reader.readLine();
@@ -129,6 +130,7 @@ public class Communication {
         } catch (IOException e) {
             System.out.println("IOEXception in receiving message.");
             e.printStackTrace();
+            System.out.println(socket);
         } catch (Exception e) {
             System.out.println("Exception in sending message.");
             System.out.println(e.toString());

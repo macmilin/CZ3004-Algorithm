@@ -256,6 +256,9 @@ public class Robot {
                 System.out.println("Calibration Fail");
             }*/
                     
+        }else if(realRun && countForward >= 3 && canCalibrateLeft(map)) {
+            sendMovement(MOVEMENT.CALIBRATE_LEFT);
+            countForward = 0;
         }else if (realRun && countForward >= 3 && canAlignFront(map)){
             sendMovement(MOVEMENT.CALIBRATE_FRONT);
             countForward = 0;
@@ -293,6 +296,8 @@ public class Robot {
             case CALIBRATE_FRONT:
                 comms.sendMessage(Constant.CALIBRATE_SENSOR_FRONT);
                 break;
+            case CALIBRATE_LEFT:
+                comms.sendMessage(Constant.CALIBRATE_SENSOR_LEFT);
             default:
                 System.out.println("Error in sending movement");
         }
@@ -496,6 +501,58 @@ public class Robot {
         return false;
     }
 
+    public boolean canCalibrateLeft(Map map) {
+        switch (dir) {
+            case NORTH:
+                if (map.isWallOrObstacle(row + 1, col - 2) && map.isWallOrObstacle(row, col - 2) && map.isWallOrObstacle(row - 1, col - 2)){
+                    return true;
+                }else if (map.isWallOrObstacle(row + 1, col - 2) && map.isWallOrObstacle(row, col - 2)){
+                    return true;
+                }else if (map.isWallOrObstacle(row, col - 2) && map.isWallOrObstacle(row - 1, col - 2)) {
+                    return true;
+                }else {
+                    return false;
+                }
+                //return map.isWallOrObstacle(row + 1, col + 2) && map.isWallOrObstacle(row, col + 2) && map.isWallOrObstacle(row - 1, col + 2);
+            case EAST:
+                if (map.isWallOrObstacle(row + 2, col + 1) && map.isWallOrObstacle(row + 2, col) && map.isWallOrObstacle(row + 2, col - 1)){
+                    return true;
+                }else if (map.isWallOrObstacle(row + 2, col + 1) && map.isWallOrObstacle(row + 2, col)) {
+                    return true;
+                }else if (map.isWallOrObstacle(row + 2, col) && map.isWallOrObstacle(row + 2, col - 1)) {
+                    return true;
+                }else {
+                    return false;
+                }
+                //return map.isWallOrObstacle(row - 2, col + 1) && map.isWallOrObstacle(row - 2, col) && map.isWallOrObstacle(row - 2, col - 1);
+            case SOUTH:
+                if (map.isWallOrObstacle(row - 1, col + 2) && map.isWallOrObstacle(row, col + 2) && map.isWallOrObstacle(row + 1, col + 2)){
+                    return true;
+                }else if (map.isWallOrObstacle(row - 1, col + 2) && map.isWallOrObstacle(row, col + 2)) {
+                    return true;
+                }else if (map.isWallOrObstacle(row, col + 2) && map.isWallOrObstacle(row + 1, col + 2)) {
+                    return true;
+                }else {
+                    return false;
+                }
+                //return map.isWallOrObstacle(row - 1, col - 2) && map.isWallOrObstacle(row, col - 2) && map.isWallOrObstacle(row + 1, col - 2);
+            case WEST:
+                if (map.isWallOrObstacle(row - 2, col - 1) && map.isWallOrObstacle(row - 2, col) && map.isWallOrObstacle(row - 2, col + 1)){
+                    return true;
+                }else if (map.isWallOrObstacle(row - 2, col - 1) && map.isWallOrObstacle(row - 2, col)) {
+                    return true;
+                }else if (map.isWallOrObstacle(row - 2, col) && map.isWallOrObstacle(row - 2, col + 1)){
+                    return true;
+                }else {
+                    return false;
+                }
+                //return map.isWallOrObstacle(row + 2, col - 1) && map.isWallOrObstacle(row + 2, col) && map.isWallOrObstacle(row + 2, col + 1);
+        }
+
+        return false;
+    }
+
+
     public boolean canAlignFront(Map map) {
         switch (dir) {
             case NORTH:
@@ -515,6 +572,8 @@ public class Robot {
         return false;
 
     }
+
+    
 
     public int[] huggedObstacle(Map map) {
         //System.out.println("Check is hugged obstacle");

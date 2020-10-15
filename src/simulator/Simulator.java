@@ -288,7 +288,6 @@ public class Simulator {
             }
         });
 
-        // Real Run
         JButton setSpeedButton = new JButton("Change Speed");
         setSpeedButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
