@@ -83,12 +83,20 @@ public class Exploration {
                 System.out.println("Waiting for Fastest Path Command");
                 String msg = Communication.getComms().receiveMessage();
                 if (msg.equals(Constant.START_FASTEST_PATH)){
+                    Communication.getComms().sendMessage(Constant.START_FASTEST_PATH);
                     break;
                 }
             }
 
             FastestPath fastestPath = new FastestPath(robot, map);
             fastestPath.run(wayPointY, wayPointX);
+            try {
+                TimeUnit.MILLISECONDS.sleep(3000);
+                System.out.println("Reached Way Point");
+            } catch (InterruptedException e) {
+                System.out.println("Error in waiting in way point.");
+            }
+
             FastestPath fastestPath2 = new FastestPath(robot, map);
             fastestPath2.run(Constant.GOAL_ROW, Constant.GOAL_COL);
         }
@@ -98,10 +106,12 @@ public class Exploration {
         robot.setSensors();
         robot.sense(map);
         map.paintComponent(map.getGraphics());
-        //robot.takePicture(imageRecRun, map);
+        robot.takePicture(imageRecRun, map);
 
         try {
-            TimeUnit.MILLISECONDS.sleep(500);
+            if(robot.getRealRun()){
+                TimeUnit.MILLISECONDS.sleep(250);
+            }
         } catch (InterruptedException e) {
             System.out.println("Something went wrong in Robot.move()!");
         }

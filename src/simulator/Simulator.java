@@ -155,28 +155,50 @@ public class Simulator {
         }
 
         class MTFastestPath extends SwingWorker<Integer, String> {
+            int wayPointX = 13;
+            int wayPointY = 18;
+
             protected Integer doInBackground() throws Exception {
                 bot.reset();
                 map.paintComponent(map.getGraphics());
+                bot.setRealRun(true);
+                Communication comms = new Communication();
+                comms = comms.getComms();
+                System.out.println("Open comms in fastest path");
+                comms.openSocket();
 
-                int wayPointY = 10;
-                int wayPointX = 10;
-
-                /*
-                if (realRun) {
-                    while (true) {
-                        System.out.println("Waiting for FP_START...");
-                        String msg = comm.recvMsg();
-                        if (msg.equals(CommMgr.FP_START)) break;
+                while (true) {
+                    System.out.println("Waiting for Fastest Path Command");
+                    String msg = Communication.getComms().receiveMessage();
+                    if (msg.equals(Constant.START_FASTEST_PATH)){
+                        break;
+                    }else {
+                        if(!msg.equals(Constant.CALIBRATE_SENSOR_PASS) && !msg.equals(Constant.CALIBRATE_SENSOR_FAIL)){
+                            getWayPoint(msg);
+                        }
                     }
-                }*/
+                }
 
                 FastestPath fastestPath = new FastestPath(bot, map);
                 fastestPath.run(wayPointY, wayPointX);
+                try {
+                    TimeUnit.MILLISECONDS.sleep(3000);
+                    System.out.println("Reached Way Point");
+                } catch (InterruptedException e) {
+                    System.out.println("Error in waiting in way point.");
+                }
                 FastestPath fastestPath2 = new FastestPath(bot, map);
-                fastestPath2.run(18, 13);
+                fastestPath2.run(Constant.GOAL_ROW, Constant.GOAL_COL);
 
                 return 222;
+            }
+
+            public void getWayPoint(String wayPointString) {
+                //String wayPointString = Communication.getComms().receiveMessage();
+                String[] wayPointStringArr = wayPointString.split(",");
+                wayPointX = Integer.parseInt(wayPointStringArr[0]);
+                wayPointY = Integer.parseInt(wayPointStringArr[1]);
+                System.out.println("Way point is: " + wayPointX + ", " + wayPointY);
             }
         }
 
