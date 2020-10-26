@@ -10,7 +10,7 @@ public class Constant {
     // range of long range sensor (tiles)
     public static final int SENSOR_LONG_RANGE_MAX = 5;
 
-    public static final int SPEED = 100;
+    public static final int SPEED = 1;
     public static final DIRECTION START_DIR = DIRECTION.NORTH;
 
     public static final int GOAL_ROW = 18;
@@ -29,6 +29,7 @@ public class Constant {
     public static final String TURN_RIGHT = "D|";
     public static final String CALIBRATE_SENSOR = "C|";
     public static final String CALIBRATE_SENSOR_FRONT = "V|";
+    public static final String CALIBRATE_SENSOR_LEFT = "X|";
     public static final String CALIBRATE_SENSOR_PASS = "P|";
     public static final String CALIBRATE_SENSOR_FAIL = "O|";
     public static final String SENSE_DATA = "R|";
@@ -51,7 +52,7 @@ public class Constant {
     
 
     public enum MOVEMENT {
-        FORWARD, BACKWARD, RIGHT, LEFT, CALIBRATE, ERROR, CALIBRATE_FRONT;
+        FORWARD, BACKWARD, RIGHT, LEFT, CALIBRATE, ERROR, CALIBRATE_FRONT, CALIBRATE_LEFT;
     }
 
     public enum DIRECTION {

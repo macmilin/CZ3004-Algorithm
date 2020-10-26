@@ -1,0 +1,1918 @@
+
+C:\Users\jozua\Desktop\MdpAlgorithm\src>java simulator.Simulator
+Opening socket's connection...
+Socket successfully opened.
+Calibrating...
+Waiting for Start Command
+Receiving a message...
+Received: 5,13
+Way point is: 5, 13
+Waiting for Start Command
+Receiving a message...
+Received: E|
+Starting exploration...
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|-1|1
+[-1, -1, -1, -1, -1, 1]
+Explored Area: 19
+Robot move from 1, 1
+Robot is facing NORTH
+Send: D|
+Send: C|
+Send: RP{"robotPosition":[0,17,90]}
+
+Send: M{"map":[{"explored":"fe007000f801c003800000000000000000000000000000000000000000000000000000000003","length":20,"obstacle":"00000"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|-1
+[-1, -1, -1, 1, 1, -1]
+Right empty. Rotate right
+Robot move from 1, 1
+Robot is facing EAST
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[1,17,90]}
+
+Send: M{"map":[{"explored":"fe007c00f801c003800200040008000000000000000000000000000000000000000000000003","length":24,"obstacle":"000000"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|-1
+[-1, -1, -1, 1, 1, -1]
+Forward empty after right rotation. Move forward
+Area explored: 30
+========================
+Robot move from 1, 2
+Robot is facing EAST
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[2,17,90]}
+
+Send: M{"map":[{"explored":"ff007e00fc01c00380030006000c000000000000000000000000000000000000000000000003","length":32,"obstacle":"00000000"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|-1
+[-1, -1, -1, 1, 1, -1]
+Forward empty. Move forward
+Area explored: 38
+========================
+Robot move from 1, 3
+Robot is facing EAST
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[3,17,90]}
+
+Send: M{"map":[{"explored":"ff807f00fe01e003c0038007000e000000000000000000000000000000000000000000000003","length":40,"obstacle":"0000000000"}]}
+
+Send: R|
+Receiving a message...
+Received: 2|2|2|1|1|4
+[2, 2, 2, 1, 1, 4]
+Forward empty. Move forward
+Area explored: 45
+========================
+Robot move from 1, 4
+Robot is facing EAST
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[4,17,90]}
+
+Send: M{"map":[{"explored":"ffc07f80ff01f003e003c007800e000000000000000000000000000000000000000000000003","length":48,"obstacle":"010101000040"}]}
+
+Send: R|
+Receiving a message...
+Received: 1|1|1|1|1|4
+[1, 1, 1, 1, 1, 4]
+Forward empty. Move forward
+Area explored: 49
+========================
+Robot move from 1, 5
+Robot is facing EAST
+Send: A|
+Send: C|
+Send: RP{"robotPosition":[4,17,0]}
+
+Send: M{"map":[{"explored":"ffc07f80ff01f803f003e007c00e000000000000000000000000000000000000000000000003","length":52,"obstacle":"01010100000c0"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|5
+[-1, -1, -1, 1, 1, 5]
+Left empty. Rotate left
+Robot move from 1, 5
+Robot is facing NORTH
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[4,16,0]}
+
+Send: M{"map":[{"explored":"ffc07f80ff01fc03f803e007c00e000000000000000000000000000000000000000000000003","length":52,"obstacle":"0101010000030"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|-1|5
+[-1, -1, -1, 1, -1, 5]
+Forward empty after left rotation. Move forward
+Area explored: 54
+========================
+Robot move from 2, 5
+Robot is facing NORTH
+Send: W|
+Send: RP{"robotPosition":[4,15,0]}
+
+Send: M{"map":[{"explored":"ffc07f80ff01ff03f803f007c00e000000000000000000000000000000000000000000000003","length":56,"obstacle":"01010100000060"}]}
+
+Send: R|
+Receiving a message...
+Received: 2|2|2|1|-1|5
+[2, 2, 2, 1, -1, 5]
+Forward empty. Move forward
+Area explored: 57
+========================
+Robot move from 3, 5
+Robot is facing NORTH
+Send: W|
+Send: RP{"robotPosition":[4,14,0]}
+
+Send: M{"map":[{"explored":"ffc07f80ff01ff03fe03f007e00e000000000000000000000000000000000000000000000003","length":60,"obstacle":"0101010000001c0"}]}
+
+Send: R|
+Receiving a message...
+Received: 1|1|1|-1|-1|5
+[1, 1, 1, -1, -1, 5]
+Forward empty. Move forward
+Area explored: 59
+========================
+Robot move from 4, 5
+Robot is facing NORTH
+Send: D|
+Send: RP{"robotPosition":[4,14,90]}
+
+Send: M{"map":[{"explored":"ffc07f80ff01ff03fe03fc07e00e000000000000000000000000000000000000000000000003","length":60,"obstacle":"010101000000070"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|-1|1
+[-1, -1, -1, -1, -1, 1]
+Right empty. Rotate right
+Robot move from 4, 5
+Robot is facing EAST
+Send: W|
+Send: X|
+Error in sending movement
+Send: RP{"robotPosition":[5,14,90]}
+
+Send: M{"map":[{"explored":"ffc07f80ff01ff03fe03fc07e00e000000000000000000000000000000000000000000000003","length":60,"obstacle":"010101000000070"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|1|1
+[-1, -1, -1, -1, 1, 1]
+Forward empty after right rotation. Move forward
+Area explored: 62
+========================
+Robot move from 4, 6
+Robot is facing EAST
+Send: W|
+Send: RP{"robotPosition":[6,14,90]}
+
+Send: M{"map":[{"explored":"ffc07f80ff01ff83ff03fe07e00e000000000000000000000000000000000000000000000003","length":64,"obstacle":"01010100000000e0"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|-1|1
+[-1, -1, -1, -1, -1, 1]
+Forward empty. Move forward
+Area explored: 68
+========================
+Robot move from 4, 7
+Robot is facing EAST
+Send: W|
+Send: RP{"robotPosition":[7,14,90]}
+
+Send: M{"map":[{"explored":"ffc07fc0ff81ffc3ff83ff07f00e000000000000000000000000000000000000000000000003","length":68,"obstacle":"01010080000000078"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|-1|1
+[-1, -1, -1, 1, -1, 1]
+Forward empty. Move forward
+Area explored: 74
+========================
+Robot move from 4, 8
+Robot is facing EAST
+Send: W|
+Send: RP{"robotPosition":[8,14,90]}
+
+Send: M{"map":[{"explored":"ffc07fe0ffc1ffe3ffc3ff87f80e000000000000000000000000000000000000000000000003","length":76,"obstacle":"01010040000000003e0"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|-1|1
+[-1, -1, -1, -1, -1, 1]
+Forward empty. Move forward
+Area explored: 80
+========================
+Robot move from 4, 9
+Robot is facing EAST
+Send: D|
+Send: RP{"robotPosition":[8,14,180]}
+
+Send: M{"map":[{"explored":"ffc07ff0ffe1fff3ffe3ffc7fc0e000000000000000000000000000000000000000000000003","length":80,"obstacle":"010100200000000001f8"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|-1|-1
+[-1, -1, -1, -1, -1, -1]
+Right empty. Rotate right
+Robot move from 4, 9
+Robot is facing SOUTH
+Send: W|
+Send: RP{"robotPosition":[8,15,180]}
+
+Send: M{"map":[{"explored":"ffc07ff0ffe1fff3fffbffc7fc0e000000000000000000000000000000000000000000000003","length":84,"obstacle":"0101002000000000007e0"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|1|-1
+[-1, -1, -1, -1, 1, -1]
+Forward empty after right rotation. Move forward
+Area explored: 87
+========================
+Robot move from 3, 9
+Robot is facing SOUTH
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[8,16,180]}
+
+Send: M{"map":[{"explored":"fff87ff0ffe1fffffffbffc7fc0e000000000000000000000000000000000000000000000003","length":88,"obstacle":"01002004000000000003f0"}]}
+
+Send: R|
+Receiving a message...
+Received: 2|2|2|-1|1|5
+[2, 2, 2, -1, 1, 5]
+Forward empty. Move forward
+Area explored: 91
+========================
+Robot move from 2, 9
+Robot is facing SOUTH
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[8,17,180]}
+
+Send: M{"map":[{"explored":"fff87ff0fffffffffffbffc7fc0e000000000000000000000000000000000000000000000003","length":92,"obstacle":"010020040000000000003f0"}]}
+
+Send: R|
+Receiving a message...
+Received: 1|1|1|1|1|5
+[1, 1, 1, 1, 1, 5]
+Forward empty. Move forward
+Area explored: 95
+========================
+Robot move from 1, 9
+Robot is facing SOUTH
+Send: A|
+Send: C|
+Send: RP{"robotPosition":[8,17,90]}
+
+Send: M{"map":[{"explored":"fff87ffffffffffffffbffc7fc0e000000000000000000000000000000000000000000000003","length":96,"obstacle":"0100200040000000000003f0"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|4
+[-1, -1, -1, 1, 1, 4]
+Left empty. Rotate left
+Robot move from 1, 9
+Robot is facing EAST
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[9,17,90]}
+
+Send: M{"map":[{"explored":"fffe7ffffffffffffffbffc7fc0e000000000000000000000000000000000000000000000003","length":100,"obstacle":"0100080010000000000000fc0"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|-1
+[-1, -1, -1, 1, 1, -1]
+Forward empty after left rotation. Move forward
+Area explored: 100
+========================
+Robot move from 1, 10
+Robot is facing EAST
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[10,17,90]}
+
+Send: M{"map":[{"explored":"ffff7ffffffffffffffbffc7fe0e040000000000000000000000000000000000000000000003","length":100,"obstacle":"01000400080000000000007e0"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|-1
+[-1, -1, -1, 1, 1, -1]
+Forward empty. Move forward
+Area explored: 103
+========================
+Robot move from 1, 11
+Robot is facing EAST
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[11,17,90]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbffc7ff0e060000000000000000000000000000000000000000000003","length":104,"obstacle":"01000200040000000000003f00"}]}
+
+Send: R|
+Receiving a message...
+Received: 2|2|2|1|1|-1
+[2, 2, 2, 1, 1, -1]
+Forward empty. Move forward
+Area explored: 105
+========================
+Robot move from 1, 12
+Robot is facing EAST
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[12,17,90]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbffc7ff8e070000000000000000000000000000000000000000000003","length":108,"obstacle":"01000200040000000000003f000"}]}
+
+Send: R|
+Receiving a message...
+Received: 1|1|1|1|1|-1
+[1, 1, 1, 1, 1, -1]
+Forward empty. Move forward
+Area explored: 108
+========================
+Robot move from 1, 13
+Robot is facing EAST
+Send: A|
+Send: C|
+Send: RP{"robotPosition":[12,17,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbffe7ffce078000000000000000000000000000000000000000000003","length":108,"obstacle":"01000200040000000000001f800"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|-1
+[-1, -1, -1, 1, 1, -1]
+Left empty. Rotate left
+Robot move from 1, 13
+Robot is facing NORTH
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[12,16,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbffe7ffce078000000000000000000000000000000000000000000003","length":108,"obstacle":"01000200040000000000001f800"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|2|1|1|5
+[-1, -1, 2, 1, 1, 5]
+Forward empty after left rotation. Move forward
+Area explored: 109
+========================
+Robot move from 2, 13
+Robot is facing NORTH
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[12,15,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffce078000000000000000000000000000000000000000000003","length":112,"obstacle":"01000200040000000000008fc000"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|1|1|1|-1
+[-1, -1, 1, 1, 1, -1]
+Forward empty. Move forward
+Area explored: 109
+========================
+Robot move from 3, 13
+Robot is facing NORTH
+Send: A|
+Send: RP{"robotPosition":[12,15,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffce078000000000000000000000000000000000000000000003","length":112,"obstacle":"01000200040000000000008fc000"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|-1|3
+[-1, -1, -1, 1, -1, 3]
+Left empty. Rotate left
+Robot move from 3, 13
+Robot is facing WEST
+Send: W|
+Send: RP{"robotPosition":[11,15,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffce078000000000000000000000000000000000000000000003","length":112,"obstacle":"01000200040000000000008fc000"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|-1|3
+[-1, -1, -1, -1, -1, 3]
+Forward empty after left rotation. Move forward
+Area explored: 109
+========================
+Robot move from 3, 12
+Robot is facing WEST
+Send: D|
+Send: RP{"robotPosition":[11,15,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffce078000000000000000000000000000000000000000000003","length":112,"obstacle":"01000200040000000000008fc000"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|2|2|-1
+[-1, -1, -1, 2, 2, -1]
+Right empty. Rotate right
+Robot move from 3, 12
+Robot is facing NORTH
+Send: W|
+Send: RP{"robotPosition":[11,14,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffce078000000000000000000000000000000000000000000003","length":112,"obstacle":"01000200040000000000008fc000"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|2|1|-1
+[-1, -1, -1, 2, 1, -1]
+Forward empty after right rotation. Move forward
+Area explored: 109
+========================
+Robot move from 4, 12
+Robot is facing NORTH
+Send: W|
+Send: RP{"robotPosition":[11,13,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffce078000000000000000000000000000000000000000000003","length":112,"obstacle":"01000200040000000000008fc000"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|2|1|-1
+[-1, -1, -1, 2, 1, -1]
+Forward empty. Move forward
+Area explored: 113
+========================
+Robot move from 5, 12
+Robot is facing NORTH
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[11,12,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee078007000000000000000000000000000000000000000003","length":116,"obstacle":"01000200040000000000008fc2000"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|2
+[-1, -1, -1, 1, 1, 2]
+Forward empty. Move forward
+Area explored: 117
+========================
+Robot move from 6, 12
+Robot is facing NORTH
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[11,11,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee07c007000e00000000000000000000000000000000000003","length":120,"obstacle":"01000200040000000000008fc20200"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|2|-1
+[-1, -1, -1, 1, 2, -1]
+Forward empty. Move forward
+Area explored: 125
+========================
+Robot move from 7, 12
+Robot is facing NORTH
+Send: W|
+Send: RP{"robotPosition":[11,10,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc007800e001c0000000000000000000000000000000003","length":128,"obstacle":"01000200040000000000008fc2002000"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|2|-1
+[-1, -1, -1, 1, 2, -1]
+Forward empty. Move forward
+Area explored: 134
+========================
+Robot move from 8, 12
+Robot is facing NORTH
+Send: W|
+Send: RP{"robotPosition":[11,9,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff800f001c0038000000000000000000000000000003","length":136,"obstacle":"01000200040000000000008fc200200000"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|2|-1|-1
+[-1, -1, -1, 2, -1, -1]
+Forward empty. Move forward
+Area explored: 143
+========================
+Robot move from 9, 12
+Robot is facing NORTH
+Send: D|
+Send: V|
+Send: RP{"robotPosition":[11,9,90]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff001e0038007000000000000000000000000003","length":144,"obstacle":"01000200040000000000008fc20020000000"}]}
+
+Send: R|
+Receiving a message...
+Received: 2|2|2|-1|-1|-1
+[2, 2, 2, -1, -1, -1]
+Right empty. Rotate right
+Robot move from 9, 12
+Robot is facing EAST
+Send: W|
+Send: RP{"robotPosition":[12,9,90]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff001e0038007000400080010000000000000003","length":148,"obstacle":"01000200040000000000008fc200200000000"}]}
+
+Send: R|
+Receiving a message...
+Received: 1|1|1|-1|1|-1
+[1, 1, 1, -1, 1, -1]
+Forward empty after right rotation. Move forward
+Area explored: 149
+========================
+Robot move from 9, 13
+Robot is facing EAST
+Send: A|
+Send: C|
+Send: RP{"robotPosition":[12,9,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff001e00380070006000c0018000000000000003","length":152,"obstacle":"01000200040000000000008fc2002000000000"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|-1
+[-1, -1, -1, 1, 1, -1]
+Left empty. Rotate left
+Robot move from 9, 13
+Robot is facing NORTH
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[12,8,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff001e003c0078006000c0018000000000000003","length":152,"obstacle":"01000200040000000000008fc2002000000000"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|2
+[-1, -1, -1, 1, 1, 2]
+Forward empty after left rotation. Move forward
+Area explored: 153
+========================
+Robot move from 10, 13
+Robot is facing NORTH
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[12,7,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e003c0078007000c0018000000000000003","length":156,"obstacle":"01000200040000000000008fc20020000400000"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|2|1|1|2
+[-1, -1, 2, 1, 1, 2]
+Forward empty. Move forward
+Area explored: 155
+========================
+Robot move from 11, 13
+Robot is facing NORTH
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[12,6,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c0078007000e0018000000000000003","length":156,"obstacle":"01000200040000000000008fc20020000420008"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|1|1|1|2
+[-1, -1, 1, 1, 1, 2]
+Forward empty. Move forward
+Area explored: 156
+========================
+Robot move from 12, 13
+Robot is facing NORTH
+Send: A|
+Send: RP{"robotPosition":[12,6,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c00f8007000e0018000000000000003","length":156,"obstacle":"01000200040000000000008fc20020000421004"}]}
+
+Send: R|
+Receiving a message...
+Received: 2|2|-1|1|-1|-1
+[2, 2, -1, 1, -1, -1]
+Left empty. Rotate left
+Robot move from 12, 13
+Robot is facing WEST
+Send: W|
+Send: RP{"robotPosition":[11,6,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c00f801f000e0018000000000000003","length":160,"obstacle":"01000200040000000000008fc200200004210010"}]}
+
+Send: R|
+Receiving a message...
+Received: 1|1|2|-1|-1|-1
+[1, 1, 2, -1, -1, -1]
+Forward empty after left rotation. Move forward
+Area explored: 161
+========================
+Robot move from 12, 12
+Robot is facing WEST
+Send: D|
+Send: X|
+Error in sending movement
+Send: RP{"robotPosition":[11,6,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c00f803f001e0038000000000000003","length":164,"obstacle":"01000200040000000000008fc2002000042108040"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|2|2|1
+[-1, -1, -1, 2, 2, 1]
+Right empty. Rotate right
+Robot move from 12, 12
+Robot is facing NORTH
+Send: W|
+Send: RP{"robotPosition":[11,5,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c00f803f001e0038000000000000003","length":164,"obstacle":"01000200040000000000008fc2002000042108040"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|2|1|2
+[-1, -1, -1, 2, 1, 2]
+Forward empty after right rotation. Move forward
+Area explored: 164
+========================
+Robot move from 13, 12
+Robot is facing NORTH
+Send: W|
+Send: RP{"robotPosition":[11,4,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c00f803f001e0038007000000000003","length":164,"obstacle":"01000200040000000000008fc2002000042108040"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|2|2|3
+[-1, -1, -1, 2, 2, 3]
+Forward empty. Move forward
+Area explored: 171
+========================
+Robot move from 14, 12
+Robot is facing NORTH
+Send: W|
+Send: RP{"robotPosition":[11,3,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c00f803f00fe003c007000e00000003","length":172,"obstacle":"01000200040000000000008fc200200004210820800"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|2|4
+[-1, -1, -1, 1, 2, 4]
+Forward empty. Move forward
+Area explored: 179
+========================
+Robot move from 15, 12
+Robot is facing NORTH
+Send: W|
+Send: RP{"robotPosition":[11,2,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c00f803f00fe03fc007800e001c0003","length":180,"obstacle":"01000200040000000000008fc200200004210820c0000"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|2|2|-1
+[-1, -1, -1, 2, 2, -1]
+Forward empty. Move forward
+Area explored: 188
+========================
+Robot move from 16, 12
+Robot is facing NORTH
+Send: D|
+Send: V|
+Send: RP{"robotPosition":[11,2,90]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c00f803f00fe03fc0ff800f001c003b","length":188,"obstacle":"01000200040000000000008fc200200004210820c000000"}]}
+
+Send: R|
+Receiving a message...
+Received: 2|2|2|-1|-1|3
+[2, 2, 2, -1, -1, 3]
+Right empty. Rotate right
+Robot move from 16, 12
+Robot is facing EAST
+Send: W|
+Send: RP{"robotPosition":[12,2,90]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c00f803f00fe03fc0ff800f001c003b","length":188,"obstacle":"01000200040000000000008fc200200004210820c000000"}]}
+
+Send: R|
+Receiving a message...
+Received: 1|1|1|-1|1|3
+[1, 1, 1, -1, 1, 3]
+Forward empty after right rotation. Move forward
+Area explored: 188
+========================
+Robot move from 16, 13
+Robot is facing EAST
+Send: A|
+Send: C|
+Send: RP{"robotPosition":[12,2,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c00f803f00fe03fc0ff800f001c003b","length":188,"obstacle":"01000200040000000000008fc200200004210820c000000"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|-1
+[-1, -1, -1, 1, 1, -1]
+Left empty. Rotate left
+Robot move from 16, 13
+Robot is facing NORTH
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[12,1,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c00f803f00fe03fc0ff800f001e003f","length":192,"obstacle":"01000200040000000000008fc200200004210820c0000000"}]}
+
+Send: R|
+Receiving a message...
+Received: 2|2|2|1|1|-1
+[2, 2, 2, 1, 1, -1]
+Forward empty after left rotation. Move forward
+Area explored: 194
+========================
+Robot move from 17, 13
+Robot is facing NORTH
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[12,0,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c00f803f00fe03fc0ff80ff001e003f","length":196,"obstacle":"01000200040000000000008fc200200004210820c00000000"}]}
+
+Send: R|
+Receiving a message...
+Received: 1|1|1|1|1|-1
+[1, 1, 1, 1, 1, -1]
+Forward empty. Move forward
+Area explored: 198
+========================
+Robot move from 18, 13
+Robot is facing NORTH
+Send: A|
+Send: C|
+Send: RP{"robotPosition":[12,0,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c00f803f00fe03fc0ff80ff01fe003f","length":200,"obstacle":"01000200040000000000008fc200200004210820c000000000"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|-1
+[-1, -1, -1, 1, 1, -1]
+Left empty. Rotate left
+Robot move from 18, 13
+Robot is facing WEST
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[11,0,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c00f803f00fe03fc0ff80ff01fe007f","length":200,"obstacle":"01000200040000000000008fc200200004210820c000000000"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|-1
+[-1, -1, -1, 1, 1, -1]
+Forward empty after left rotation. Move forward
+Area explored: 200
+========================
+Robot move from 18, 12
+Robot is facing WEST
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[10,0,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c00f803f00fe03fc0ff80ff01fe00ff","length":200,"obstacle":"01000200040000000000008fc200200004210820c000000000"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|-1
+[-1, -1, -1, 1, 1, -1]
+Forward empty. Move forward
+Area explored: 201
+========================
+Robot move from 18, 11
+Robot is facing WEST
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[9,0,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c00f803f00fe03fc0ff80ff01fe01ff","length":204,"obstacle":"01000200040000000000008fc200200004210820c0000000000"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|1|1|1|-1
+[-1, -1, 1, 1, 1, -1]
+Forward empty. Move forward
+Area explored: 201
+========================
+Robot move from 18, 10
+Robot is facing WEST
+Send: A|
+Send: RP{"robotPosition":[9,0,180]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c00f803f00fe03fc0ff80ff01fe01ff","length":204,"obstacle":"01000200040000000000008fc200200004210820c0000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|-1|4
+[-1, -1, -1, 1, -1, 4]
+Left empty. Rotate left
+Robot move from 18, 10
+Robot is facing SOUTH
+Send: W|
+Send: RP{"robotPosition":[9,1,180]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c00f803f00fe03fc0ff80ff01fe01ff","length":204,"obstacle":"01000200040000000000008fc200200004210820c0000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|-1|4
+[-1, -1, -1, -1, -1, 4]
+Forward empty after left rotation. Move forward
+Area explored: 201
+========================
+Robot move from 17, 10
+Robot is facing SOUTH
+Send: D|
+Send: RP{"robotPosition":[9,1,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c00f803f00fe03fc0ff80ff01fe01ff","length":204,"obstacle":"01000200040000000000008fc200200004210820c0000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|2|2|4
+[-1, -1, -1, 2, 2, 4]
+Right empty. Rotate right
+Robot move from 17, 10
+Robot is facing WEST
+Send: W|
+Send: RP{"robotPosition":[8,1,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c00f803f00fe03fc0ff80ff01fe01ff","length":204,"obstacle":"01000200040000000000008fc200200004210820c0000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|2|1|3
+[-1, -1, -1, 2, 1, 3]
+Forward empty after right rotation. Move forward
+Area explored: 203
+========================
+Robot move from 17, 9
+Robot is facing WEST
+Send: W|
+Send: RP{"robotPosition":[7,1,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c00f803f00fe03fc0ff81ff03fe01ff","length":204,"obstacle":"01000200040000000000008fc200200004210820c0000000080"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|2|2|2
+[-1, -1, -1, 2, 2, 2]
+Forward empty. Move forward
+Area explored: 207
+========================
+Robot move from 17, 8
+Robot is facing WEST
+Send: W|
+Send: RP{"robotPosition":[6,1,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c00f803f00fe03fc1ff83ff07fe03ff","length":208,"obstacle":"01000200040000000000008fc200200004210820c00000000080"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|2|1
+[-1, -1, -1, 1, 2, 1]
+Forward empty. Move forward
+Area explored: 211
+========================
+Robot move from 17, 7
+Robot is facing WEST
+Send: W|
+Send: RP{"robotPosition":[5,1,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e007c00f803f00fe03fc3ff87ff0ffe07ff","length":212,"obstacle":"01000200040000000000008fc200200004210820c000000000080"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|2|2|-1
+[-1, -1, -1, 2, 2, -1]
+Forward empty. Move forward
+Area explored: 220
+========================
+Robot move from 17, 6
+Robot is facing WEST
+Send: D|
+Send: V|
+Send: RP{"robotPosition":[5,1,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e047c08f813f02fe07fc7ff8fff1ffe0fff","length":220,"obstacle":"01000200040000000000008fc2002000041041020a0000000000040"}]}
+
+Send: R|
+Receiving a message...
+Received: 2|2|2|-1|-1|-1
+[2, 2, 2, -1, -1, -1]
+Right empty. Rotate right
+Robot move from 17, 6
+Robot is facing NORTH
+Send: W|
+Send: RP{"robotPosition":[5,0,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e047c08f813f02fe07fc7ffffff1ffe0fff","length":224,"obstacle":"01000200040000000000008fc2002000041041020a00000000000080"}]}
+
+Send: R|
+Receiving a message...
+Received: 1|1|1|-1|1|-1
+[1, 1, 1, -1, 1, -1]
+Forward empty after right rotation. Move forward
+Area explored: 226
+========================
+Robot move from 18, 6
+Robot is facing NORTH
+Send: A|
+Send: C|
+Send: RP{"robotPosition":[5,0,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e047c08f813f02fe07fc7fffffffffe0fff","length":228,"obstacle":"01000200040000000000008fc2002000041041020a000000000000100"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|-1
+[-1, -1, -1, 1, 1, -1]
+Left empty. Rotate left
+Robot move from 18, 6
+Robot is facing WEST
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[4,0,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e047c08f813f02fe07fc7fffffffffe3fff","length":228,"obstacle":"01000200040000000000008fc2002000041041020a000000000000040"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|-1
+[-1, -1, -1, 1, 1, -1]
+Forward empty after left rotation. Move forward
+Area explored: 233
+========================
+Robot move from 18, 5
+Robot is facing WEST
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[3,0,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e047c18f833f06fe0ffc7fffffffffe7fff","length":236,"obstacle":"01000200040000000000008fc2002000041020404120000000000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|-1
+[-1, -1, -1, 1, 1, -1]
+Forward empty. Move forward
+Area explored: 238
+========================
+Robot move from 18, 4
+Robot is facing WEST
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[2,0,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e047c38f873f0efe1ffc7fffffffffeffff","length":240,"obstacle":"01000200040000000000008fc20020000410101008220000000000000100"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|1
+[-1, -1, -1, 1, 1, 1]
+Forward empty. Move forward
+Area explored: 239
+========================
+Robot move from 18, 3
+Robot is facing WEST
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[1,0,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e047c38f873f0efe1ffc7ffffffffffffff","length":240,"obstacle":"01000200040000000000008fc20020000410101008220200000000000080"}]}
+
+Send: R|
+Receiving a message...
+Received: 2|2|2|1|1|2
+[2, 2, 2, 1, 1, 2]
+Forward empty. Move forward
+Area explored: 241
+========================
+Robot move from 18, 2
+Robot is facing WEST
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[0,0,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e047c38f873f0efe5ffcfffffffffffffff","length":244,"obstacle":"01000200040000000000008fc200200004101010083100800000000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: 1|1|1|1|1|2
+[1, 1, 1, 1, 1, 2]
+Forward empty. Move forward
+Area explored: 243
+========================
+Robot move from 18, 1
+Robot is facing WEST
+Send: A|
+Send: C|
+Send: RP{"robotPosition":[0,0,180]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e047c38f873f0efedffdfffffffffffffff","length":244,"obstacle":"01000200040000000000008fc200200004101010083880200000000000080"}]}
+
+Send: R|
+Receiving a message...
+Received: 2|2|2|1|1|-1
+[2, 2, 2, 1, 1, -1]
+Left empty. Rotate left
+Robot move from 18, 1
+Robot is facing SOUTH
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[0,1,180]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e047c38f873f0effdffffffffffffffffff","length":248,"obstacle":"01000200040000000000008fc200200004101010083c400800000000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: 1|1|1|1|1|-1
+[1, 1, 1, 1, 1, -1]
+Forward empty after left rotation. Move forward
+Area explored: 245
+========================
+Robot move from 17, 1
+Robot is facing SOUTH
+Send: A|
+Send: C|
+Send: RP{"robotPosition":[0,1,90]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e047c38f873f0effdffffffffffffffffff","length":248,"obstacle":"01000200040000000000008fc200200004101010083c400800000000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|1|1|1|2
+[-1, -1, 1, 1, 1, 2]
+Send: R|
+Receiving a message...
+Received: -1|-1|1|1|1|2
+[-1, -1, 1, 1, 1, 2]
+Robot move from 17, 1
+Robot is facing EAST
+Send: A|
+Send: RP{"robotPosition":[0,1,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e047c38f873f0effdffffffffffffffffff","length":248,"obstacle":"01000200040000000000008fc200200004101010083c400800000000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: 2|2|2|1|-1|1
+[2, 2, 2, 1, -1, 1]
+Send: R|
+Receiving a message...
+Received: 2|2|2|1|-1|1
+[2, 2, 2, 1, -1, 1]
+Deadend. U-turn
+Area explored: 245
+========================
+Robot move from 17, 1
+Robot is facing NORTH
+Send: W|
+Send: RP{"robotPosition":[0,0,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e047c38f873f0effdffffffffffffffffff","length":248,"obstacle":"01000200040000000000008fc200200004101010083c400800000000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: 1|1|1|-1|-1|1
+[1, 1, 1, -1, -1, 1]
+Forward empty. Move forward
+Area explored: 245
+========================
+Robot move from 18, 1
+Robot is facing NORTH
+Send: D|
+Send: X|
+Error in sending movement
+Send: RP{"robotPosition":[0,0,90]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e047c38f873f0effdffffffffffffffffff","length":248,"obstacle":"01000200040000000000008fc200200004101010083c400800000000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|2|2|1
+[-1, -1, -1, 2, 2, 1]
+Right empty. Rotate right
+Robot move from 18, 1
+Robot is facing EAST
+Send: W|
+Send: RP{"robotPosition":[1,0,90]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e047c38f873f0effdffffffffffffffffff","length":248,"obstacle":"01000200040000000000008fc200200004101010083c400800000000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|2|1|1
+[-1, -1, -1, 2, 1, 1]
+Forward empty after right rotation. Move forward
+Area explored: 245
+========================
+Robot move from 18, 2
+Robot is facing EAST
+Send: W|
+Send: RP{"robotPosition":[2,0,90]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e047c38f873f0effdffffffffffffffffff","length":248,"obstacle":"01000200040000000000008fc200200004101010083c400800000000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|2|-1|1
+[-1, -1, -1, 2, -1, 1]
+Forward empty. Move forward
+Area explored: 245
+========================
+Robot move from 18, 3
+Robot is facing EAST
+Send: W|
+Send: RP{"robotPosition":[3,0,90]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e047c38f873f0effdffffffffffffffffff","length":248,"obstacle":"01000200040000000000008fc200200004101010083c400800000000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|-1|1
+[-1, -1, -1, 1, -1, 1]
+Forward empty. Move forward
+Area explored: 245
+========================
+Robot move from 18, 4
+Robot is facing EAST
+Send: W|
+Send: X|
+Error in sending movement
+Send: RP{"robotPosition":[4,0,90]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e047c38f873f0effdffffffffffffffffff","length":248,"obstacle":"01000200040000000000008fc200200004101010083c400800000000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: 2|-1|-1|-1|-1|1
+[2, -1, -1, -1, -1, 1]
+Forward empty. Move forward
+Area explored: 245
+========================
+Robot move from 18, 5
+Robot is facing EAST
+Send: D|
+Send: RP{"robotPosition":[4,0,180]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e047c38f873f0effdffffffffffffffffff","length":248,"obstacle":"01000200040000000000008fc200200004101010083c400800000000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|-1|-1
+[-1, -1, -1, -1, -1, -1]
+Right empty. Rotate right
+Robot move from 18, 5
+Robot is facing SOUTH
+Send: W|
+Send: RP{"robotPosition":[4,1,180]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e047c38f873f0effdffffffffffffffffff","length":248,"obstacle":"01000200040000000000008fc200200004101010083c400800000000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|1|-1
+[-1, -1, -1, -1, 1, -1]
+Forward empty after right rotation. Move forward
+Area explored: 245
+========================
+Robot move from 17, 5
+Robot is facing SOUTH
+Send: W|
+Send: RP{"robotPosition":[4,2,180]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e047c38f873f0effdffffffffffffffffff","length":248,"obstacle":"01000200040000000000008fc200200004101010083c400800000000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|1|-1
+[-1, -1, -1, -1, 1, -1]
+Forward empty. Move forward
+Area explored: 246
+========================
+Robot move from 16, 5
+Robot is facing SOUTH
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[4,3,180]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e047c38f873f0efffffffffffffffffffff","length":248,"obstacle":"01000200040000000000008fc200200004101010083e200400000000000100"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|-1|1
+[-1, -1, -1, 1, -1, 1]
+Forward empty. Move forward
+Area explored: 248
+========================
+Robot move from 15, 5
+Robot is facing SOUTH
+Send: W|
+Send: RP{"robotPosition":[4,4,180]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e047c38f873f3efffffffffffffffffffff","length":248,"obstacle":"01000200040000000000008fc200200004101010020f880100000000000040"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|-1|2
+[-1, -1, -1, 1, -1, 2]
+Forward empty. Move forward
+Area explored: 253
+========================
+Robot move from 14, 5
+Robot is facing SOUTH
+Send: W|
+Send: RP{"robotPosition":[4,5,180]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff003e1c7c38f9f3f3ffffffffffffffffffffff","length":256,"obstacle":"01000200040000000000008fc20020000404040100107c400800000000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|-1|3
+[-1, -1, -1, -1, -1, 3]
+Forward empty. Move forward
+Area explored: 260
+========================
+Robot move from 13, 5
+Robot is facing SOUTH
+Send: D|
+Send: RP{"robotPosition":[4,5,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffee7fc0ff81ff0e3e1c7cf8f9fff3ffffffffffffffffffffff","length":260,"obstacle":"01000200040000000000008fc200200000808020020020f880100000000000040"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|-1|-1
+[-1, -1, -1, -1, -1, -1]
+Right empty. Rotate right
+Robot move from 13, 5
+Robot is facing WEST
+Send: W|
+Send: RP{"robotPosition":[3,5,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffeeffc1ff83ff0e3e1c7cf8f9fff3ffffffffffffffffffffff","length":264,"obstacle":"01000200040000000000008fc2001000001010040040041f100200000000000080"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|1|-1
+[-1, -1, -1, -1, 1, -1]
+Forward empty after right rotation. Move forward
+Area explored: 269
+========================
+Robot move from 13, 4
+Robot is facing WEST
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[2,5,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffefffc3ff87ff0e3e1c7df8fbfff7ffffffffffffffffffffff","length":272,"obstacle":"01000200040000000000008fc200080000020200400200107c400800000000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|1|1
+[-1, -1, -1, -1, 1, 1]
+Forward empty. Move forward
+Area explored: 273
+========================
+Robot move from 13, 3
+Robot is facing WEST
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[1,5,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffefffc3ff87ff0e3e3c7ff8ffffffffffffffffffffffffffff","length":276,"obstacle":"01000200040000000000008fc2000800000211001000400107c400800000000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: 2|2|2|1|1|2
+[2, 2, 2, 1, 1, 2]
+Forward empty. Move forward
+Area explored: 275
+========================
+Robot move from 13, 2
+Robot is facing WEST
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[0,5,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffefffc3ff87ff2e3e7c7ff8ffffffffffffffffffffffffffff","length":276,"obstacle":"01000200040000000000008fc2000800001104400400100041f100200000000000080"}]}
+
+Send: R|
+Receiving a message...
+Received: 1|1|1|1|1|2
+[1, 1, 1, 1, 1, 2]
+Forward empty. Move forward
+Area explored: 277
+========================
+Robot move from 13, 1
+Robot is facing WEST
+Send: A|
+Send: C|
+Send: RP{"robotPosition":[0,5,180]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffefffc3ff87ff6e3efc7ff8ffffffffffffffffffffffffffff","length":280,"obstacle":"01000200040000000000008fc20008000018811001000400107c400800000000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: 2|2|2|1|1|-1
+[2, 2, 2, 1, 1, -1]
+Left empty. Rotate left
+Robot move from 13, 1
+Robot is facing SOUTH
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[0,6,180]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffefffc3ff87ffee3ffc7ff8ffffffffffffffffffffffffffff","length":280,"obstacle":"01000200040000000000008fc2000800001c404400400100041f100200000000000080"}]}
+
+Send: R|
+Receiving a message...
+Received: 1|1|1|1|1|-1
+[1, 1, 1, 1, 1, -1]
+Forward empty after left rotation. Move forward
+Area explored: 280
+========================
+Robot move from 12, 1
+Robot is facing SOUTH
+Send: A|
+Send: C|
+Send: RP{"robotPosition":[0,6,90]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffefffc3ff87ffee3ffc7ffcffffffffffffffffffffffffffff","length":280,"obstacle":"01000200040000000000008fc2000800001c404400200080020f880100000000000040"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|1|1|1|2
+[-1, -1, 1, 1, 1, 2]
+Send: R|
+Receiving a message...
+Received: -1|-1|1|1|1|2
+[-1, -1, 1, 1, 1, 2]
+Robot move from 12, 1
+Robot is facing EAST
+Send: A|
+Send: X|
+Error in sending movement
+Send: RP{"robotPosition":[0,6,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffefffc3ff87ffee3ffc7ffcffffffffffffffffffffffffffff","length":280,"obstacle":"01000200040000000000008fc2000800001c404400200080020f880100000000000040"}]}
+
+Send: R|
+Receiving a message...
+Received: 2|2|2|1|-1|1
+[2, 2, 2, 1, -1, 1]
+Send: R|
+Receiving a message...
+Received: 2|2|2|1|-1|1
+[2, 2, 2, 1, -1, 1]
+Deadend. U-turn
+Area explored: 280
+========================
+Robot move from 12, 1
+Robot is facing NORTH
+Send: W|
+Send: RP{"robotPosition":[0,5,0]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffefffc3ff87ffee3ffc7ffcffffffffffffffffffffffffffff","length":280,"obstacle":"01000200040000000000008fc2000800001c404400200080020f880100000000000040"}]}
+
+Send: R|
+Receiving a message...
+Received: 1|1|1|-1|-1|1
+[1, 1, 1, -1, -1, 1]
+Forward empty. Move forward
+Area explored: 280
+========================
+Robot move from 13, 1
+Robot is facing NORTH
+Send: D|
+Send: RP{"robotPosition":[0,5,90]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffefffc3ff87ffee3ffc7ffcffffffffffffffffffffffffffff","length":280,"obstacle":"01000200040000000000008fc2000800001c404400200080020f880100000000000040"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|2|2|1
+[-1, -1, -1, 2, 2, 1]
+Right empty. Rotate right
+Robot move from 13, 1
+Robot is facing EAST
+Send: W|
+Send: RP{"robotPosition":[1,5,90]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffefffc3ff87ffee3ffc7ffcffffffffffffffffffffffffffff","length":280,"obstacle":"01000200040000000000008fc2000800001c404400200080020f880100000000000040"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|2|1|1
+[-1, -1, -1, 2, 1, 1]
+Forward empty after right rotation. Move forward
+Area explored: 280
+========================
+Robot move from 13, 2
+Robot is facing EAST
+Send: W|
+Send: X|
+Error in sending movement
+Send: RP{"robotPosition":[2,5,90]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffefffc3ff87ffee3ffc7ffcffffffffffffffffffffffffffff","length":280,"obstacle":"01000200040000000000008fc2000800001c404400200080020f880100000000000040"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|2|1
+[-1, -1, -1, -1, 2, 1]
+Forward empty. Move forward
+Area explored: 280
+========================
+Robot move from 13, 3
+Robot is facing EAST
+Send: W|
+Send: RP{"robotPosition":[3,5,90]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffefffc3ff87ffee3ffc7ffcffffffffffffffffffffffffffff","length":280,"obstacle":"01000200040000000000008fc2000800001e404400200080020f880100000000000040"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|-1|-1
+[-1, -1, -1, 1, -1, -1]
+Forward empty. Move forward
+Area explored: 280
+========================
+Robot move from 13, 4
+Robot is facing EAST
+Send: W|
+Send: RP{"robotPosition":[4,5,90]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffefffc3ff87ffee3ffc7ffcffffffffffffffffffffffffffff","length":280,"obstacle":"01000200040000000000008fc2000800001e404400200080020f880100000000000040"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|-1|-1
+[-1, -1, -1, -1, -1, -1]
+Forward empty. Move forward
+Area explored: 281
+========================
+Robot move from 13, 5
+Robot is facing EAST
+Send: D|
+Send: RP{"robotPosition":[4,5,180]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffefffc3ff87ffee3ffc7ffeffffffffffffffffffffffffffff","length":284,"obstacle":"01000200040000000000008fc2000800001e4044001000400007c400800000000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|-1|4
+[-1, -1, -1, -1, -1, 4]
+Right empty. Rotate right
+Robot move from 13, 5
+Robot is facing SOUTH
+Send: W|
+Send: RP{"robotPosition":[4,6,180]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffefffc3ff87ffee3ffc7ffeffffffffffffffffffffffffffff","length":284,"obstacle":"01000200040000000000008fc2000800001c4044001000400007c400800000000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|1|4
+[-1, -1, -1, -1, 1, 4]
+Forward empty after right rotation. Move forward
+Area explored: 282
+========================
+Robot move from 12, 5
+Robot is facing SOUTH
+Send: W|
+Send: RP{"robotPosition":[4,7,180]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffefffc3ff87ffee3ffc7fffffffffffffffffffffffffffffff","length":284,"obstacle":"01000200040000000000008fc2000800001c4044000800200003e200400000000000100"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|1|5
+[-1, -1, -1, -1, 1, 5]
+Forward empty. Move forward
+Area explored: 286
+========================
+Robot move from 11, 5
+Robot is facing SOUTH
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[4,8,180]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffefffc3ff87fffe3fffffffffffffffffffffffffffffffffff","length":288,"obstacle":"01000200040000000000008fc2000800001e20204000800200003e200400000000000100"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|-1|5
+[-1, -1, -1, 1, -1, 5]
+Forward empty. Move forward
+Area explored: 291
+========================
+Robot move from 10, 5
+Robot is facing SOUTH
+Send: W|
+Send: V|
+Send: RP{"robotPosition":[4,9,180]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffefffc3ff9fffffffffffffffffffffffffffffffffffffffff","length":292,"obstacle":"01000200040000000000008fc20008000007810102000400100001f100200000000000080"}]}
+
+Send: R|
+Receiving a message...
+Received: 2|2|2|2|-1|-1
+[2, 2, 2, 2, -1, -1]
+Forward empty. Move forward
+Area explored: 293
+========================
+Robot move from 9, 5
+Robot is facing SOUTH
+Send: W|
+Send: RP{"robotPosition":[4,10,180]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffefffcfff9fffffffffffffffffffffffffffffffffffffffff","length":296,"obstacle":"01000200040000000000008fc20008000001e040408001000400007c400800000000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: 1|1|1|-1|-1|-1
+[1, 1, 1, -1, -1, -1]
+Forward empty. Move forward
+Area explored: 293
+========================
+Robot move from 8, 5
+Robot is facing SOUTH
+Send: D|
+Send: RP{"robotPosition":[4,10,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffefffcfff9fffffffffffffffffffffffffffffffffffffffff","length":296,"obstacle":"01000200040000000000008fc20008000001e040408001000400007c400800000000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|2|1
+[-1, -1, -1, -1, 2, 1]
+Right empty. Rotate right
+Robot move from 8, 5
+Robot is facing WEST
+Send: W|
+Send: RP{"robotPosition":[3,10,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffefffcfff9fffffffffffffffffffffffffffffffffffffffff","length":296,"obstacle":"01000200040000000000008fc20008000001e040608001000400007c400800000000000200"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|2|1
+[-1, -1, -1, -1, 2, 1]
+Forward empty after right rotation. Move forward
+Area explored: 295
+========================
+Robot move from 8, 4
+Robot is facing WEST
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[2,10,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffefffdfffbfffffffffffffffffffffffffffffffffffffffff","length":296,"obstacle":"01000200040000000000008fc200080000007810182000400100001f100200000000000080"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|-1|2|-1
+[-1, -1, -1, -1, 2, -1]
+Forward empty. Move forward
+Area explored: 298
+========================
+Robot move from 8, 3
+Robot is facing WEST
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[1,10,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffffffffffffffffffffffffffffffffffffffffffffffffffff","length":300,"obstacle":"01000200040000000000008fc200040000000f020304000800200003e200400000000000100"}]}
+
+Send: R|
+Receiving a message...
+Received: 2|2|2|-1|2|-1
+[2, 2, 2, -1, 2, -1]
+Forward empty. Move forward
+Area explored: 298
+========================
+Robot move from 8, 2
+Robot is facing WEST
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[0,10,270]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffffffffffffffffffffffffffffffffffffffffffffffffffff","length":300,"obstacle":"01000200040000000000008fc200040000000f020304000800200003e200400000000000100"}]}
+
+Send: R|
+Receiving a message...
+Received: 1|1|1|2|2|-1
+[1, 1, 1, 2, 2, -1]
+Forward empty. Move forward
+Area explored: 298
+========================
+Robot move from 8, 1
+Robot is facing WEST
+Send: A|
+Send: C|
+Send: RP{"robotPosition":[0,10,180]}
+
+Send: M{"map":[{"explored":"fffffffffffffffffffbfff7ffffffffffffffffffffffffffffffffffffffffffffffffffff","length":300,"obstacle":"01000200040000000000008fc200040000000f020304000800200003e200400000000000100"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|-1
+[-1, -1, -1, 1, 1, -1]
+Left empty. Rotate left
+Robot move from 8, 1
+Robot is facing SOUTH
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[0,11,180]}
+
+Send: M{"map":[{"explored":"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff","length":300,"obstacle":"010002000400000000000043f0800100000003c080c1000200080000f880100000000000040"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|-1
+[-1, -1, -1, 1, 1, -1]
+Forward empty after left rotation. Move forward
+Area explored: 300
+========================
+Robot move from 7, 1
+Robot is facing SOUTH
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[0,12,180]}
+
+Send: M{"map":[{"explored":"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff","length":300,"obstacle":"010002000400000000000043f0800100000003c080c1000200080000f880100000000000040"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|2
+[-1, -1, -1, 1, 1, 2]
+Forward empty. Move forward
+Area explored: 300
+========================
+Robot move from 6, 1
+Robot is facing SOUTH
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[0,13,180]}
+
+Send: M{"map":[{"explored":"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff","length":300,"obstacle":"010002000400000000000043f0800100000003c080c1000200080000f880100000000000040"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|-1
+[-1, -1, -1, 1, 1, -1]
+Forward empty. Move forward
+Area explored: 300
+========================
+Robot move from 5, 1
+Robot is facing SOUTH
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[0,14,180]}
+
+Send: M{"map":[{"explored":"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff","length":300,"obstacle":"010002000400000000000043f0800100000003c080c1000200080000f880100000000000040"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|-1
+[-1, -1, -1, 1, 1, -1]
+Forward empty. Move forward
+Area explored: 300
+========================
+Robot move from 4, 1
+Robot is facing SOUTH
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[0,15,180]}
+
+Send: M{"map":[{"explored":"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff","length":300,"obstacle":"010002000400000000000043f0800100000003c080c1000200080000f880100000000000040"}]}
+
+Send: R|
+Receiving a message...
+Received: -1|-1|-1|1|1|5
+[-1, -1, -1, 1, 1, 5]
+Forward empty. Move forward
+Area explored: 300
+========================
+Robot move from 3, 1
+Robot is facing SOUTH
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[0,16,180]}
+
+Send: M{"map":[{"explored":"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff","length":300,"obstacle":"010002000400080000000043f0800100000003c080c1000200080000f880100000000000040"}]}
+
+Send: R|
+Receiving a message...
+Received: 2|2|2|1|1|-1
+[2, 2, 2, 1, 1, -1]
+Forward empty. Move forward
+Area explored: 300
+========================
+Robot move from 2, 1
+Robot is facing SOUTH
+Send: W|
+Send: C|
+Send: RP{"robotPosition":[0,17,180]}
+
+Send: M{"map":[{"explored":"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff","length":300,"obstacle":"010002000400080000000043f0800100000003c080c1000200080000f880100000000000040"}]}
+
+Send: R|
+Receiving a message...
+Received: 1|1|1|1|1|-1
+[1, 1, 1, 1, 1, -1]
+Forward empty. Move forward
+Area explored: 300
+========================
+1602812322949
+1602830085278
+300
+End exploration. Robot is facing South
+Send: C|
+Robot is calibrating
+Send: D|
+Robot turn right
+Send: V|
+Robot is calibrating front
+Send: D|
+Robot turn right
+Exploration complete!
+Waiting for Fastest Path Command
+Receiving a message...
+Received: F|
+Finding fastest path from row 1 col 1
+13 5
+13 6
+12 6
+11 6
+10 6
+9 6
+8 6
+8 5
+8 4
+8 3
+8 2
+8 1
+7 1
+6 1
+5 1
+4 1
+3 1
+2 1
+1 1
+Found fastest path to goal
+Robot move from 1, 1
+Robot is facing NORTH
+Send: W|
+Robot move from 2, 1
+Robot is facing NORTH
+Send: W|
+Robot move from 3, 1
+Robot is facing NORTH
+Send: W|
+Robot move from 4, 1
+Robot is facing NORTH
+Send: W|
+Robot move from 5, 1
+Robot is facing NORTH
+Send: W|
+Robot move from 6, 1
+Robot is facing NORTH
+Send: W|
+Robot move from 7, 1
+Robot is facing NORTH
+Send: W|
+Robot move from 8, 1
+Robot is facing NORTH
+Send: D|
+Robot move from 8, 1
+Robot is facing EAST
+Send: W|
+Robot move from 8, 2
+Robot is facing EAST
+Send: W|
+Robot move from 8, 3
+Robot is facing EAST
+Send: W|
+Robot move from 8, 4
+Robot is facing EAST
+Send: W|
+Robot move from 8, 5
+Robot is facing EAST
+Send: W|
+Robot move from 8, 6
+Robot is facing EAST
+Send: A|
+Robot move from 8, 6
+Robot is facing NORTH
+Send: W|
+Robot move from 9, 6
+Robot is facing NORTH
+Send: W|
+Robot move from 10, 6
+Robot is facing NORTH
+Send: W|
+Robot move from 11, 6
+Robot is facing NORTH
+Send: W|
+Robot move from 12, 6
+Robot is facing NORTH
+Send: W|
+Robot move from 13, 6
+Robot is facing NORTH
+Send: A|
+Robot move from 13, 6
+Robot is facing WEST
+Send: W|
+Finding fastest path from row 13 col 5
+18 13
+17 13
+17 12
+17 11
+17 10
+17 9
+17 8
+17 7
+17 6
+17 5
+16 5
+15 5
+14 5
+13 5
+Found fastest path to goal
+Robot move from 13, 5
+Robot is facing WEST
+Send: D|
+Robot move from 13, 5
+Robot is facing NORTH
+Send: W|
+Robot move from 14, 5
+Robot is facing NORTH
+Send: W|
+Robot move from 15, 5
+Robot is facing NORTH
+Send: W|
+Robot move from 16, 5
+Robot is facing NORTH
+Send: W|
+Robot move from 17, 5
+Robot is facing NORTH
+Send: D|
+Robot move from 17, 5
+Robot is facing EAST
+Send: W|
+Robot move from 17, 6
+Robot is facing EAST
+Send: W|
+Robot move from 17, 7
+Robot is facing EAST
+Send: W|
+Robot move from 17, 8
+Robot is facing EAST
+Send: W|
+Robot move from 17, 9
+Robot is facing EAST
+Send: W|
+Robot move from 17, 10
+Robot is facing EAST
+Send: W|
+Robot move from 17, 11
+Robot is facing EAST
+Send: W|
+Robot move from 17, 12
+Robot is facing EAST
+Send: W|
+Robot move from 17, 13
+Robot is facing EAST
+Send: A|
+Robot move from 17, 13
+Robot is facing NORTH
+Send: W|

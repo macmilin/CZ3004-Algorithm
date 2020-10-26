@@ -153,7 +153,10 @@ public class Map extends JPanel {
             }
         }
 
-        if(bin.length() > 0) {
+        while(bin.length() > 0 && bin.length() <  4) {
+            bin.append("0");
+        }
+        if (bin.length() != 0){
             ans.append(binToHex(bin.toString()));
         }
         return ans.toString();
