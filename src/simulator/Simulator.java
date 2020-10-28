@@ -161,7 +161,8 @@ public class Simulator {
             protected Integer doInBackground() throws Exception {
                 bot.reset();
                 map.paintComponent(map.getGraphics());
-                bot.setRealRun(true);
+                //bot.setRealRun(true);
+                /*
                 Communication comms = new Communication();
                 comms = comms.getComms();
                 System.out.println("Open comms in fastest path");
@@ -177,16 +178,17 @@ public class Simulator {
                             getWayPoint(msg);
                         }
                     }
-                }
+                }*/
 
                 FastestPath fastestPath = new FastestPath(bot, map);
                 fastestPath.run(wayPointY, wayPointX);
+                /*
                 try {
                     TimeUnit.MILLISECONDS.sleep(3000);
                     System.out.println("Reached Way Point");
                 } catch (InterruptedException e) {
                     System.out.println("Error in waiting in way point.");
-                }
+                }*/
                 FastestPath fastestPath2 = new FastestPath(bot, map);
                 fastestPath2.run(Constant.GOAL_ROW, Constant.GOAL_COL);
 

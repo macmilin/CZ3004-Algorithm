@@ -31,7 +31,7 @@ public class Exploration {
         this.map = map;
         this.limited = limited;
         this.firstMove = false;
-        this.updateAndroid = true;
+        this.updateAndroid = false;
     }
 
     public void run() {

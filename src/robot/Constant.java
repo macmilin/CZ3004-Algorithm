@@ -10,7 +10,7 @@ public class Constant {
     // range of long range sensor (tiles)
     public static final int SENSOR_LONG_RANGE_MAX = 5;
 
-    public static final int SPEED = 1;
+    public static final int SPEED = 10;
     public static final DIRECTION START_DIR = DIRECTION.NORTH;
 
     public static final int GOAL_ROW = 18;
